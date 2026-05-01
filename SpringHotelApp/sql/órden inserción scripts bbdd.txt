@@ -1,0 +1,96 @@
+1. CREAR BASE DE DATOS:
+
+CREATE DATABASE hoteldb;
+USE hoteldb;
+
+2. USUARIOS:
+
+CREATE TABLE `usuarios` (
+  `id_usuario` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `rol` enum('recepcionista','supervisor') NOT NULL,
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+3. HUESPEDES:
+
+CREATE TABLE `huespedes` (
+  `id_huesped` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  `apellidos` varchar(50) NOT NULL,
+  `direccion` varchar(50) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_huesped`),
+  UNIQUE KEY `telefono` (`telefono`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+4. HABITACIONES:
+
+CREATE TABLE `habitaciones` (
+  `id_habitacion` int NOT NULL AUTO_INCREMENT,
+  `numero_habitacion` varchar(50) NOT NULL,
+  `tipo_habitacion` enum('individual','doble','suite') NOT NULL,
+  `precio_noche` decimal(7,2) NOT NULL,
+  `disponibilidad_habitacion` enum('disponible','ocupada','limpieza','mantenimiento') NOT NULL,
+  `orientacion_habitacion` enum('interior','exterior') DEFAULT NULL,
+  PRIMARY KEY (`id_habitacion`),
+  UNIQUE KEY `numero_habitacion` (`numero_habitacion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+5. RESERVAS:
+
+CREATE TABLE reservas (
+  id_reserva INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  fecha_entrada DATE NOT NULL,
+  fecha_salida DATE NOT NULL,
+  id_huesped INT NOT NULL,
+  id_habitacion INT NOT NULL,
+  tipo_pension ENUM('alojamiento','media','completa'),
+  estado_reserva ENUM('pendiente','confirmada','cancelada'),
+  numero_huespedes INT NOT NULL,
+  observaciones TEXT,
+  CONSTRAINT fk_reserva_huesped
+    FOREIGN KEY (id_huesped)
+    REFERENCES huespedes(id_huesped),
+  CONSTRAINT fk_reserva_habitacion
+    FOREIGN KEY (id_habitacion)
+    REFERENCES habitaciones(id_habitacion)  
+) ENGINE=InnoDB 
+DEFAULT CHARSET=utf8mb4 
+COLLATE=utf8mb4_0900_ai_ci;
+
+
+6. INCIDENCIAS:
+
+CREATE TABLE `incidencias` (
+  `id_incidencia` int NOT NULL AUTO_INCREMENT,
+  `estado_incidencia` enum('abierta', 'en curso', 'cerrada') NOT NULL,
+  `prioridad` enum('baja', 'media', 'alta') NOT NULL,
+  `descripcion_incidencia` TEXT DEFAULT NULL,
+  `fecha_apertura` DATE NOT NULL,
+  `fecha_cierre` DATE NOT NULL,
+  `id_habitacion` int NOT NULL,
+  PRIMARY KEY (`id_incidencia`),
+  CONSTRAINT `fk_incidencias_habitacion` 
+    FOREIGN KEY (`id_habitacion`) 
+    REFERENCES `habitaciones` (`id_habitacion`) 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+ORDEN CORRECTO PARA EJECUTAR LOS SCRIPTS:
+
+1 hoteldb_CREATE DATABASE.sql
+2 hoteldb_usuarios.sql
+3 hoteldb_huespedes.sql
+4 hoteldb_habitaciones.sql
+5 hoteldb_reservas.sql
+6 hoteldb_incidencias
+
+
+Cambia usuario y contraseña según tu MySQL en application.properties según tu configuración local
