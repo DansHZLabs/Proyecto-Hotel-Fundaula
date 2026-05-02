@@ -1,8 +1,22 @@
-package es.accenture.entity;           
+package es.accenture.entity;             //Esta ya está terminada, falta poner la relación con incidencia
+										 //habrá que poner @OneToMany(mappedBy="habitacion" //Relación 1:N con incidencia encima de private List<Incidencia>incidencias; y sus imports y luego comprobar y en incidencia meter la suya que manda sobre ella, no poner cascade por las reglas sde negocio
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity //Anotación para representar una tabla en la BBDD
+@Table(name = "habitaciones") //Anotación que indica cómo se llama la tabla que representa
 public class Habitacion {
 
 	//clase interna para crear los enum y poner las opciones que se quiere establecer
@@ -20,18 +34,31 @@ public class Habitacion {
     	interior,exterior
     }
 
+    @Id //clave primaria INT
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//Anotación para generar automáticamente el ID en la base de datos (AUTO_INCREMENT)
+    @Column(name = "id_habitacion") //Anotación que indica cómo se llama la tabla que representa
     private int id;
 
+    @Column(name = "numero_habitacion") //Anotación que indica cómo se llama la tabla que representa INT
     private String numeroHabitacion;
 
+    @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
+    @Column(name = "tipo_habitacion") //Anotación que indica cómo se llama la tabla que representa ENUM
     private Tipo tipo;
 
+    @Column(name = "precio_noche") //Anotación que indica cómo se llama la tabla que representa DECIMAL(7,2)
     private BigDecimal precioPorNoche;
 
+    @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
+    @Column(name = "disponibilidad_habitacion") //Anotación que indica cómo se llama la tabla que representa ENUM
     private Disponibilidad disponibilidad;
 
+    @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
+    @Column(name = "orientacion_habitacion")//Anotación que indica cómo se llama la tabla que representa ENUM
     private Orientacion orientacionHabitacion;
     
+    @OneToMany(mappedBy="habitacion", fetch=FetchType.LAZY)//Anotación para la relación 1N con habitación 1 habitación puede tener muchas incidencias
+    													      //sin Cascade para propagar el CRUD de lo que se haga en habitación a incidencias porque nos rompe la lógica de negocio    
     private List<Incidencia>incidencias; //lista donde se guardan las incidencias
 
     // Constructor vacío (es obligatorio)
@@ -91,12 +118,20 @@ public class Habitacion {
         this.disponibilidad = disponibilidad;
     }
 
-    public Orientacion getOrientacion() {
+    public Orientacion getOrientacionHabitacion() {
         return orientacionHabitacion;
     }
 
-    public void setOrientacion(Orientacion orientacionHabitacion) {
+    public void setOrientacionHabitacion(Orientacion orientacionHabitacion) {
         this.orientacionHabitacion = orientacionHabitacion;
+    }
+    
+    public List<Incidencia>getIncidencias() {
+        return incidencias;
+    }
+
+    public void setIncidencias(List<Incidencia>incidencias) {
+        this.incidencias = incidencias;
     }
 
     // toString para mostrar como texto
