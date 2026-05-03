@@ -2,13 +2,14 @@ package es.accenture.entity;                          //esto lo hace el A
 													  //esta es la relación que hay que poner con habitacion
 												  	  //@ManyToOne
 													  //@JoinColumn(name = "id_habitacion")
-													  //private Habitacion habitacion;
+													  //private Habitacion habitacion; //quitar not null de fecha_cierre porque si la incidencia está sin cerrar si puede ser null, está mal y nos rompe la lógica
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,33 +21,33 @@ import javax.persistence.Table;
 @Table(name="incidencias") // Anotación que indica cómo se llama la tabla que representa
 public class Incidencia {
 	
-	public enum EstadoIncidencia {avisado,pendiente,arreglado} //clase interna para crear los enum y poner las opciones que se quiere establecer
+	public enum EstadoIncidencia {abierta,en_curso,cerrada} //clase interna para crear los enum y poner las opciones que se quiere establecer
 	public enum PrioridadIncidencia {baja,media,alta} //clase interna para crear los enum y poner las opciones que se quiere establecer
 	
 	@Id //clave primaria INT
-	@GeneratedValue(strategy = GenerationType.IDENTITY)//Anotación para generar automáticamente el ID en la base de datos (AUTO_INCREMENT)
-	@Column(name = "id_incidencia") //Anotación que indica cómo se llama la tabla que representa
+	@GeneratedValue(strategy=GenerationType.IDENTITY)//Anotación para generar automáticamente el ID en la base de datos (AUTO_INCREMENT)
+	@Column(name="id_incidencia") //Anotación que indica cómo se llama la tabla que representa
 	private int idIncidencia;
 	
-	@ManyToOne //Anoración para la relación 1N con habitación 1 habitación puede tener muchas incidencias
-	@JoinColumn(name = "id_habitacion") //Anotación que indica que se referencia a Habitacion es clave FK INT
+	@ManyToOne(fetch=FetchType.LAZY) //Anoración para la relación 1N con habitación 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda
+	@JoinColumn(name="id_habitacion",nullable=false) //Anotación que indica que se referencia a Habitacion es clave FK y que es requerido INT
 	private Habitacion habitacion; //Se crea el objeto Habitación para hacerlo con anotaciones en las relaciones
 
 	@Enumerated(EnumType.STRING) //Anotación para los enum, le dice a BBDD que son strings
-	@Column(name = "estado_incidencia") //Anotación que indica cómo se llama la tabla que representa ENUM
+	@Column(name="estado_incidencia",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido ENUM
 	private EstadoIncidencia estadoIncidencia;
 	
 	@Enumerated(EnumType.STRING) //Anotación para los enum, le dice a BBDD que son strings ENUM
-	@Column(name = "prioridad") //Anotación que indica cómo se llama la tabla que representa
+	@Column(name="prioridad",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido
 	private PrioridadIncidencia prioridadIncidencia;
 	
-	@Column(name = "descripcion_incidencia") //Anotación que indica cómo se llama la tabla que representa TEXT
+	@Column(name="descripcion_incidencia") //Anotación que indica cómo se llama la tabla que representa TEXT
 	private String descripcionIncidencia;
 	
-	@Column(name = "fecha_apertura") //Anotación que indica cómo se llama la tabla que representa DATE
+	@Column(name="fecha_apertura",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido DATE
 	private Date fechaApertura;
 	
-	@Column(name = "fecha_cierre") //Anotación que indica cómo se llama la tabla que representa DATE
+	@Column(name="fecha_cierre") //Anotación que indica cómo se llama la tabla que representa DATE
 	private Date fechaCierre;
 
 	// Constructor vacío (es obligatorio)

@@ -35,29 +35,29 @@ public class Habitacion {
     }
 
     @Id //clave primaria INT
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//Anotación para generar automáticamente el ID en la base de datos (AUTO_INCREMENT)
-    @Column(name = "id_habitacion") //Anotación que indica cómo se llama la tabla que representa
+    @GeneratedValue(strategy=GenerationType.IDENTITY)//Anotación para generar automáticamente el ID en la base de datos (AUTO_INCREMENT)
+    @Column(name="id_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido aunque al ser PK nullable=false no haría falta
     private int id;
 
-    @Column(name = "numero_habitacion") //Anotación que indica cómo se llama la tabla que representa INT
+    @Column(name="numero_habitacion",nullable=false,unique=true) //Anotación que indica cómo se llama la tabla que representa y que es requeridoINT
     private String numeroHabitacion;
 
     @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
-    @Column(name = "tipo_habitacion") //Anotación que indica cómo se llama la tabla que representa ENUM
+    @Column(name="tipo_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido ENUM
     private Tipo tipo;
 
-    @Column(name = "precio_noche") //Anotación que indica cómo se llama la tabla que representa DECIMAL(7,2)
+    @Column(name="precio_noche",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido DECIMAL(7,2)
     private BigDecimal precioPorNoche;
 
     @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
-    @Column(name = "disponibilidad_habitacion") //Anotación que indica cómo se llama la tabla que representa ENUM
+    @Column(name="disponibilidad_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requeridoENUM
     private Disponibilidad disponibilidad;
 
     @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
-    @Column(name = "orientacion_habitacion")//Anotación que indica cómo se llama la tabla que representa ENUM
+    @Column(name="orientacion_habitacion")//Anotación que indica cómo se llama la tabla que representa ENUM
     private Orientacion orientacionHabitacion;
     
-    @OneToMany(mappedBy="habitacion", fetch=FetchType.LAZY)//Anotación para la relación 1N con habitación 1 habitación puede tener muchas incidencias
+    @OneToMany(mappedBy="habitacion",fetch=FetchType.LAZY)//Anotación para la relación 1N con habitación 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda
     													      //sin Cascade para propagar el CRUD de lo que se haga en habitación a incidencias porque nos rompe la lógica de negocio    
     private List<Incidencia>incidencias; //lista donde se guardan las incidencias
 
@@ -145,4 +145,5 @@ public class Habitacion {
                 ", Orientación=" + orientacionHabitacion +
                 "]";
     }
+    
 }
