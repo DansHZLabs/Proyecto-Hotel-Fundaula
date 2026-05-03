@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity //Anotación para representar una tabla en la BBDD
-@Table(name = "habitaciones") //Anotación que indica cómo se llama la tabla que representa
+@Table(name="habitaciones") //Anotación que indica cómo se llama la tabla que representa
 public class Habitacion {
 
 	//clase interna para crear los enum y poner las opciones que se quiere establecer
@@ -37,7 +37,7 @@ public class Habitacion {
     @Id //clave primaria INT
     @GeneratedValue(strategy=GenerationType.IDENTITY)//Anotación para generar automáticamente el ID en la base de datos (AUTO_INCREMENT)
     @Column(name="id_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido aunque al ser PK nullable=false no haría falta
-    private int id;
+    private int idHabitacion;
 
     @Column(name="numero_habitacion",nullable=false,unique=true) //Anotación que indica cómo se llama la tabla que representa y que es requeridoINT
     private String numeroHabitacion;
@@ -78,13 +78,13 @@ public class Habitacion {
     }
 
     //getters y setters
-    public int getId() {
-        return id;
+    public int getIdHabitacion() {
+        return idHabitacion;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    /*public void setIdHabitacion(int idHabitacion) { //el setter se quita porque es autoincremental
+        this.idHabitacion = idHabitacion;
+    }*/
 
     public String getNumeroHabitacion() {
         return numeroHabitacion;
@@ -137,7 +137,7 @@ public class Habitacion {
     // toString para mostrar como texto
     @Override
     public String toString() {
-        return "Habitacion [ID=" + id +
+        return "Habitacion [ID Habitación=" + idHabitacion +
                 ", Numero=" + numeroHabitacion +
                 ", Tipo=" + tipo +
                 ", Precio=" + precioPorNoche +
