@@ -36,10 +36,10 @@ public class Habitacion {
 
     @Id //clave primaria INT
     @GeneratedValue(strategy=GenerationType.IDENTITY)//Anotación para generar automáticamente el ID en la base de datos (AUTO_INCREMENT)
-    @Column(name="id_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido aunque al ser PK nullable=false no haría falta
+    @Column(name="id_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido aunque al ser PK nullable=false no haría falta INT
     private int idHabitacion;
 
-    @Column(name="numero_habitacion",nullable=false,unique=true) //Anotación que indica cómo se llama la tabla que representa y que es requeridoINT
+    @Column(name="numero_habitacion",nullable=false,unique=true) //Anotación que indica cómo se llama la tabla que representa y que es requerido INT
     private String numeroHabitacion;
 
     @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
@@ -50,17 +50,20 @@ public class Habitacion {
     private BigDecimal precioPorNoche;
 
     @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
-    @Column(name="disponibilidad_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requeridoENUM
+    @Column(name="disponibilidad_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido ENUM
     private Disponibilidad disponibilidad;
 
     @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
     @Column(name="orientacion_habitacion")//Anotación que indica cómo se llama la tabla que representa ENUM
     private Orientacion orientacionHabitacion;
     
-    @OneToMany(mappedBy="habitacion",fetch=FetchType.LAZY)//Anotación para la relación 1N con habitación 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda
+    @OneToMany(mappedBy="habitacion",fetch=FetchType.LAZY)//Anotación para la relación 1N con incidencia, 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda
     													      //sin Cascade para propagar el CRUD de lo que se haga en habitación a incidencias porque nos rompe la lógica de negocio    
     private List<Incidencia>incidencias; //lista donde se guardan las incidencias
-
+    
+    @OneToMany(mappedBy = "habitacion",fetch=FetchType.LAZY)//Anotación para la relación 1N con reserva, 1 habitación puede tener muchas reservas y Lazy porque se dan datos bajo demanda
+    private List<Reserva> reservas; //lista donde se guardan las reservas
+    
     // Constructor vacío (es obligatorio)
     public Habitacion() {
     }
@@ -132,6 +135,14 @@ public class Habitacion {
 
     public void setIncidencias(List<Incidencia>incidencias) {
         this.incidencias = incidencias;
+    }
+    
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 
     // toString para mostrar como texto
