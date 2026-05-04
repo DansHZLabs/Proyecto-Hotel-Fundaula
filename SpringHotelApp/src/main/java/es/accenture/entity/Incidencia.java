@@ -29,7 +29,7 @@ public class Incidencia {
 	@Column(name = "id_incidencia",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido INT
 	private int idIncidencia;
 	
-	@ManyToOne(fetch=FetchType.LAZY) //Anoración para la relación 1N con habitación 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda
+	@ManyToOne(fetch=FetchType.LAZY) //Anotación para la relación 1N con habitación 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda
 	@JoinColumn(name="id_habitacion",nullable=false) //Anotación que indica que se referencia a Habitacion es clave FK y que es requerido INT
 	private Habitacion habitacion; //Se crea el objeto Habitación para hacerlo con anotaciones en las relaciones
 
