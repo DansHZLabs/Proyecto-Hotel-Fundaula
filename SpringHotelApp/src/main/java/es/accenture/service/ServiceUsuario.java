@@ -42,7 +42,7 @@ public class ServiceUsuario implements InServiceUsuario {
 			throw new ExcepcionUsuario(ExcepcionUsuario.USUARIO_INCORRECTO);
 		}
 
-		Usuario usu = listaUsers.get(1);
+		Usuario usu = listaUsers.get(0);
 
 		if (!usu.getPassword().equals(password)) {
 

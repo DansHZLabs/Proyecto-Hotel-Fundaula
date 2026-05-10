@@ -39,7 +39,7 @@
 						<div class="form-group">
 							<div>
 								<form role="form" id="login-usuarios" autocomplete="off"
-									class="credentials" method="post" action="ServletEventos">
+									class="credentials" method="post" action="login">
 									<input type="hidden" name="accion" value="login">
 									Acceso de usuarios
 									<div class="input-group">
