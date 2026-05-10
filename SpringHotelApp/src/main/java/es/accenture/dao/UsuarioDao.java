@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import es.accenture.Interfaces.InUsuarioDAO;
 import es.accenture.entity.Usuario;
 
 /**
@@ -16,12 +17,13 @@ import es.accenture.entity.Usuario;
  * @version 1.0
  */
 @Component
-public class UsuarioDao {
+public class UsuarioDao implements InUsuarioDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Transactional
+	@Override
 	public List<Usuario> obtenerUsuario(String usuario, String password){
 		
 		return sessionFactory.getCurrentSession()
