@@ -24,37 +24,39 @@ public class HabitacionDao implements IHabitacionDao {
 		
 		List<Habitacion>habitaciones=null; //se crea la lista vacía donde se van a guardar las que se traigan de bbdd
 		
-
+	    Session miSession = null; //se crea vacía la sesión
 		//se crea la transacción vacía donde se va a acumular todo lo que se quiere tramitar a bbdd para enviarlo de una
 		Transaction tx=null;
 
-		// try with resources para que se cierre solo
-		try (Session miSession=mySessionFactory.openSession()){
+		// try with resources para que se cierre solo no se puede hacer porque no llega al rollback porque cierra sesión antes y si se mete el rollback en otro try solo se controlaría la excepción y el rollback sería mentira
+		try {
 			
-			//comenzar la transación, aquí es donde todo queda dentro de tx
-			tx=miSession.beginTransaction();
+			miSession=mySessionFactory.openSession(); //se abre la sesión manualmente
+			
+			tx=miSession.beginTransaction(); //comenzar la transación, aquí es donde todo queda dentro de tx
 
 			// consulta de habitaciones a bbdd, se crea una query dentro de miSession en hql (como el sql pero con objetos y clases), de la entity Habitación lo que me traigas van a ser objetos tipo Habitacion y devuelve List<Habitacion>
 			habitaciones = miSession.createQuery("from Habitacion",Habitacion.class).getResultList();
 
-			// commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
-			tx.commit();
+			tx.commit(); 			// commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
 
 		} catch (Exception e) {
 			
-			if(tx!=null) { //si es distinto de null es que la transacción se inicio pero aún así pudo fallar y si no está completa o falla algo se hace el rollback y echa todo para atrás
-				
+				if(tx!=null) { // si es distinto de null es que la transacción se inicio pero aún así pudo fallar y si no está completa o falla algo se hace el rollback y echa todo para atrás
 			
-			tx.rollback(); // rollback se asegura de que si no está completo o hay algún error antes del commit se deshaga todo, es como coger bollos, ponértelos todos en la mano y llevarlos a la boca y si no te los puedes comer porque no te entran todos o se te caen se quita uno la mano de la boca
-			
-			}
+					tx.rollback(); // rollback se asegura de que si no está completo o hay algún error antes del commit se deshaga todo, es como coger bollos, ponértelos todos en la mano y llevarlos a la boca y si no te los puedes comer porque no te entran todos o se te caen se quita uno la mano de la boca
+					
+				}
 			
 			System.out.println("error en la consulta de habitaciones");
+			
+		}finally {
+				
+			miSession.close(); // se cierra la sesión
 
 		}
 
-		// se devuelve la lista de las habitaciones
-		return habitaciones;
+		return habitaciones; // se devuelve la lista de las habitaciones
 
 	}
 
@@ -65,31 +67,35 @@ public class HabitacionDao implements IHabitacionDao {
 
 		//se crea la transacción vacía donde se va a acumular todo lo que se quiere tramitar a bbdd para enviarlo de una
 		Transaction tx=null;
+		
+		Session miSession = null; //se crea vacía la sesión
 
-		// try with resources para que se cierre solo
-		try (Session miSession=mySessionFactory.openSession()){
+		// try with resources para que se cierre solo no se puede hacer porque no llega al rollback porque cierra sesión antes y si se mete el rollback en otro try solo se controlaría la excepción y el rollback sería mentira
+		try {
 			
-			//comenzar la transación, aquí es donde todo queda dentro de tx
-			tx=miSession.beginTransaction();
+			miSession=mySessionFactory.openSession(); //se abre la sesión manualmente
+			
+			tx=miSession.beginTransaction(); //comenzar la transación, aquí es donde todo queda dentro de tx
 
-			// guardar la habitacion en bbdd, hibernate hace un insert pero no se ve
-			miSession.save(habitacion);
+			miSession.save(habitacion); // guardar la habitacion en bbdd, hibernate hace un insert pero no se ve
 
-			// commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
-			tx.commit();
+			tx.commit(); // commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
 
 		} catch (Exception e) {
 			
 			if(tx!=null) { //si es distinto de null es que la transacción se inicio pero aún así pudo fallar y si no está completa o falla algo se hace el rollback y echa todo para atrás
 				
-			
-			tx.rollback(); // rollback se asegura de que si no está completo o hay algún error antes del commit se deshaga todo
+				tx.rollback(); // rollback se asegura de que si no está completo o hay algún error antes del commit se deshaga todo
 			
 			}
 			
 			System.out.println("error al guardar la habitación");
 
-		}
+		}finally {
+		
+			miSession.close(); // se cierra la sesión
+
+	}
 		
 	}
 		
@@ -101,36 +107,40 @@ public class HabitacionDao implements IHabitacionDao {
 	public void modificarHabitacion(Habitacion habitacion) { //void no devuelve nada solo modifica
 		// TODO Auto-generated method stub
 
-
+		Session miSession = null; //se crea vacía la sesión
+		
 		//se crea la transacción vacía donde se va a acumular todo lo que se quiere tramitar a bbdd para enviarlo de una
 		Transaction tx=null;
 
-		// try with resources para que se cierre solo
-		try (Session miSession=mySessionFactory.openSession()){
+		// try with resources para que se cierre solo no se puede hacer porque no llega al rollback porque cierra sesión antes y si se mete el rollback en otro try solo se controlaría la excepción y el rollback sería mentira
+		try {
 			
-			//comenzar la transación, aquí es donde todo queda dentro de tx
-			tx=miSession.beginTransaction();
+			miSession=mySessionFactory.openSession(); //se abre la sesión manualmente
+			
+			tx=miSession.beginTransaction(); //comenzar la transación, aquí es donde todo queda dentro de tx
 
-			// actualizar la habitacion en bbdd, hibernate hace un update y cambia los datos
-			miSession.update(habitacion);
+			miSession.update(habitacion); // actualizar la habitacion en bbdd, hibernate hace un update y cambia los datos
 
-			// commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
-			tx.commit();
+			tx.commit(); // commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
 
 		} catch (Exception e) {
 			
 			if(tx!=null) { //si es distinto de null es que la transacción se inicio pero aún así pudo fallar y si no está completa o falla algo se hace el rollback y echa todo para atrás
-				
 			
-			tx.rollback(); // rollback se asegura de que si no está completo o hay algún error antes del commit se deshaga todo
+				tx.rollback(); // rollback se asegura de que si no está completo o hay algún error antes del commit se deshaga todo
 			
 			}
 			
 			System.out.println("error al actualizar la habitación");
 
+		}finally {
+		
+			miSession.close(); // se cierra la sesión
+
+	}
+			
 		}
 		
-	}	
 			
 
 	// método para eliminar una habitación
@@ -138,12 +148,14 @@ public class HabitacionDao implements IHabitacionDao {
 	public void eliminarHabitacion(int id) { //void que no devuelve nada, solo borra
 		// TODO Auto-generated method stub
 
+		Session miSession = null; //se crea vacía la sesión
+		
+		Transaction tx=null; //se crea la transacción vacía donde se va a acumular todo lo que se quiere tramitar a bbdd para enviarlo de una
 
-		//se crea la transacción vacía donde se va a acumular todo lo que se quiere tramitar a bbdd para enviarlo de una
-		Transaction tx=null;
-
-		// try with resources para que se cierre solo
-		try (Session miSession=mySessionFactory.openSession()){
+		// try with resources para que se cierre solo no se puede hacer porque no llega al rollback porque cierra sesión antes y si se mete el rollback en otro try solo se controlaría la excepción y el rollback sería mentira
+		try {
+			
+			miSession=mySessionFactory.openSession(); //se abre la sesión manualmente
 			
 			//comenzar la transación, aquí es donde todo queda dentro de tx
 			tx=miSession.beginTransaction();
@@ -165,14 +177,17 @@ public class HabitacionDao implements IHabitacionDao {
 			
 			if(tx!=null) { //si es distinto de null es que la transacción se inicio pero aún así pudo fallar y si no está completa o falla algo se hace el rollback y echa todo para atrás
 				
-			
 				tx.rollback(); // rollback se asegura de que si no está completo o hay algún error antes del commit se deshaga todo
 			
 			}
 			
 			System.out.println("error al borrar la habitación");
 
-		}
+		}finally {
+		
+			miSession.close(); // se cierra la sesión
+
+	}
 		
 	}		
 
@@ -182,23 +197,22 @@ public class HabitacionDao implements IHabitacionDao {
 	public Habitacion obtenerHabitacionPorId(int id) { //devuelve objeto de tipo Habitacion
 		// TODO Auto-generated method stub
 
-		//se crea la transacción vacía donde se va a acumular todo lo que se quiere tramitar a bbdd para enviarlo de una
-		Transaction tx=null;
+		Session miSession = null; //se crea vacía la sesión
+		
+		Transaction tx=null; //se crea la transacción vacía donde se va a acumular todo lo que se quiere tramitar a bbdd para enviarlo de una
 
-		// try with resources para que se cierre solo
-		try (Session miSession=mySessionFactory.openSession()){
+		// try with resources para que se cierre solo no se puede hacer porque no llega al rollback porque cierra sesión antes y si se mete el rollback en otro try solo se controlaría la excepción y el rollback sería mentira
+		try {
 			
-			//comenzar la transación, aquí es donde todo queda dentro de tx
-			tx=miSession.beginTransaction();
+			miSession=mySessionFactory.openSession(); //se abre la sesión manualmente
 			
-			//primero hay que buscar la habitación en bbdd por Id
-			Habitacion habitacion=miSession.get(Habitacion.class,id);
+			tx=miSession.beginTransaction(); //comenzar la transación, aquí es donde todo queda dentro de tx
+			
+			Habitacion habitacion=miSession.get(Habitacion.class,id); //primero hay que buscar la habitación en bbdd por Id
 
-			// commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
-			tx.commit();
+			tx.commit(); // commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
 			
-			//después del commit devolver la habitación
-			return habitacion;
+			return habitacion; //después del commit devolver la habitación
 
 		} catch (Exception e) {
 			
@@ -211,7 +225,11 @@ public class HabitacionDao implements IHabitacionDao {
 			
 			System.out.println("error al buscar la habitación");
 		
-		}
+		}finally {
+			
+			miSession.close(); // se cierra la sesión
+
+	}
 		
 		return null; //se pone fuera del catch por si no hay habitación y no entra en la excepcion tiene que devolver algo
 		
