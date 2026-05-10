@@ -42,7 +42,7 @@ public class LoginController {
 			
 		}
 		
-		return "Bienvenida";
+		return "Principal";
 	}
 
 }

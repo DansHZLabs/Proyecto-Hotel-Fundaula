@@ -17,6 +17,6 @@ public interface InUsuarioDAO {
 
 	// Metodo a implementar por el UsuarioDAO
 
-	List<Usuario> obtenerUsuario(String usuario, String password);
+	List<Usuario> obtenerUsuario(String usuario);
 
 }

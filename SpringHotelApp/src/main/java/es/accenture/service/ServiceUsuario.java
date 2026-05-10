@@ -35,7 +35,7 @@ public class ServiceUsuario implements InServiceUsuario {
 
 		}
 
-		List<Usuario> listaUsers = repositorioUsuario.obtenerUsuario(usuario, password);
+		List<Usuario> listaUsers = repositorioUsuario.obtenerUsuario(usuario);
 
 		if (listaUsers.isEmpty()) {
 

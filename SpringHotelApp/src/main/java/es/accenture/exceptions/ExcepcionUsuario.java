@@ -13,7 +13,7 @@ public class ExcepcionUsuario extends Exception {
 	
 	public static final String USUARIO_INCORRECTO = "Error, usuario incorrecto, por favor inserte un usuario existente";
 	
-	public static final String PASSWORD_INCORRECTA = "Error, usuario incorrecto, por favor inserte un password correcto";
+	public static final String PASSWORD_INCORRECTA = "Error, password incorrecto, por favor inserte un password correcto";
 	
 	
 	/*

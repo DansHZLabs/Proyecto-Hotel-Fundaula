@@ -24,7 +24,7 @@ public class UsuarioDao implements InUsuarioDAO {
 
 	@Transactional
 	@Override
-	public List<Usuario> obtenerUsuario(String usuario, String password){
+	public List<Usuario> obtenerUsuario(String usuario){
 		
 		return sessionFactory.getCurrentSession()
 									.createQuery("from Usuario u where u.username = :username",Usuario.class)
