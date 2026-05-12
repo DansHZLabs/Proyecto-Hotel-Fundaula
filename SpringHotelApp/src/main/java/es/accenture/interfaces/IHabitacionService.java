@@ -12,7 +12,7 @@ public interface IHabitacionService {
 	
 	void modificarHabitacion (Habitacion habitacion); //método donde se meterá la lógica de negocio en HabitacionService al sobreescribirlo de la modificación de habitaciones, ojo se llaman igual que el método de HabitacionDao pero no hacen lo mismo este es para la lógica y el otro para la bbdd
 
-	void eliminarHabitacion (int id); //método donde se meterá la lógica de negocio en HabitacionService al sobreescribirlo de la eliminación de habitaciones, ojo se llaman igual que el método de HabitacionDao pero no hacen lo mismo este es para la lógica y el otro para la bbdd
+	void eliminarHabitacion (int id)throws Exception; //método donde se meterá la lógica de negocio en HabitacionService al sobreescribirlo de la eliminación de habitaciones, ojo se llaman igual que el método de HabitacionDao pero no hacen lo mismo este es para la lógica y el otro para la bbdd
 
 	Habitacion obtenerHabitacionPorId (int id); //método donde se meterá la lógica de negocio en HabitacionService al sobreescribirlo de la obtención de habitaciones por Id, ojo! devuelve una habitación que es la que se utilizará para modificar o eliminar, ojo se llaman igual que el método de HabitacionDao pero no hacen lo mismo este es para la lógica y el otro para la bbdd
 	

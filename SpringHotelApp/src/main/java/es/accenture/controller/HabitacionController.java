@@ -43,12 +43,12 @@ public class HabitacionController {
     }
 
     // método para mostrar el formulario de alta
-    @GetMapping("/nueva") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien entre en nueva se ejecuta el método mostrarFormularioAlta, hace la caja en model con "habitacion" y devuelve la vista formularioHabitacion
+    @GetMapping("/nueva") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien entre en nueva se ejecuta el método mostrarFormularioAlta, hace la caja en model con "habitacion" y devuelve la vista formularioAltaHabitacion
     public String mostrarFormularioAlta(Model model) {
 
         model.addAttribute("habitacion", new Habitacion()); //model es la caja que guarda un objeto creado nuevo de tipo habitacion en model con el nombre habitacion, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitacion} expression language desde la jsp
 
-        return "formularioHabitacion"; //devuelve el jsp del formulario
+        return "formularioAltaHabitacion"; //devuelve el jsp del formulario, se cambia porque da problemas con editar y se hace otra jsp solo para editar
     }
 
     // método para guardar habitación nueva
@@ -70,7 +70,7 @@ public class HabitacionController {
         // La manda al formulario ya relleno
         model.addAttribute("habitacion", habitacion); //model es la caja que guarda el objeto habitacion en model con el nombre habitacion, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitacion} expression language desde la jsp
 
-        return "formularioHabitacion"; //devuelve la jsp formulario
+        return "formularioEditarHabitacion"; //devuelve la jsp formulario, se cambia porque da problemas con guardar y se hace otra jsp solo para editar y así para separar los caminos de guardar y editar
     }
 
     // método para actualizar habitación en bbdd
@@ -86,11 +86,22 @@ public class HabitacionController {
 
     // método para eliminar habitación de bbdd
     @GetMapping("/eliminar/{id}") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien pinche en eliminar se ejecuta el método eliminarHabitacion, ejecuta el método del service y lo borra de bbdd a través del dao, luego redirige a la jsp habitaciones y muestra el listado
-    public String eliminarHabitacion(@PathVariable int id) {
+    public String eliminarHabitacion(@PathVariable int id,Model model) throws Exception{ //PathVariable recoge el id de la url y se crea un objeto model de tipo Model para poder usarlo
+    	try {
+    		
+    		habitacionService.eliminarHabitacion(id); // borra de bbdd a través del service
+    	
+    	}catch(Exception e) {
+    		
+    		model.addAttribute("error", e.getMessage()); //crea la caja model donde se añade el error que recupera el mensaje de la excepción
+    		
+    		model.addAttribute("habitaciones",habitacionService.obtenerTodasHabitaciones()); //se vuelve a cargar la lista de habitaciones porque sino al salir el mensaje en rojo no aparece
 
-        habitacionService.eliminarHabitacion(id); // borra de bbdd a través del service
-
-        return "redirect:/habitaciones"; // Redirige a la jsp habitaciones y muestra el listado
+    		return "habitaciones"; //vuelve a la jsp habitaciones
+    		
+    	}
+    		
+        return "redirect:/habitaciones"; // Redirige a la jsp habitaciones y muestra el listado si todo sale bien
     }
     
 }

@@ -1,6 +1,6 @@
 package es.accenture.entity;             //Esta ya está terminada, falta poner la relación con incidencia
 										 //habrá que poner @OneToMany(mappedBy="habitacion" //Relación 1:N con incidencia encima de private List<Incidencia>incidencias; y sus imports y luego comprobar y en incidencia meter la suya que manda sobre ella, no poner cascade por las reglas sde negocio
-
+										 //dudas sintaxis video de hibernate de clase hasta el minuto 10 viene casi todo
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -85,9 +85,9 @@ public class Habitacion {
         return idHabitacion;
     }
 
-    /*public void setIdHabitacion(int idHabitacion) { //el setter se quita porque es autoincremental
+    public void setIdHabitacion(int idHabitacion) { //el setter se quita porque es autoincremental, luego se vuelve a poner porque sino no puede cogerlo para editar
         this.idHabitacion = idHabitacion;
-    }*/
+    }
 
     public String getNumeroHabitacion() {
         return numeroHabitacion;

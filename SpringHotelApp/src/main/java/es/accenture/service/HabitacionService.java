@@ -18,17 +18,18 @@ public class HabitacionService implements IHabitacionService{
 	//a partir de aquí hay que ir llamando a los métodos del contrato con IHabitacionService y meter la lógica y luego ir llamando a los que HabitacionDao ha ido sobreescribiendo de IHabitacionDao y así sacar datos
 	//método para obtener todas las habitaciones
 	@Override //Anotación para sobreescribir el método de la interfaz
-	public List<Habitacion> obtenerTodasHabitaciones() {
+	public List<Habitacion> obtenerTodasHabitaciones(){
 		// TODO Auto-generated method stub
+		
 		return habitacionDao.obtenerDetallesTodasHabitaciones(); //aquí se llama a dao que consulta bbdd y devuelve la lista
 	}
 
 	//método para obtener una habitación por Id
     @Override //Anotación para sobreescribir el método de la interfaz
     public Habitacion obtenerHabitacionPorId(int id) {
-
-    	//poner aquí la lógica
+    			
         return habitacionDao.obtenerHabitacionPorId(id); //aquí se llama a dao que consulta una habitación por el parámetro id
+    
     }
     
     
@@ -51,11 +52,29 @@ public class HabitacionService implements IHabitacionService{
     
     //método para la eliminación de una habitación
     @Override //Anotación para sobreescribir el método de la interfaz
-    public void eliminarHabitacion(int id) {
+    public void eliminarHabitacion(int id)throws Exception{ //poner la excepción en la interfaz y el controller
+ 	
+    	//no eliminar si está ocupada
+    	// obtener la habitación
+    	Habitacion habitacion=habitacionDao.obtenerHabitacionPorId(id);
 
-        // Aquí va la lógica if tiene incidencias no se puede borrar y cosas así, está apuntado todo lo que acordamos en la reunión en un bloc de notas, buscar en la carpeta y pegar
+    	if (habitacion.getDisponibilidad()!=Habitacion.Disponibilidad.disponible) { //se comprueba que el estado sea disponible
 
-        habitacionDao.eliminarHabitacion(id); //aquí se llama a dao para borrar de la bbdd
+            throw new Exception("La habitación está ocupada y no se puede eliminar");
+        }
+    	
+    	//no eliminar si tiene incidencias
+    	if(habitacion.getIncidencias()!=null&&!habitacion.getIncidencias().isEmpty()){ //se comprueba la lista que esté vacía
+    		throw new Exception ("La habitación tiene incidencias y no se puede eliminar");
+    	}
+    	
+    	//no eliminar si tiene reservas
+    	if(habitacion.getReservas()!=null&&!habitacion.getReservas().isEmpty()){ //se comprueba la lista que esté vacía
+    		throw new Exception ("La habitación tiene reservas y no se puede eliminar");
+    	}
+        
+        habitacionDao.eliminarHabitacion(id); //aquí se llama a dao para borrar de la bbdd si pasa todas las reglas
+        
     }
 	
 }
