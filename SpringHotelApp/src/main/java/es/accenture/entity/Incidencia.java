@@ -21,7 +21,7 @@ import javax.persistence.Table;
 @Table(name="incidencias") // Anotación que indica cómo se llama la tabla que representa
 public class Incidencia {
 	
-	public enum EstadoIncidencia {avisado,pendiente,arreglado} //clase interna para crear los enum y poner las opciones que se quiere establecer
+	public enum EstadoIncidencia {abierta,en_curso,cerrada} //clase interna para crear los enum y poner las opciones que se quiere establecer
 	public enum PrioridadIncidencia {baja,media,alta} //clase interna para crear los enum y poner las opciones que se quiere establecer
 	
 	@Id //clave primaria INT

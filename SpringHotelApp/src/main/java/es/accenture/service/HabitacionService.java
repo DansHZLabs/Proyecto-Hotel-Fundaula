@@ -26,9 +26,9 @@ public class HabitacionService implements IHabitacionService{
 
 	//método para obtener una habitación por Id
     @Override //Anotación para sobreescribir el método de la interfaz
-    public Habitacion obtenerHabitacionPorId(int id) {
+    public Habitacion obtenerHabitacionPorId(int idHabitacion) {
     			
-        return habitacionDao.obtenerHabitacionPorId(id); //aquí se llama a dao que consulta una habitación por el parámetro id
+        return habitacionDao.obtenerHabitacionPorId(idHabitacion); //aquí se llama a dao que consulta una habitación por el parámetro id
     
     }
     

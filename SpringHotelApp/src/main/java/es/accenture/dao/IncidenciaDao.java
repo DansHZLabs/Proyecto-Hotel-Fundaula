@@ -230,4 +230,46 @@ public class IncidenciaDao implements IIncidenciaDao { //devuelve la List de tip
 		
 	}
 
+	// método para obtener las incidencias por su Id //es lo mismo que el de habitacionDao
+	@Override // Anotación que dice que es un método de la interfaz IIncidenciaDao y se sobreescribe
+	public Incidencia obtenerIncidenciaPorId(int idIncidencia) {
+
+		Session miSession = null; //se crea vacía la sesión
+		
+		Transaction tx=null; //se crea la transacción vacía donde se va a acumular todo lo que se quiere tramitar a bbdd para enviarlo de una
+
+		// try with resources para que se cierre solo no se puede hacer porque no llega al rollback porque cierra sesión antes y si se mete el rollback en otro try solo se controlaría la excepción y el rollback sería mentira
+		try {
+			
+			miSession=mySessionFactory.openSession(); //se abre la sesión manualmente
+			
+			tx=miSession.beginTransaction(); //comenzar la transación, aquí es donde todo queda dentro de tx
+			
+			Incidencia incidencia=miSession.get(Incidencia.class,idIncidencia); //primero hay que buscar la incidencia en bbdd por Id
+
+			tx.commit(); // commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
+			
+			return incidencia; //después del commit devolver la incidencia
+
+		} catch (Exception e) {
+			
+			if(tx!=null) { //si es distinto de null es que la transacción se inicio pero aún así pudo fallar y si no está completa o falla algo se hace el rollback y echa todo para atrás
+				
+			
+				tx.rollback(); // rollback se asegura de que si no está completo o hay algún error antes del commit se deshaga todo
+			
+			}
+			
+			System.out.println("error al buscar la incidencia");
+		
+		}finally {
+			
+			miSession.close(); // se cierra la sesión
+
+	}
+		
+		return null; //se pone fuera del catch por si no hay incidencia y no entra en la excepcion tiene que devolver algo
+		
+	}
+	
 }
