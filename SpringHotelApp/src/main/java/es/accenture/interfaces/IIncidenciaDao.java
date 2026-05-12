@@ -29,3 +29,4 @@ public interface IIncidenciaDao {
 El acceso a datos de incidencias: una interfaz y su implementación con las 
 operaciones CRUD necesariasy una consulta por habitaciónque devuelva las incidencias
 asociadas a una habitación concreta.*/ //la última hay que guardarla en una lista
+//el método de obtener incidencia por su Id aquí no se pide
