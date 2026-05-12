@@ -12,7 +12,7 @@ public interface IHabitacionDao {
 	
 	void modificarHabitacion (Habitacion habitacion); //coge los datos de una habitación consultando bbdd, los muestra en formulario mediante una jsp y guarda luego lo que se cambie en bbdd
 
-	void eliminarHabitacion (int id); //borra una habitación de bbdd y luego redirige a la jsp que muestra detalle habitacion y salen todas
+	void eliminarHabitacion (int idHabitacion); //borra una habitación de bbdd y luego redirige a la jsp que muestra detalle habitacion y salen todas
 
 	Habitacion obtenerHabitacionPorId (int id); //este voy a necesitar para ModificarHabitacion y EliminarHabitacion, ojo! devuelve una habitación que es la que se utilizará para modificar o eliminar
 
