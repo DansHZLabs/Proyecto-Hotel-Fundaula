@@ -89,7 +89,7 @@ public class LoginController {
 
 		} catch (Exception e) {
 
-			model.addAttribute("error", e.getMessage());
+			model.addAttribute("errorLogin", e.getMessage());
 
 			return "Login";
 
