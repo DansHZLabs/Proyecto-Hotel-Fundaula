@@ -8,10 +8,13 @@
 
 <h1>Detalle Habitación</h1><!-- título, se puede cambiar el tamaño poniendo h2 o h3 o lo que sea -->
 
-<p>ID:${habitacion.idHabitacion}</p><!-- $expresion languages para llamar y traerse algo como un get -->
-<p>Número:${habitacion.numeroHabitacion}</p>
-<p>Tipo:${habitacion.tipo}</p>
-<p>Precio:${habitacion.precioPorNoche}</p>
+<p><strong>ID de la habitación:</strong> ${habitacion.idHabitacion}</p>
+
+<p><strong>Nº de la habitación:</strong> ${habitacion.numeroHabitacion}</p>
+
+<p><strong>Tipo de habitación:</strong> ${habitacion.tipo}</p>
+
+<p><strong>Precio de la habitación:</strong> ${habitacion.precioPorNoche}</p>
 
 <a href="${pageContext.request.contextPath}/habitaciones">Volver</a><!-- botón volver para cambiar de vista al listado-->
 

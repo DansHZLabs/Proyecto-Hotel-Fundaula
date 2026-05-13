@@ -28,7 +28,7 @@ public class HabitacionController {
 
         model.addAttribute("habitaciones",habitaciones); //model es la caja que guarda la lista habitaciones en model con el nombre habitaciones, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitaciones} expression language desde la jsp
 
-        return "habitaciones"; //devuelve la vista jsp de habitaciones y muestra el listado
+        return "Habitaciones"; //devuelve la vista jsp de habitaciones y muestra el listado
     }
 
     // método para ver el detalle de una habitación
@@ -39,7 +39,7 @@ public class HabitacionController {
 
         model.addAttribute("habitacion",habitacion); //model es la caja que guarda el objeto habitacion en model con el nombre habitacion, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitacion} expression language desde la jsp
 
-        return "detalleHabitacion"; //devuelve la jsp de detalle
+        return "DetalleHabitacion"; //devuelve la jsp de detalle
     }
 
     // método para mostrar el formulario de alta
@@ -48,15 +48,23 @@ public class HabitacionController {
 
         model.addAttribute("habitacion",new Habitacion()); //model es la caja que guarda un objeto creado nuevo de tipo habitacion en model con el nombre habitacion, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitacion} expression language desde la jsp
 
-        return "formularioAltaHabitacion"; //devuelve el jsp del formulario, se cambia porque da problemas con editar y se hace otra jsp solo para editar
+        return "FormularioHabitacion"; //devuelve el jsp del formulario, se cambia porque da problemas con editar y se hace otra jsp solo para editar
     }
 
     // método para guardar habitación nueva
     @PostMapping("/guardar") //Anotación que dice cuál es la url de entrada que coge el método guardarHabitacion, cuándo alguien pinche en guardar, rellena los datos del objeto habitacion con los datos del formulario gracias a modelAtribute (este no es como model que guarda datos en la mochila este los asigna como atributos del objeto) y llama al método del service y redirige a la vista habitaciones con el listado
     public String guardarHabitacion(@ModelAttribute Habitacion habitacion) { //ModelAtribute hace que Spring rellene automáticamente un objeto con los datos que vienen del formulario
 
+    	if(habitacion.getIdHabitacion() != 0){
+    		
+    		habitacionService.modificarHabitacion(habitacion);//para modificar si existe porque sea distinta de 0 en la comparación
+    		
+    	}else {
+    		
         habitacionService.altaHabitacion(habitacion); //guarda en bbdd a través del service
 
+    	}
+    	
         return "redirect:/habitaciones"; // Redirige a la jsp habitaciones y muestra el listado
     }
 
@@ -70,19 +78,19 @@ public class HabitacionController {
         // La manda al formulario ya relleno
         model.addAttribute("habitacion",habitacion); //model es la caja que guarda el objeto habitacion en model con el nombre habitacion, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitacion} expression language desde la jsp
 
-        return "formularioEditarHabitacion"; //devuelve la jsp formulario, se cambia porque da problemas con guardar y se hace otra jsp solo para editar y así para separar los caminos de guardar y editar
+        return "FormularioHabitacion"; //devuelve la jsp formulario, se cambia porque da problemas con guardar y se hace otra jsp solo para editar y así para separar los caminos de guardar y editar
     }
 
-    // método para actualizar habitación en bbdd
-    @PostMapping("/actualizar") //Anotación que dice cuál es la url de entrada que coge el método actualizarHabitacion, cuándo alguien pinche en actualizar trae a través del service el método modificarHabitacion conectando con bbdd por medio del dao y trayendo los datos de habitacion con los datos del formulario gracias a modelAtribute (este no es como model que guarda datos en la mochila este los asigna como atributos del objeto) y llama al método del service y redirige a la vista habitaciones con el listado
-    public String actualizarHabitacion(@ModelAttribute Habitacion habitacion) {
+    // método para actualizar habitación en bbdd             //este ya no se va a usar porque al arreglar el formulario se hace desde guardar
+    //@PostMapping("/actualizar") //Anotación que dice cuál es la url de entrada que coge el método actualizarHabitacion, cuándo alguien pinche en actualizar trae a través del service el método modificarHabitacion conectando con bbdd por medio del dao y trayendo los datos de habitacion con los datos del formulario gracias a modelAtribute (este no es como model que guarda datos en la mochila este los asigna como atributos del objeto) y llama al método del service y redirige a la vista habitaciones con el listado
+    //public String actualizarHabitacion(@ModelAttribute Habitacion habitacion) {
 
         // Actualiza en BD
-        habitacionService.modificarHabitacion(habitacion); //modifica una habitacion a través del service
+        //habitacionService.modificarHabitacion(habitacion); //modifica una habitacion a través del service
 
         // Vuelve al listado
-        return "redirect:/habitaciones"; // Redirige a la jsp habitaciones y muestra el listado
-    }
+        //return "redirect:/habitaciones"; // Redirige a la jsp habitaciones y muestra el listado
+    //}
 
     // método para eliminar habitación de bbdd
     @GetMapping("/eliminar/{id}") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien pinche en eliminar se ejecuta el método eliminarHabitacion, ejecuta el método del service y lo borra de bbdd a través del dao, luego redirige a la jsp habitaciones y muestra el listado
@@ -97,7 +105,7 @@ public class HabitacionController {
     		
     		model.addAttribute("habitaciones",habitacionService.obtenerTodasHabitaciones()); //se vuelve a cargar la lista de habitaciones porque sino al salir el mensaje en rojo no aparece
 
-    		return "habitaciones"; //vuelve a la jsp habitaciones
+    		return "Habitaciones"; //vuelve a la jsp habitaciones
     		
     	}
     		
