@@ -19,26 +19,26 @@ public class IncidenciaService implements IIncidenciaService {
 	//a partir de aquí hay que ir llamando a los métodos del contrato con IIncidenciaService y meter la lógica y luego ir llamando a los que IncidenciaDao ha ido sobreescribiendo de IIncidenciaDao y así sacar datos
 	//método para obtener todas las incidencias
 	@Override //Anotación para sobreescribir el método de la interfaz
-	public List<Incidencia> obtenerTodasIncidencias() {
+	public List<Incidencia>buscarTodasIncidencias() {
 		// TODO Auto-generated method stub
 
-		 return incidenciaDao.obtenerDetallesTodasIncidencias(); //aquí se llama a dao que consulta todas las incidencias en bbdd y devuelve la lista
+		 return incidenciaDao.buscarIncidencias(); //aquí se llama a dao que consulta todas las incidencias en bbdd y devuelve la lista
     
     }
 
 	//método para el alta de una incidencia
     @Override //Anotación para sobreescribir el método de la interfaz
-	public void altaIncidencia(Incidencia incidencia) {
+	public void guardarIncidencia(Incidencia incidencia) {
 		// TODO Auto-generated method stub
-    	incidenciaDao.altaIncidencia(incidencia); //aquí se llama a dao para guardar la incidencia
+    	incidenciaDao.guardarIncidencia(incidencia); //aquí se llama a dao para guardar la incidencia
 	}
 
     //método para la modificación de una incidencia
     @Override //Anotación para sobreescribir el método de la interfaz
-	public void modificarIncidencia(Incidencia incidencia) {
+	public void actualizarIncidencia(Incidencia incidencia) {
 		// TODO Auto-generated method stub
 		
-    	incidenciaDao.modificarIncidencia(incidencia); //aquí se llama a dao para actualizar en la bbdd
+    	incidenciaDao.actualizarIncidencia(incidencia); //aquí se llama a dao para actualizar en la bbdd
 	}
 
     //método para la eliminación de una incidencia
@@ -47,7 +47,7 @@ public class IncidenciaService implements IIncidenciaService {
 		// TODO Auto-generated method stub
     	
     	// obtener la incidencia
-    	Incidencia incidencia=incidenciaDao.obtenerIncidenciaPorId(idIncidencia); //se obtiene por el Id a través del dao
+    	Incidencia incidencia=incidenciaDao.buscarIncidenciaPorId(idIncidencia); //se obtiene por el Id a través del dao
     	
     	//si no hay incidencia porque es igual a null
     	if(incidencia==null) {throw new Exception("La incidencia no existe");}
@@ -61,16 +61,16 @@ public class IncidenciaService implements IIncidenciaService {
 
     // método para obtener una incidencia por su id
     @Override
-    public Incidencia obtenerIncidenciaPorId(int idIncidencia) {
+    public Incidencia buscarIncidenciaPorId(int idIncidencia) {
 
-        return incidenciaDao.obtenerIncidenciaPorId(idIncidencia); //llama al dao para buscar la incidencia en bbdd y la devuelve
+        return incidenciaDao.buscarIncidenciaPorId(idIncidencia); //llama al dao para buscar la incidencia en bbdd y la devuelve
     }
 
 	@Override
-	public List<Incidencia>obtenerIncidenciasPorIdHabitacion(int idHabitacion) {
+	public List<Incidencia>buscarIncidenciasPorIdHabitacion(int idHabitacion) {
 		// TODO Auto-generated method stub
 		
-		return incidenciaDao.obtenerIncidenciasPorIdHabitacion(idHabitacion); // llama al dao para buscar en bbdd las incidencias por el id de habitación y las devuelve en la lista
+		return incidenciaDao.buscarIncidenciasPorIdHabitacion(idHabitacion); // llama al dao para buscar en bbdd las incidencias por el id de habitación y las devuelve en la lista
 		
 	}
 	

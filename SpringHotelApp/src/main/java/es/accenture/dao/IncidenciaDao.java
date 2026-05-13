@@ -21,7 +21,7 @@ public class IncidenciaDao implements IIncidenciaDao { //devuelve la List de tip
     
  // método para obtener detalles de todas las incidencias, devuelve una List donde se almacenan
 	@Override // Anotación que dice que es un método de la interfaz IIncidenciaDao y se sobreescribe
-	public List<Incidencia> obtenerDetallesTodasIncidencias() {
+	public List<Incidencia>buscarIncidencias() {
 		// TODO Auto-generated method stub
 		
 		List<Incidencia>incidencias=null; //se crea la lista vacía donde se van a guardar las que se traigan de bbdd
@@ -65,7 +65,7 @@ public class IncidenciaDao implements IIncidenciaDao { //devuelve la List de tip
 	
 	// método para hacer el alta de una incidencia
 	@Override // Anotación que dice que es un método de la interfaz IHabitaciónDao y se sobreescribe
-	public void altaIncidencia(Incidencia incidencia) {
+	public void guardarIncidencia(Incidencia incidencia) {
 		// TODO Auto-generated method stub
 		
 		
@@ -104,7 +104,7 @@ public class IncidenciaDao implements IIncidenciaDao { //devuelve la List de tip
 
 	// método para hacer modificación de una incidencia
 	@Override // Anotación que dice que es un método de la interfaz IIncidenciaDao y se sobreescribe
-	public void modificarIncidencia(Incidencia incidencia) { //void no devuelve nada solo modifica
+	public void actualizarIncidencia(Incidencia incidencia) { //void no devuelve nada solo modifica
 		// TODO Auto-generated method stub
 		
 		//Session miSession = null; //se crea vacía la sesión
@@ -191,7 +191,7 @@ public class IncidenciaDao implements IIncidenciaDao { //devuelve la List de tip
 
 	 // método para obtener las incidencias de una habitación por su Id //es lo mismo que el de habitacionDao pero busca por el id de habitacion y no por el de incidencia
 	@Override  // Anotación que dice que es un método de la interfaz IIncidenciaDao y se sobreescribe
-	public List<Incidencia> obtenerIncidenciasPorIdHabitacion(int idHabitacion) { //devuelve una lista de tipo Incidencia
+	public List<Incidencia>buscarIncidenciasPorIdHabitacion(int idHabitacion) { //devuelve una lista de tipo Incidencia
 		// TODO Auto-generated method stub
 		
 		//Session miSession = null; //se crea vacía la sesión
@@ -236,7 +236,7 @@ public class IncidenciaDao implements IIncidenciaDao { //devuelve la List de tip
 
 	// método para obtener las incidencias por su Id //es lo mismo que el de habitacionDao
 	@Override // Anotación que dice que es un método de la interfaz IIncidenciaDao y se sobreescribe
-	public Incidencia obtenerIncidenciaPorId(int idIncidencia) {
+	public Incidencia buscarIncidenciaPorId(int idIncidencia) {
 
 		//Session miSession = null; //se crea vacía la sesión
 		

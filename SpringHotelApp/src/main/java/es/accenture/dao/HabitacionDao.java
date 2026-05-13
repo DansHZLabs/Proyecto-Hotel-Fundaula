@@ -20,7 +20,7 @@ public class HabitacionDao implements IHabitacionDao {
 	
 	// método para obtener detalles de todas las habitaciones, devuelve una List donde se almacenan
 	@Override // Anotación que dice que es un método de la interfaz IHabitaciónDao y se sobreescribe
-	public List<Habitacion> obtenerDetallesTodasHabitaciones() { //devuelve la List de tipo Habitacion, ahí se guardan
+	public List<Habitacion>buscarHabitaciones() { //devuelve la List de tipo Habitacion, ahí se guardan
 		// TODO Auto-generated method stub
 		
 		List<Habitacion>habitaciones=null; //se crea la lista vacía donde se van a guardar las que se traigan de bbdd
@@ -38,7 +38,7 @@ public class HabitacionDao implements IHabitacionDao {
 			//tx=miSession.beginTransaction(); //comenzar la transación, aquí es donde todo queda dentro de tx
 
 			// consulta de habitaciones a bbdd, se crea una query dentro de miSession en hql (como el sql pero con objetos y clases), de la entity Habitación lo que me traigas van a ser objetos tipo Habitacion y devuelve List<Habitacion>
-			habitaciones = miSession.createQuery("from Habitacion",Habitacion.class).getResultList();
+			habitaciones=miSession.createQuery("from Habitacion",Habitacion.class).getResultList();
 
 			//tx.commit(); 			// commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
 
@@ -64,7 +64,7 @@ public class HabitacionDao implements IHabitacionDao {
 
 	// método para hacer el alta de una habitación
 	@Override // Anotación que dice que es un método de la interfaz IHabitaciónDao y se sobreescribe
-	public void altaHabitacion(Habitacion habitacion) { //void no devuelve nada, solo lo manda a la bbdd
+	public void guardarHabitacion(Habitacion habitacion) { //void no devuelve nada, solo lo manda a la bbdd
 		// TODO Auto-generated method stub
 
 		//se crea la transacción vacía donde se va a acumular todo lo que se quiere tramitar a bbdd para enviarlo de una
@@ -106,7 +106,7 @@ public class HabitacionDao implements IHabitacionDao {
 
 	// método para hacer modificación de una habitación
 	@Override // Anotación que dice que es un método de la interfaz IHabitaciónDao y se sobreescribe
-	public void modificarHabitacion(Habitacion habitacion) { //void no devuelve nada solo modifica
+	public void actualizarHabitacion(Habitacion habitacion) { //void no devuelve nada solo modifica
 		// TODO Auto-generated method stub
 
 		//Session miSession = null; //se crea vacía la sesión
@@ -196,7 +196,7 @@ public class HabitacionDao implements IHabitacionDao {
 
 	// método para obtener una habitación por su Id //es lo mismo que el de borrar pero sin el delete y que lo devuelva
 	@Override // Anotación que dice que es un método de la interfaz IHabitaciónDao y se sobreescribe
-	public Habitacion obtenerHabitacionPorId(int idHabitacion) { //devuelve objeto de tipo Habitacion
+	public Habitacion buscarHabitacionPorId(int idHabitacion) { //devuelve objeto de tipo Habitacion
 		// TODO Auto-generated method stub
 
 		//Session miSession = null; //se crea vacía la sesión

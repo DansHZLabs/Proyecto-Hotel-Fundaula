@@ -24,7 +24,7 @@ public class HabitacionController {
     @GetMapping //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en habitaciones, se ejecuta el método listarHabitaciones, va al service, de ahí al dao, lo saca de bbdd, lo guarda en la lista y devuelve la vista habitaciones con el listado
     public String listarHabitaciones(Model model) {
 
-        List<Habitacion>habitaciones=habitacionService.obtenerTodasHabitaciones(); //llama al service de ahí al dao y a bbdd y lo guarda en la lista habitaciones
+        List<Habitacion>habitaciones=habitacionService.buscarHabitaciones(); //llama al service de ahí al dao y a bbdd y lo guarda en la lista habitaciones
 
         model.addAttribute("habitaciones",habitaciones); //model es la caja que guarda la lista habitaciones en model con el nombre habitaciones, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitaciones} expression language desde la jsp
 
@@ -35,7 +35,7 @@ public class HabitacionController {
     @GetMapping("/{id}") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "habitacion" y devuelve la vista detalleHabitacion
     public String verDetalle(@PathVariable int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
 
-        Habitacion habitacion=habitacionService.obtenerHabitacionPorId(id); //obtiene una habitación por su Id a través del service
+        Habitacion habitacion=habitacionService.buscarHabitacionPorId(id); //obtiene una habitación por su Id a través del service
 
         model.addAttribute("habitacion",habitacion); //model es la caja que guarda el objeto habitacion en model con el nombre habitacion, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitacion} expression language desde la jsp
 
@@ -57,11 +57,11 @@ public class HabitacionController {
 
     	if(habitacion.getIdHabitacion() != 0){
     		
-    		habitacionService.modificarHabitacion(habitacion);//para modificar si existe porque sea distinta de 0 en la comparación
+    		habitacionService.actualizarHabitacion(habitacion);//para modificar si existe porque sea distinta de 0 en la comparación
     		
     	}else {
     		
-        habitacionService.altaHabitacion(habitacion); //guarda en bbdd a través del service
+        habitacionService.guardarHabitacion(habitacion); //guarda en bbdd a través del service
 
     	}
     	
@@ -73,7 +73,7 @@ public class HabitacionController {
     public String mostrarFormularioEditar(@PathVariable int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
 
         // Busca la habitación existente
-        Habitacion habitacion=habitacionService.obtenerHabitacionPorId(id); //obtiene una habitación por su id a través del service
+        Habitacion habitacion=habitacionService.buscarHabitacionPorId(id); //obtiene una habitación por su id a través del service
 
         // La manda al formulario ya relleno
         model.addAttribute("habitacion",habitacion); //model es la caja que guarda el objeto habitacion en model con el nombre habitacion, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitacion} expression language desde la jsp
@@ -103,7 +103,7 @@ public class HabitacionController {
     		
     		model.addAttribute("error",e.getMessage()); //crea la caja model donde se añade el error que recupera el mensaje de la excepción
     		
-    		model.addAttribute("habitaciones",habitacionService.obtenerTodasHabitaciones()); //se vuelve a cargar la lista de habitaciones porque sino al salir el mensaje en rojo no aparece
+    		model.addAttribute("habitaciones",habitacionService.buscarHabitaciones()); //se vuelve a cargar la lista de habitaciones porque sino al salir el mensaje en rojo no aparece
 
     		return "Habitaciones"; //vuelve a la jsp habitaciones
     		
