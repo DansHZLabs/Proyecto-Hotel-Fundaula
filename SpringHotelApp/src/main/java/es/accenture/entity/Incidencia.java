@@ -17,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity // Anotación para representar una tabla en BBDD
 @Table(name="incidencias") // Anotación que indica cómo se llama la tabla que representa
 public class Incidencia {
@@ -29,7 +31,7 @@ public class Incidencia {
 	@Column(name = "id_incidencia",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido INT
 	private int idIncidencia;
 	
-	@ManyToOne(fetch=FetchType.LAZY) //Anotación para la relación 1N con habitación 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda
+	@ManyToOne(fetch=FetchType.EAGER) //Anotación para la relación 1N con habitación 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda, se cambia a EAGER porque con LAZY no va porque se limita
 	@JoinColumn(name="id_habitacion",nullable=false) //Anotación que indica que se referencia a Habitacion es clave FK y que es requerido INT
 	private Habitacion habitacion; //Se crea el objeto Habitación para hacerlo con anotaciones en las relaciones
 
@@ -44,9 +46,11 @@ public class Incidencia {
 	@Column(name="descripcion_incidencia") //Anotación que indica cómo se llama la tabla que representa TEXT
 	private String descripcionIncidencia;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd") //Anotación para el formato de la fecha porque sino spring no la reconoce como fecha
 	@Column(name="fecha_apertura",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido DATE
 	private Date fechaApertura;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd") //Anotación para el formato de la fecha porque sino spring no la reconoce como fecha
 	@Column(name="fecha_cierre") //Anotación que indica cómo se llama la tabla que representa DATE
 	private Date fechaCierre;
 

@@ -34,7 +34,7 @@ public class IncidenciaController {
 
 		model.addAttribute("incidencias",incidencias); //model es la caja que guarda la lista incidencias en model con el nombre incidencias y luego desde la jsp se recoge con ${expresion language}
 
-		return "incidencias"; //devuelve la vista jsp incidencias y muestra el listado
+		return "Incidencias"; //devuelve la vista jsp incidencias y muestra el listado
 	}
 
 	// método para ver el detalle de una incidencia
@@ -45,7 +45,7 @@ public class IncidenciaController {
 
 		model.addAttribute("incidencia",incidencia); //model es la caja que guarda el objeto incidencia en model con el nombre incidencia, luego se recupera desde la jsp con ${expresion language}
 
-		return "detalleIncidencia"; //devuelve la jsp de detalleIncidencia
+		return "DetalleIncidencia"; //devuelve la jsp de detalleIncidencia
 	}
 
 	// método para mostrar el formulario de alta
@@ -58,15 +58,23 @@ public class IncidenciaController {
 
 		model.addAttribute("habitaciones",habitaciones); //guarda la lista habitaciones en model para usarla en el formulario
 
-		return "formularioAltaIncidencia"; //devuelve el jsp del formularioAltaIncidencia
+		return "FormularioIncidencia"; //devuelve el jsp del formularioAltaIncidencia
 	}
 
-	// método para guardar incidencia nueva
+	// método para guardar incidencia nueva //este se cambia y se mete para que compruebe si tiene incidencias la incidencia y sino (si sí tiene) un else para modificar
 	@PostMapping("/guardar") //Anotación que dice cuál es la url de entrada que coge el método guardarIncidencia
 	public String guardarIncidencia(@ModelAttribute Incidencia incidencia) { //ModelAtribute hace que Spring rellene automáticamente un objeto con los datos que vienen del formulario
 
-		incidenciaService.altaIncidencia(incidencia); //guarda en bbdd a través del service que las coge del dao que las guarda en bbdd
-
+		if(incidencia.getIdIncidencia()!=0){
+					
+				incidenciaService.modificarIncidencia(incidencia); //guarda en bbdd a través del service que las coge del dao que las guarda en bbdd
+			
+		}else {
+			
+			incidenciaService.altaIncidencia(incidencia);
+			
+		}
+		
 		return "redirect:/incidencias"; // Redirige a la jsp incidencias y muestra el listado
 	}
 
@@ -82,17 +90,17 @@ public class IncidenciaController {
 
 		model.addAttribute("habitaciones",habitaciones); //guarda la lista habitaciones en model para usarla en el formulario, luego desde jsp se cogen con ${expresion languanges}
 
-		return "formularioEditarIncidencia"; //devuelve la jsp formularioEditarIncidencia
+		return "FormularioIncidencia"; //devuelve la jsp formularioEditarIncidencia
 	}
 
-	// método para actualizar incidencia en bbdd
-	@PostMapping("/actualizar") //Anotación que dice cuál es la url de entrada que coge el método actualizarIncidencia
-	public String actualizarIncidencia(@ModelAttribute Incidencia incidencia) { //ModelAtribute hace que Spring rellene automáticamente un objeto con los datos que vienen del formulario
+	// método para actualizar incidencia en bbdd //este método se borra y se meterá en guardar con una comprobación de si hay datos porque tienen que ir juntos en la jsp y sino no veo forma
+	//@PostMapping("/actualizar") //Anotación que dice cuál es la url de entrada que coge el método actualizarIncidencia
+	//public String actualizarIncidencia(@ModelAttribute Incidencia incidencia) { //ModelAtribute hace que Spring rellene automáticamente un objeto con los datos que vienen del formulario
 
-		incidenciaService.modificarIncidencia(incidencia); //modifica una incidencia a través del service,dao,bbdd
+		//incidenciaService.modificarIncidencia(incidencia); //modifica una incidencia a través del service,dao,bbdd
 
-		return "redirect:/incidencias"; // Redirige a la jsp incidencias y muestra el listado de incidencias
-	}
+		//return "redirect:/incidencias"; // Redirige a la jsp incidencias y muestra el listado de incidencias
+	//}
 
 	// método para eliminar incidencia de bbdd
 	@GetMapping("/eliminar/{id}") //Anotación que dice cuál es la url de entrada que coge el método
@@ -108,7 +116,7 @@ public class IncidenciaController {
 
 			model.addAttribute("incidencias",incidenciaService.obtenerTodasIncidencias()); //se vuelve a cargar la lista de incidencias porque sino al salir el mensaje en rojo no aparece
 
-			return "incidencias"; //vuelve a la jsp incidencias y la muestra
+			return "Incidencias"; //vuelve a la jsp incidencias y la muestra
 		}
 
 		return "redirect:/incidencias"; // Redirige a la jsp incidencias y muestra el listado si todo sale bien
@@ -126,7 +134,7 @@ public class IncidenciaController {
 
 		model.addAttribute("habitacion",habitacion); //guarda la habitación en model, luego se cogerán en jsp con ${expresion language}
 
-		return "incidencias"; //devuelve la jsp incidencias y muestra las de esa habitación
+		return "Incidencias"; //devuelve la jsp incidencias y muestra las de esa habitación
 	}
 
 }
