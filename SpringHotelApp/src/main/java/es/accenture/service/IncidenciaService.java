@@ -13,9 +13,15 @@ import es.accenture.interfaces.IIncidenciaService;
 @Service //Anotación para decirle a Spring que es un service
 public class IncidenciaService implements IIncidenciaService {
 
-	@Autowired //Anotación para hacer la inyección de dependencias de HabitacionDao aquí sin hacer new HabitacionDao=habitacionDao
-	private IIncidenciaDao incidenciaDao;
+	//@Autowired //Anotación para hacer la inyección de dependencias de HabitacionDao aquí sin hacer new HabitacionDao=habitacionDao
+	//private IIncidenciaDao incidenciaDao;  //se quita porque Daniel lo tiene por constructor y es mejor práctica
 	
+	private IIncidenciaDao incidenciaDao;
+
+	@Autowired //inyección por constructor
+	public IncidenciaService(IIncidenciaDao incidenciaDao) {
+	    this.incidenciaDao = incidenciaDao;
+	}
 	//a partir de aquí hay que ir llamando a los métodos del contrato con IIncidenciaService y meter la lógica y luego ir llamando a los que IncidenciaDao ha ido sobreescribiendo de IIncidenciaDao y así sacar datos
 	//método para obtener todas las incidencias
 	@Override //Anotación para sobreescribir el método de la interfaz

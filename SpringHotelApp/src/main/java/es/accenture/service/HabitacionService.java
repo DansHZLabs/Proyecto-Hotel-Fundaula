@@ -12,9 +12,15 @@ import es.accenture.interfaces.IHabitacionService;
 @Service //Anotación para decirle a Spring que es un service
 public class HabitacionService implements IHabitacionService{
 
-	@Autowired //Anotación para hacer la inyección de dependencias de HabitacionDao aquí sin hacer new HabitacionDao=habitacionDao
-	private IHabitacionDao habitacionDao;
+	//@Autowired //Anotación para hacer la inyección de dependencias de HabitacionDao aquí sin hacer new HabitacionDao=habitacionDao
+	//private IHabitacionDao habitacionDao; //se quita porque Daniel lo tiene por constructor y es mejor práctica
 	
+	private IHabitacionDao habitacionDao;
+
+	@Autowired //inyección por constructor
+	public HabitacionService(IHabitacionDao habitacionDao) {
+	    this.habitacionDao = habitacionDao;
+	}
 	//a partir de aquí hay que ir llamando a los métodos del contrato con IHabitacionService y meter la lógica y luego ir llamando a los que HabitacionDao ha ido sobreescribiendo de IHabitacionDao y así sacar datos
 	//método para obtener todas las habitaciones
 	@Override //Anotación para sobreescribir el método de la interfaz

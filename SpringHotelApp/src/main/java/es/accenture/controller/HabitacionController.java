@@ -18,9 +18,16 @@ import es.accenture.interfaces.IHabitacionService;
 @RequestMapping("/habitaciones") //Anotación que asigna una url al controller, es la ruta general y luego se especifica con getmapping para donde va
 public class HabitacionController {
 
-    @Autowired // inyección de dependencias del service para no hacer new IHabitacionService myService=new habitacionService crea el objeto automático
-    private IHabitacionService habitacionService;
+    //@Autowired // inyección de dependencias del service para no hacer new IHabitacionService myService=new habitacionService crea el objeto automático
+    //private IHabitacionService habitacionService; //se quita porque Daniel lo tiene por constructor y es mejor práctica
 
+	private IHabitacionService habitacionService;
+
+	@Autowired // inyección en el constructor
+	public HabitacionController(IHabitacionService habitacionService) {
+	    this.habitacionService = habitacionService;
+	}
+	
     @GetMapping //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en habitaciones, se ejecuta el método listarHabitaciones, va al service, de ahí al dao, lo saca de bbdd, lo guarda en la lista y devuelve la vista habitaciones con el listado
     public String listarHabitaciones(Model model) {
 

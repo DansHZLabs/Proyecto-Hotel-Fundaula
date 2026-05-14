@@ -42,7 +42,14 @@
     	<option value="mantenimiento">mantenimiento</option>
 	</select>
  <br>
- 
+  
+<label>Orientación:</label>
+<select name="orientacionHabitacion">
+    <option value="INTERIOR"${habitacion.orientacionHabitacion == 'interior' ? 'selected' : ''}>Interior</option>
+    <option value="EXTERIOR"${habitacion.orientacionHabitacion == 'exterior' ? 'selected' : ''}>Exterior</option>
+</select>
+<br>
+
     <button type="submit">
         <c:choose>
             <c:when test="${habitacion.idHabitacion != 0}">Actualizar</c:when>

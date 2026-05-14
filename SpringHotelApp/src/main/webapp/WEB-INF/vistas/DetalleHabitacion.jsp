@@ -16,6 +16,8 @@
 
 <p><strong>Precio de la habitación:</strong> ${habitacion.precioPorNoche}</p>
 
+<p><strong>Orientación:</strong> ${habitacion.orientacionHabitacion}</p>
+
 <a href="${pageContext.request.contextPath}/habitaciones">Volver</a><!-- botón volver para cambiar de vista al listado-->
 
 </body>

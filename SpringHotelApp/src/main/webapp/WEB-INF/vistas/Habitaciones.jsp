@@ -21,6 +21,7 @@
         <th>Tipo de la habitación</th>
         <th>Precio por noche</th>
         <th>Disponibilidad de la habitación</th>
+        <th>Orientación</th>
         <th>Acciones</th>
     </tr>
     <c:forEach var="habitacion" items="${habitaciones}"><!-- recorre la list y cada objeto de habitación es una habitación -->
@@ -30,6 +31,7 @@
             <td>${habitacion.tipo}</td>
             <td>${habitacion.precioPorNoche}</td>
 			<td>${habitacion.disponibilidad}</td>
+			<td>${habitacion.orientacionHabitacion}</td>
             <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
                 <a href="${pageContext.request.contextPath}/habitaciones/${habitacion.idHabitacion}">Ver</a>
                 <a href="${pageContext.request.contextPath}/habitaciones/editar/${habitacion.idHabitacion}">Editar</a>

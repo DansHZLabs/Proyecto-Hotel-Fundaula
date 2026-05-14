@@ -16,10 +16,14 @@ import es.accenture.interfaces.IIncidenciaDao;
 @Repository // Anotación para decirle a Spring que esta clase es un DAO para acceder a bbdd, spring crea objeto automáticamente
 public class IncidenciaDao implements IIncidenciaDao { //devuelve la List de tipo Incidencia, ahí se guardan
 
-    @Autowired //spring inyecta el SessionFactory, así no hay que hacer SessionFactory mySessionFactory=new SessionFactory porque se crea solo el objeto SessionFactory
+    //@Autowired //spring inyecta el SessionFactory, así no hay que hacer SessionFactory mySessionFactory=new SessionFactory porque se crea solo el objeto SessionFactory
     private SessionFactory mySessionFactory; //se crea una variable mySessionFactory de tipo SessionFactory para luego usarla dentro del try with resources, es como el pool de conexiones, se fabrican dentro las sessions, así solo se crea una vez
-    
- // método para obtener detalles de todas las incidencias, devuelve una List donde se almacenan
+    //se quita porque Daniel lo tiene por constructor y es mejor práctica
+    @Autowired//inyección por constructor
+    public IncidenciaDao(SessionFactory mySessionFactory) {
+        this.mySessionFactory = mySessionFactory;
+    }
+    // método para obtener detalles de todas las incidencias, devuelve una List donde se almacenan
 	@Override // Anotación que dice que es un método de la interfaz IIncidenciaDao y se sobreescribe
 	public List<Incidencia>buscarIncidencias() {
 		// TODO Auto-generated method stub
