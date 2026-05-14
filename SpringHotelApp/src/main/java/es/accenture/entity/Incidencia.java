@@ -76,9 +76,9 @@ public class Incidencia {
 		return idIncidencia;
 	}
 
-	/*public void setIdIncidencia(int idIncidencia) { //se quita porque es autoincremental
+	public void setIdIncidencia(int idIncidencia) { //se quita porque es autoincremental, se vuelve a poner porque sino al rellenar el formulario no puede hacerlo y crea una nueva
 		this.idIncidencia = idIncidencia;
-	}*/
+	}
 	
 	public Habitacion getHabitacion() {
 		return habitacion;
