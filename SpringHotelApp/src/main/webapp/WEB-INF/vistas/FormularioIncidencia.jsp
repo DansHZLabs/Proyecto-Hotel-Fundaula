@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %> <!-- se pueden poner br muchas encadenadas y así se deja más hueco -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!-- librería jstl -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!-- librería jstl para formatear fechas -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
 <html>
 <head>
@@ -15,9 +16,9 @@
     </c:choose>
 </h1>
 
-<form action="${pageContext.request.contextPath}/incidencias/guardar" method="post"><!-- formulario para actualizar manda los datos al controller -->
+<form:form action="${pageContext.request.contextPath}/incidencias/guardar" method="post" modelAttribute="incidencia"><!-- formulario para actualizar manda los datos al controller -->
 
-    <input type="hidden" name="idIncidencia" value="${incidencia.idIncidencia}"><!-- guarda el id para actualizar pero no lo enseña y así sabe cuál es -->
+    <form:hidden path="idIncidencia"/><!-- guarda el id para actualizar pero no lo enseña y así sabe cuál es -->
 
     <label>Número de la habitación:</label><!-- aquí hay que poner lo que es el hueco de cada campo que hay que rellenar -->
 		<select name="habitacion.idHabitacion">
@@ -28,24 +29,31 @@
     <br>
 
     <label>Estado de la incidencia:</label>
-    <select name="estadoIncidencia">
-   		 <option value="abierta" <c:if test="${incidencia.estadoIncidencia=='abierta'}">selected</c:if>>abierta</option>
-   		 <option value="en_curso" <c:if test="${incidencia.estadoIncidencia=='en_curso'}">selected</c:if>>en curso</option>
-    		<option value="cerrada" <c:if test="${incidencia.estadoIncidencia=='cerrada'}">selected</c:if>>cerrada</option>
-    </select>
+    <form:select path="estadoIncidencia">
+
+    <form:option value="abierta">abierta</form:option>
+
+    <form:option value="en_curso">en curso</form:option>
+
+    <form:option value="cerrada">cerrada</form:option>
+
+</form:select>
     <br>
 
     <label>Prioridad de la incidencia:</label>
-    <select name="prioridadIncidencia">
-    	<option value="baja" <c:if test="${incidencia.prioridadIncidencia=='baja'}">selected</c:if>>baja</option>
-   		 <option value="media" <c:if test="${incidencia.prioridadIncidencia=='media'}">selected</c:if>>media</option>
-   		 <option value="alta" <c:if test="${incidencia.prioridadIncidencia=='alta'}">selected</c:if>>alta</option>
-	</select>
+    <form:select path="prioridadIncidencia">
+
+    <form:option value="baja">baja</form:option>
+
+    <form:option value="media">media</form:option>
+
+    <form:option value="alta">alta</form:option>
+
+</form:select>
     <br>
 
     <label>Descripción de la incidencia:</label>
-    <input type="text" name="descripcionIncidencia"
-    value="${incidencia.descripcionIncidencia}">
+   <form:input path="descripcionIncidencia"/>
     <br>
 
     <fmt:formatDate value="${incidencia.fechaApertura}" pattern="yyyy-MM-dd" var="fechaAperturaFormateada"/>
@@ -64,10 +72,12 @@
 	        <c:otherwise>Guardar</c:otherwise>
 	    </c:choose>
 	</button>
-</form>
+</form:form>
 <br>
 
 <a href="${pageContext.request.contextPath}/incidencias">Volver</a><!-- botón volver para cambiar de vista al listado-->
 
 </body>
 </html>
+
+<!-- se usan solo algunas form tags porque se rompe el choose y pone editar y guardar y no funciona -->

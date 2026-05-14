@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %> <!-- esta vista es para probar luego hay que cambiarla -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- librería jstl -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
 <html>
 <head>
@@ -43,3 +44,4 @@
 
 </body>
 </html>
+<!-- no se pueden usar los form tags en este porque no funcionan con las tablas relacionadas solo en objetos libres -->

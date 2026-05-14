@@ -45,3 +45,5 @@
 
 </body>
 </html>
+
+<!-- no se pueden usar los form tags en este porque no funcionan con las tablas relacionadas solo en objetos libres -->
