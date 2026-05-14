@@ -3,6 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!-- librería jstl para formatear fechas -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
+<p style="color:red">${error}</p><!-- el error si no se completan los campos -->
+
 <html>
 <head>
     <title>Formulario Incidencia</title><!-- título de la pestaña del navegador -->

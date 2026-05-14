@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.accenture.entity.Habitacion;
 import es.accenture.entity.Incidencia;
@@ -38,8 +38,8 @@ public class IncidenciaController {
 	}
 
 	// método para ver el detalle de una incidencia
-	@GetMapping("/{id}") //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "incidencia" y devuelve la vista detalleIncidencia
-	public String verDetalle(@PathVariable int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
+	@GetMapping("/detalle") //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "incidencia" y devuelve la vista detalleIncidencia
+	public String verDetalle(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
 
 		Incidencia incidencia=incidenciaService.buscarIncidenciaPorId(id); //obtiene una incidencia por su Id a través del service que la coge del dao que mira en bbdd
 
@@ -63,8 +63,9 @@ public class IncidenciaController {
 
 	// método para guardar incidencia nueva //este se cambia y se mete para que compruebe si tiene incidencias la incidencia y sino (si sí tiene) un else para modificar
 	@PostMapping("/guardar") //Anotación que dice cuál es la url de entrada que coge el método guardarIncidencia
-	public String guardarIncidencia(@ModelAttribute Incidencia incidencia) { //ModelAtribute hace que Spring rellene automáticamente un objeto con los datos que vienen del formulario
-
+	public String guardarIncidencia(@ModelAttribute Incidencia incidencia,Model model) { //ModelAtribute hace que Spring rellene automáticamente un objeto con los datos que vienen del formulario
+	
+	try {
 		if(incidencia.getIdIncidencia()!=0){
 					
 				incidenciaService.actualizarIncidencia(incidencia); //guarda en bbdd a través del service que las coge del dao que las guarda en bbdd
@@ -74,13 +75,27 @@ public class IncidenciaController {
 			incidenciaService.guardarIncidencia(incidencia);
 			
 		}
+
+		
+	}catch(Exception e) {
+			
+			model.addAttribute("error","Todos los campos obligatorios deben estar rellenos");
+			
+			model.addAttribute("incidencia",incidencia);
+			
+			model.addAttribute("habitaciones",habitacionService.buscarHabitaciones());
+			
+			return "FormularioIncidencia";
+			
+		}
 		
 		return "redirect:/incidencias"; // Redirige a la jsp incidencias y muestra el listado
+		
 	}
 
 	// método para mostrar el formulario para editar
-	@GetMapping("/editar/{id}") //Anotación que dice cuál es la url de entrada que coge el método
-	public String mostrarFormularioEditar(@PathVariable int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
+	@GetMapping("/editar") //Anotación que dice cuál es la url de entrada que coge el método
+	public String mostrarFormularioEditar(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
 
 		Incidencia incidencia=incidenciaService.buscarIncidenciaPorId(id); //obtiene una incidencia por su id a través del service,dao,bbdd
 
@@ -103,8 +118,8 @@ public class IncidenciaController {
 	//}
 
 	// método para eliminar incidencia de bbdd
-	@GetMapping("/eliminar/{id}") //Anotación que dice cuál es la url de entrada que coge el método
-	public String eliminarIncidencia(@PathVariable int id,Model model)throws Exception{ //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
+	@GetMapping("/eliminar") //Anotación que dice cuál es la url de entrada que coge el método
+	public String eliminarIncidencia(@RequestParam int id,Model model)throws Exception{ //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
 
 		try {
 
@@ -123,8 +138,8 @@ public class IncidenciaController {
 	}
 
 	// método para obtener incidencias por el id de una habitación
-	@GetMapping("/habitacion/{idHabitacion}") //Anotación que dice cuál es la url de entrada que coge el método
-	public String obtenerIncidenciasPorHabitacion(@PathVariable int idHabitacion, Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidenciass/4 si se cambia el valor de id por ejemplo REST
+	@GetMapping("/habitacion") //Anotación que dice cuál es la url de entrada que coge el método
+	public String obtenerIncidenciasPorHabitacion(@RequestParam int idHabitacion, Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidenciass/4 si se cambia el valor de id por ejemplo REST
 
 		List<Incidencia>incidencias=incidenciaService.buscarIncidenciasPorIdHabitacion(idHabitacion); //obtiene las incidencias de una habitación y las guarda en la lista incidencias
 

@@ -35,9 +35,9 @@
             <td>${incidencia.fechaApertura}</td>
             <td>${incidencia.fechaCierre}</td>
             <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
-                <a href="${pageContext.request.contextPath}/incidencias/${incidencia.idIncidencia}">Ver</a>
-                <a href="${pageContext.request.contextPath}/incidencias/editar/${incidencia.idIncidencia}">Editar</a>
-                <a href="${pageContext.request.contextPath}/incidencias/eliminar/${incidencia.idIncidencia}">Eliminar</a>
+                <a href="${pageContext.request.contextPath}/incidencias/detalle?id=${incidencia.idIncidencia}">Ver</a>
+                <a href="${pageContext.request.contextPath}/incidencias/editar?id=${incidencia.idIncidencia}">Editar</a>
+                <a href="${pageContext.request.contextPath}/incidencias/eliminar?id=${incidencia.idIncidencia}">Eliminar</a>
             </td>
         </tr>
     </c:forEach>

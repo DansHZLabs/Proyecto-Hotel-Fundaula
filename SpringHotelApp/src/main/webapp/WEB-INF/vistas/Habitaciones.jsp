@@ -34,9 +34,9 @@
 			<td>${habitacion.disponibilidad}</td>
 			<td>${habitacion.orientacionHabitacion}</td>
             <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
-                <a href="${pageContext.request.contextPath}/habitaciones/${habitacion.idHabitacion}">Ver</a>
-                <a href="${pageContext.request.contextPath}/habitaciones/editar/${habitacion.idHabitacion}">Editar</a>
-                <a href="${pageContext.request.contextPath}/habitaciones/eliminar/${habitacion.idHabitacion}">Eliminar</a>
+                <a href="${pageContext.request.contextPath}/habitaciones/detalle?id=${habitacion.idHabitacion}">Ver</a>
+                <a href="${pageContext.request.contextPath}/habitaciones/editar?id=${habitacion.idHabitacion}">Editar</a>
+                <a href="${pageContext.request.contextPath}/habitaciones/eliminar?id=${habitacion.idHabitacion}">Eliminar</a>
             </td>
         </tr>
     </c:forEach>

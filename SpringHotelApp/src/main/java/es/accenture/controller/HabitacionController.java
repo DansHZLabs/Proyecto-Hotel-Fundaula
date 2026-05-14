@@ -7,9 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.accenture.entity.Habitacion;
 import es.accenture.interfaces.IHabitacionService;
@@ -39,8 +39,8 @@ public class HabitacionController {
     }
 
     // método para ver el detalle de una habitación
-    @GetMapping("/{id}") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "habitacion" y devuelve la vista detalleHabitacion
-    public String verDetalle(@PathVariable int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
+    @GetMapping("/detalle") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "habitacion" y devuelve la vista detalleHabitacion
+    public String verDetalle(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
 
         Habitacion habitacion=habitacionService.buscarHabitacionPorId(id); //obtiene una habitación por su Id a través del service
 
@@ -60,8 +60,9 @@ public class HabitacionController {
 
     // método para guardar habitación nueva
     @PostMapping("/guardar") //Anotación que dice cuál es la url de entrada que coge el método guardarHabitacion, cuándo alguien pinche en guardar, rellena los datos del objeto habitacion con los datos del formulario gracias a modelAtribute (este no es como model que guarda datos en la mochila este los asigna como atributos del objeto) y llama al método del service y redirige a la vista habitaciones con el listado
-    public String guardarHabitacion(@ModelAttribute Habitacion habitacion) { //ModelAtribute hace que Spring rellene automáticamente un objeto con los datos que vienen del formulario
-
+    public String guardarHabitacion(@ModelAttribute Habitacion habitacion,Model model) { //ModelAtribute hace que Spring rellene automáticamente un objeto con los datos que vienen del formulario
+    	
+    try {
     	if(habitacion.getIdHabitacion() != 0){
     		
     		habitacionService.actualizarHabitacion(habitacion);//para modificar si existe porque sea distinta de 0 en la comparación
@@ -73,11 +74,21 @@ public class HabitacionController {
     	}
     	
         return "redirect:/habitaciones"; // Redirige a la jsp habitaciones y muestra el listado
+    }catch(Exception e) {
+    	
+    	model.addAttribute("error","Todos los campos deben estar rellenos");
+    	
+    	model.addAttribute("habitacion",habitacion);
+    	
+    	return "FormularioHabitacion";
+    	
+    	}
+    
     }
 
     // método para mostrar el formulario para editar
-    @GetMapping("/editar/{id}") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien pinche en editar se ejecuta el método mostrarFormularioEditar, hace la caja en model con "habitacion" y devuelve la vista formularioHabitacion
-    public String mostrarFormularioEditar(@PathVariable int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
+    @GetMapping("/editar") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien pinche en editar se ejecuta el método mostrarFormularioEditar, hace la caja en model con "habitacion" y devuelve la vista formularioHabitacion
+    public String mostrarFormularioEditar(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
 
         // Busca la habitación existente
         Habitacion habitacion=habitacionService.buscarHabitacionPorId(id); //obtiene una habitación por su id a través del service
@@ -100,8 +111,8 @@ public class HabitacionController {
     //}
 
     // método para eliminar habitación de bbdd
-    @GetMapping("/eliminar/{id}") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien pinche en eliminar se ejecuta el método eliminarHabitacion, ejecuta el método del service y lo borra de bbdd a través del dao, luego redirige a la jsp habitaciones y muestra el listado
-    public String eliminarHabitacion(@PathVariable int id,Model model) throws Exception{ //PathVariable recoge el id de la url y se crea un objeto model de tipo Model para poder usarlo
+    @GetMapping("/eliminar") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien pinche en eliminar se ejecuta el método eliminarHabitacion, ejecuta el método del service y lo borra de bbdd a través del dao, luego redirige a la jsp habitaciones y muestra el listado
+    public String eliminarHabitacion(@RequestParam int id,Model model) throws Exception{ //PathVariable recoge el id de la url y se crea un objeto model de tipo Model para poder usarlo
     	try {
     		
     		habitacionService.eliminarHabitacion(id); // borra de bbdd a través del service

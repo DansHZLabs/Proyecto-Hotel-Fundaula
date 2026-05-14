@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!-- librería jstl -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
+<p style="color:red">${error}</p><!-- el error si no se completan los campos -->
+
 <html>
 <head>
     <title>Formulario Habitación</title><!-- título de la pestaña del navegador -->
