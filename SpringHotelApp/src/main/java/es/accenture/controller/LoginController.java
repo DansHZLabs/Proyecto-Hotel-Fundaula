@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import es.accenture.interfaces.InServiceUsuario;
+import es.accenture.entity.Usuario;
+import es.accenture.interfaces.IUsuarioService;
 
 /**
  * Controlador que devuelve, en funcion de lo que pida la request, la vista
@@ -20,26 +21,27 @@ import es.accenture.interfaces.InServiceUsuario;
 public class LoginController {
 
 	/*
-	 * Atributo donde se almacena el Servicio de usuario. Se usa la interfaz
-	 * y no la clase que la implementa para que exista un mayor
-	 * desacoplamiento (por si en un futuro se quiere cambiar la clase que
-	 * se encarga de este servicio). Spring detecta automaticamente cual es
-	 * la clase que implementa la interfaz (aunque si hay varias hay que
-	 * indicar la principal con etiquetas como 'Primary' o 'Qualifier').
+	 * Atributo donde se almacena el Servicio de usuario. Se usa la interfaz y no la
+	 * clase que la implementa para que exista un mayor desacoplamiento (por si en
+	 * un futuro se quiere cambiar la clase que se encarga de este servicio). Spring
+	 * detecta automaticamente cual es la clase que implementa la interfaz (aunque
+	 * si hay varias hay que indicar la principal con etiquetas como 'Primary' o
+	 * 'Qualifier').
 	 */
-	private InServiceUsuario usuarioService; 
+	private IUsuarioService usuarioService;
 
 	/**
 	 * Constructor por parametros en la que se usa la inyeccion de dependencias del
 	 * Servicio de Usuario. Se hace aqui y no en el atributo para que Spring cree al
 	 * mismo tiempo el objeto de tipo LoginController y su dependencia
-	 * InserviceUsuario, evitando un NullPointerException al crear en primera
-	 * instancia un InserviceUsuario null
+	 * IUsuarioService, evitando un NullPointerException al crear en primera
+	 * instancia un IUsuarioService null
 	 * 
 	 * @param usuarioService
 	 */
-	@Autowired //Etiqueta de Spring para la inyeccion de dependencias al detectar una clase como 'component' o similar en el paquete seleccionado en la configuracion.
-	public LoginController(InServiceUsuario usuarioService) {
+	@Autowired // Etiqueta de Spring para la inyeccion de dependencias al detectar una clase
+				// como 'component' o similar en el paquete seleccionado en la configuracion.
+	public LoginController(IUsuarioService usuarioService) {
 
 		this.usuarioService = usuarioService;
 	}
@@ -50,10 +52,20 @@ public class LoginController {
 	 * configurado en el archivo WebConfig se encarga de añadir las anotaciones de
 	 * sub ruta y la extension .jsp correspondientes)
 	 * 
+	 * @param model (para poder almacenar atributos y otra informacion entre
+	 *              requests)
 	 * @return String con la vista 'Login'
 	 */
 	@GetMapping("/") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
-	public String mostrarLogin() {
+	public String mostrarLogin(Model model) {
+
+		/*
+		 * Le pide a Spring el objeto Model, creando una plantilla con el atributo
+		 * 'credencialesLogin' a utilizar por las etiquetas form MVC del Login.jsp
+		 */
+		model.addAttribute("credencialesLogin", new Usuario());
+
+		System.out.println("Entrando al login");
 
 		return "Login";
 	}
@@ -61,35 +73,42 @@ public class LoginController {
 	/**
 	 * Metodo que recoge la request de la URL originada al pulsar el boton 'Login'
 	 * en el 'Login.jsp', devolviendo un error en caso de no coincidencia o ausencia
-	 * de credenciales; y la vista principal de la app en caso de éxito.
+	 * de credenciales; y la vista principal de la app en caso de exito.
 	 * 
-	 * @param model (para poder almacenar atributos y otra informacion entre
-	 *              requests)
-	 * @param usu   (para obtener el nombre que ha escrito el usuario en el
-	 *              formulario del 'Login.jsp')
-	 * @param passw (para obtener el password que ha escrito el usuario en el
-	 *              formulario del 'Login.jsp')
+	 * @param usuario (objeto que se utiliza en conjunto con la etiqueta de
+	 *                'ModelAttribute' de Spring para inyectar en sus parametros el
+	 *                nombre y password que ha escrito el usuario en el formulario
+	 *                del 'Login.jsp')
+	 * @param model   (para poder almacenar atributos y otra informacion entre
+	 *                requests)
 	 * @return String con la vista 'Login' o 'Principal' en funcion de la logica de
-	 *         negocio del 'usuarioService'
+	 *         negocio del 'UsuarioService'
 	 */
-	@PostMapping("/login") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente. En este caso uso el metodo POST por razones de seguirdad, ya que asi no se mostraran las credenciales en la URL.
-							
-	public String login(Model model, @RequestParam("usuario") String usu, @RequestParam("password") String passw) {
+	@PostMapping("/login") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente. En este caso uso el metodo POST por razones de seguridad, ya que asi no se mostraran las credenciales en la URL.
+	public String login(@ModelAttribute("credencialesLogin") Usuario usuario, Model model) {
 
 		/*
 		 * A traves del catch recogen los posibles errores con la coincidencia de las
 		 * credenciales escritas por el usuario en el formulario del 'Login.jsp' y su
 		 * existencia en la BBDD 'hoteldb'. Devolviendo de nuevo en este caso la vista
-		 * de 'Login.jsp' con el mensaje de error correspondiente. Se devuelve la pagina
-		 * 'Principal.jsp' en caso de coincidencia con la BBDD.
+		 * de 'Login.jsp' con el mensaje de error correspondiente (almacenado en el
+		 * model). Se devuelve la pagina 'Principal.jsp' en caso de coincidencia con la
+		 * BBDD.
 		 */
 		try {
 
-			usuarioService.loginUsuario(usu, passw);
+			/* A partir del objeto usuario almacenado en el model, le pasamos al Service las
+			credenciales obtenidas del formulario */
+			usuarioService.loginUsuario(usuario.getUsername(), usuario.getPassword());
 
 		} catch (Exception e) {
 
 			model.addAttribute("errorLogin", e.getMessage());
+			/*
+			 * Se limpia el model con las credenciales en caso de error, ya que sino nos
+			 * toca borrarlo manualmente de nuevo en el formulario
+			 */
+			model.addAttribute("credencialesLogin", new Usuario());
 
 			return "Login";
 

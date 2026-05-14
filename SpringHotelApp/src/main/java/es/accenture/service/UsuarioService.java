@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.accenture.entity.Usuario;
-import es.accenture.exceptions.ExcepcionUsuario;
-import es.accenture.interfaces.InServiceUsuario;
-import es.accenture.interfaces.InUsuarioDAO;
+import es.accenture.exceptions.UsarioException;
+import es.accenture.interfaces.IUsuarioService;
+import es.accenture.interfaces.IUsuarioDAO;
 
 /**
  * Clase de tipo Servicio que contiene la logica de negocio relativa a la
@@ -20,9 +20,9 @@ import es.accenture.interfaces.InUsuarioDAO;
  * @version 1.0
  */
 @Service // Etiqueta Spring que clasifica la clase como Servicio (generando un bean que se pueda utilizar en cualquier momento)
-public class ServiceUsuario implements InServiceUsuario {
+public class UsuarioService implements IUsuarioService {
 
-	private InUsuarioDAO repositorioUsuario; // Atributo que almacena el DAO de usuario
+	private IUsuarioDAO usuarioRepositorio; // Atributo que almacena el DAO de usuario
 
 	/*
 	 * Atributo que almacena el objeto de tipo HttpSession (para poder guardar los
@@ -32,18 +32,18 @@ public class ServiceUsuario implements InServiceUsuario {
 
 	/**
 	 * * Constructor por parametros en el que se usa la inyeccion de dependencias
-	 * del InUsuarioDAO (su implementacion) y el HttpSession. Se hace aqui y no en
+	 * del IUsuarioDAO (su implementacion) y el HttpSession. Se hace aqui y no en
 	 * el atributo para que Spring cree al mismo tiempo el objeto de tipo
 	 * ServiceUsuario y sus dependencias, evitando un NullPointerException al crear
-	 * en primera instancia un InUsuarioDAO o un HttpSessio null
+	 * en primera instancia un InUsuarioDAO o un HttpSession null
 	 * 
 	 * @param repositorioUsuario
 	 * @param session
 	 */
 	@Autowired // Etiqueta de Spring para la inyeccion de dependencias al detectar una clase como 'component' o similar en el paquete seleccionado en la configuracion.	
-	public ServiceUsuario(InUsuarioDAO repositorioUsuario, HttpSession session) {
+	public UsuarioService(IUsuarioDAO repositorioUsuario, HttpSession session) {
 
-		this.repositorioUsuario = repositorioUsuario;
+		this.usuarioRepositorio = repositorioUsuario;
 		this.session = session;
 	}
 
@@ -60,7 +60,7 @@ public class ServiceUsuario implements InServiceUsuario {
 
 		if (usuario.isEmpty() || password.isEmpty()) {// Estos parametros vienen del formulario 'Login.jsp'
 
-			throw new ExcepcionUsuario(ExcepcionUsuario.CREDENCIALES_VACIAS);
+			throw new UsarioException(UsarioException.CREDENCIALES_VACIAS);
 
 		}
 
@@ -68,11 +68,11 @@ public class ServiceUsuario implements InServiceUsuario {
 		 * Se llama al DAO para que haga la consulta en la BBDD y nos devuelva la lista
 		 * con coincidencias
 		 */
-		List<Usuario> listaUsers = repositorioUsuario.obtenerUsuario(usuario);
+		List<Usuario> listaUsers = usuarioRepositorio.buscarUsuario(usuario);
 
 		if (listaUsers.isEmpty()) {
 
-			throw new ExcepcionUsuario(ExcepcionUsuario.USUARIO_INCORRECTO);
+			throw new UsarioException(UsarioException.USUARIO_INCORRECTO);
 		}
 
 		/*
@@ -87,7 +87,7 @@ public class ServiceUsuario implements InServiceUsuario {
 		 */
 		if (!usu.getPassword().equals(password)) {
 
-			throw new ExcepcionUsuario(ExcepcionUsuario.PASSWORD_INCORRECTA);
+			throw new UsarioException(UsarioException.PASSWORD_INCORRECTA);
 		}
 
 		session.setAttribute("usuarioLogueado", usu); // se guarda la informacion del usuario logueado en la sesion

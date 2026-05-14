@@ -12,7 +12,7 @@ import es.accenture.entity.Usuario;
  * @version 1.0
  *
  */
-public interface InUsuarioDAO {
+public interface IUsuarioDAO {
 
 	// Metodo a implementar por el UsuarioDAO
 
@@ -24,6 +24,6 @@ public interface InUsuarioDAO {
 	 * @param usuario
 	 * @return
 	 */
-	List<Usuario> obtenerUsuario(String usuario);
+	List<Usuario> buscarUsuario(String usuario);
 
 }

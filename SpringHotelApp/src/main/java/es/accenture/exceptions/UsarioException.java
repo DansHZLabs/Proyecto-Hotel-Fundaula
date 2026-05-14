@@ -7,7 +7,7 @@ package es.accenture.exceptions;
  * @author danih y javi
  * @version 1.0
  */
-public class ExcepcionUsuario extends Exception {
+public class UsarioException extends Exception {
 
 	// Constantes para los mensajes de error en funcion de su tipo
 
@@ -27,7 +27,7 @@ public class ExcepcionUsuario extends Exception {
 	 * 
 	 * @param mensaje de excepcion personalizado
 	 */
-	public ExcepcionUsuario(String mensaje) {
+	public UsarioException(String mensaje) {
 		super(mensaje);
 	}
 

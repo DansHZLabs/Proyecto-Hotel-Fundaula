@@ -2,11 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!doctype html>
 <html lang="en">
 <head>
 
-<!-- Required meta tags -->
+<!-- Etiquetas para caracteres y diseno responsivo -->
 
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -20,7 +22,6 @@
 <!-- CSS Embebido-->
 
 <style>
-
 .fondo {
 	background-color: #E8B0E8;
 	font-family: Arial, sans-serif;
@@ -50,7 +51,7 @@
 	text-decoration: underline;
 }
 
-.formulario-login  {
+.formulario-login {
 	margin-bottom: 15px;
 	width: 100%;
 	padding: 10px;
@@ -83,24 +84,28 @@
 
 	<div class="contenedor-formulario">
 
-		<form id="login-usuarios" autocomplete="off" method="post" action="login">
+		<!-- Etiqueta Spring MVC para almacenar datos del formulario en el model de la request. En este caso obtiene la plantilla vacia de credenciales que hemos creado en el 'LoginController' -->
+		<form:form modelAttribute="credencialesLogin" autocomplete="off"
+			method="post" action="login">
 
 
-			<h3 class="titulo-formulario">Acceso de usuarios</h3>			
+			<h3 class="titulo-formulario">Acceso de usuarios</h3>
 
-				<input class= "formulario-login" name="usuario" type="text" placeholder="Usuario">
-				<input class= "formulario-login" name="password" type="password" placeholder="Password">			
+			<form:input cssClass="formulario-login" path="username"
+				placeholder="Usuario" />
+			<form:password cssClass="formulario-login" path="password"
+				placeholder="Password" />
 
 			<div class="error">
 				<!-- recupera de la request el mensaje de error que hemos almacenado (mediante el objeto 'Model' creado en el LoginController). Son errores tanto de credenciales vacias como erroneas segun lo buscado por el DAO en la tabla usuarios de la BBDD hoteldb -->
-				<c:out value="${requestScope.errorLogin}"></c:out>
+				<c:out value="${errorLogin}"></c:out>
 			</div>
-			
+
 			<!-- Al pulsar sobre el boton se envia la accion de Login definida para el formulario -->
 			<button type="submit" class="boton-login">Login...</button>
 
 
-		</form>
+		</form:form>
 	</div>
 
 </body>
