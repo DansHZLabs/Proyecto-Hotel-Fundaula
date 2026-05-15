@@ -1,10 +1,10 @@
 CREATE TABLE `incidencias` (
   `id_incidencia` int NOT NULL AUTO_INCREMENT,
-  `estado_incidencia` enum('abierta', 'en curso', 'cerrada') NOT NULL,
+  `estado_incidencia` enum('abierta', 'en_curso', 'cerrada') NOT NULL,
   `prioridad` enum('baja', 'media', 'alta') NOT NULL,
   `descripcion_incidencia` TEXT DEFAULT NULL,
   `fecha_apertura` DATE NOT NULL,
-  `fecha_cierre` DATE NOT NULL,
+  `fecha_cierre` DATE,
   `id_habitacion` int NOT NULL,
   PRIMARY KEY (`id_incidencia`),
   CONSTRAINT `fk_incidencias_habitacion` 

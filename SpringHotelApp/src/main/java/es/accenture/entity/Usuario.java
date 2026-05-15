@@ -28,7 +28,7 @@ public class Usuario {
 	 * establecer
 	 */
 	public enum Rol {
-		recepcionista, supervisor
+		RECEPCIONISTA, SUPERVISOR
 	}
 
 	@Id // Clave primaria INT
