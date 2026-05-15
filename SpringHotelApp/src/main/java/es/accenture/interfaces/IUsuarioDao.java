@@ -12,7 +12,7 @@ import es.accenture.entity.Usuario;
  * @version 1.0
  *
  */
-public interface IUsuarioDAO {
+public interface IUsuarioDao {
 
 	// Metodo a implementar por el UsuarioDAO
 

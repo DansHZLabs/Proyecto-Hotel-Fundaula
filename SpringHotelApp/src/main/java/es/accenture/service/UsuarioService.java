@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import es.accenture.entity.Usuario;
 import es.accenture.exceptions.UsarioException;
 import es.accenture.interfaces.IUsuarioService;
-import es.accenture.interfaces.IUsuarioDAO;
+import es.accenture.interfaces.IUsuarioDao;
 
 /**
  * Clase de tipo Servicio que contiene la logica de negocio relativa a la
@@ -22,7 +22,7 @@ import es.accenture.interfaces.IUsuarioDAO;
 @Service // Etiqueta Spring que clasifica la clase como Servicio (generando un bean que se pueda utilizar en cualquier momento)
 public class UsuarioService implements IUsuarioService {
 
-	private IUsuarioDAO usuarioRepositorio; // Atributo que almacena el DAO de usuario
+	private IUsuarioDao usuarioRepositorio; // Atributo que almacena el DAO de usuario
 
 	/*
 	 * Atributo que almacena el objeto de tipo HttpSession (para poder guardar los
@@ -41,7 +41,7 @@ public class UsuarioService implements IUsuarioService {
 	 * @param session
 	 */
 	@Autowired // Etiqueta de Spring para la inyeccion de dependencias al detectar una clase como 'component' o similar en el paquete seleccionado en la configuracion.	
-	public UsuarioService(IUsuarioDAO repositorioUsuario, HttpSession session) {
+	public UsuarioService(IUsuarioDao repositorioUsuario, HttpSession session) {
 
 		this.usuarioRepositorio = repositorioUsuario;
 		this.session = session;

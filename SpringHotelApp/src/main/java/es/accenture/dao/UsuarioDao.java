@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import es.accenture.entity.Usuario;
-import es.accenture.interfaces.IUsuarioDAO;
+import es.accenture.interfaces.IUsuarioDao;
 
 /**
  * Clase DAO (Data Acces Object) encargada de buscar en la BBDD 'hoteldb' la
  * credencial de usuario (enviada en la request a partir del formulario del
  * 'Login.jsp'), y devolver los datos correspondientes en caso de coincidencia.
- * Implementa la interfaz IUsuarioDAO para generar un mayor desacoplamiento por
+ * Implementa la interfaz IUsuarioDao para generar un mayor desacoplamiento por
  * si en un futuro se quiere utilizar otra clase DAO en vez de esta (y asi tener
  * que cambiar menos cantidad de codigo)*
  * 
@@ -23,7 +23,7 @@ import es.accenture.interfaces.IUsuarioDAO;
  * @version 1.0
  */
 @Component // Anotacion de Spring para mapear la clase como componente (y asi crear un bean que este disponible cuando se necesite)			 
-public class UsuarioDao implements IUsuarioDAO {
+public class UsuarioDao implements IUsuarioDao {
 
 	private SessionFactory mySessionFactory; // Atributo donde se almacena la conexion con la BBDD
 
