@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1><!-- para cambiar entre guardar y editar -->
+<h1><!-- para cambiar entre guardar y editar --><!-- aquí no se llega según el rol porque ya se ocultó la opción en la lista-->
     <c:choose>
         <c:when test="${habitacion.idHabitacion != 0}">
             Editar Habitación
@@ -21,7 +21,7 @@
     </c:choose>
 </h1>
 
-<form action="${pageContext.request.contextPath}/habitaciones/guardar"method="post"><!-- formulario para actualizar manda los datos al controller -->
+<form action="${pageContext.request.contextPath}/habitaciones/guardar" method="post"><!-- formulario para actualizar manda los datos al controller -->
 
     <input type="hidden"name="idHabitacion"value="${habitacion.idHabitacion}"><!-- guarda el id para actualizar pero no lo enseña y así sabe cuál es -->
 
@@ -30,7 +30,11 @@
     <br>
 
     <label>Tipo:</label>
-    <input type="text"name="tipo"value="${habitacion.tipo}">
+    <select name="tipo">
+        <option value="INDIVIDUAL">Individual</option>
+        <option value="DOBLE">Doble</option>
+        <option value="SUITE">Suite</option>
+    </select>
     <br>
 
     <label>Precio:</label>
@@ -38,18 +42,18 @@
     <br>
 
     <label>Disponibilidad:</label>
-    <select path="disponibilidad">
-        <option value="disponible">disponible</option>
-        <option value="ocupada">ocupada</option>
-        <option value="limpieza">limpieza</option>
-        <option value="mantenimiento">mantenimiento</option>
+    <select name="disponibilidad">
+        <option value="DISPONIBLE">disponible</option>
+        <option value="OCUPADA">ocupada</option>
+        <option value="LIMPIEZA">limpieza</option>
+        <option value="MANTENIMIENTO">mantenimiento</option>
     </select>
     <br>
 
     <label>Orientación:</label>
-    <select path="orientacionHabitacion">
-        <option value="interior">Interior</option>
-        <option value="exterior">Exterior</option>
+    <select name="orientacionHabitacion">
+        <option value="INTERIOR">Interior</option>
+        <option value="EXTERIOR">Exterior</option>
     </select>
     <br>
 

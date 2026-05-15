@@ -12,7 +12,9 @@
 
 <p style="color:red;"> ${error}</p> <!-- error al borrar habitación, cambia solo el mensaje porque enlaza al error y muestra el texto que sea -->
 
-<a href="${pageContext.request.contextPath}/habitaciones/nueva">Nueva habitación</a><!-- obtiene la ruta y saca la url -->
+<c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
+    <a href="${pageContext.request.contextPath}/habitaciones/nueva">Nueva habitación</a>
+</c:if>
 <br><!-- espacio en blanco, deja una línea -->
 
 <table border="1"><!-- tabla con borde, tr son las filas y td las columnas,th es la cabecera de cada columna -->
@@ -35,8 +37,10 @@
 			<td>${habitacion.orientacionHabitacion}</td>
             <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
                 <a href="${pageContext.request.contextPath}/habitaciones/detalle?id=${habitacion.idHabitacion}">Ver</a>
+                <c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
                 <a href="${pageContext.request.contextPath}/habitaciones/editar?id=${habitacion.idHabitacion}">Editar</a>
                 <a href="${pageContext.request.contextPath}/habitaciones/eliminar?id=${habitacion.idHabitacion}">Eliminar</a>
+                 </c:if>
             </td>
         </tr>
     </c:forEach>

@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<h1><!-- para cambiar entre guardar y editar -->
+<h1><!-- para cambiar entre guardar y editar --><!-- aquí no se llega según el rol porque ya se ocultó la opción en la lista-->
     <c:choose>
         <c:when test="${incidencia.idIncidencia != 0}">Editar Incidencia</c:when>
         <c:otherwise>Nueva Incidencia</c:otherwise>
@@ -32,25 +32,17 @@
 
     <label>Estado de la incidencia:</label>
     <form:select path="estadoIncidencia">
-
-    <form:option value="abierta">abierta</form:option>
-
-    <form:option value="en_curso">en curso</form:option>
-
-    <form:option value="cerrada">cerrada</form:option>
-
+    <form:option value="ABIERTA">abierta</form:option>
+    <form:option value="EN_CURSO">en curso</form:option>
+    <form:option value="CERRADA">cerrada</form:option>
 </form:select>
     <br>
 
     <label>Prioridad de la incidencia:</label>
     <form:select path="prioridadIncidencia">
-
-    <form:option value="baja">baja</form:option>
-
-    <form:option value="media">media</form:option>
-
-    <form:option value="alta">alta</form:option>
-
+    <form:option value="BAJA">baja</form:option>
+    <form:option value="MEDIA">media</form:option>
+    <form:option value="ALTA">alta</form:option>
 </form:select>
     <br>
 
@@ -58,15 +50,13 @@
    <form:input path="descripcionIncidencia"/>
     <br>
 
-    <fmt:formatDate value="${incidencia.fechaApertura}" pattern="yyyy-MM-dd" var="fechaAperturaFormateada"/>
     <label>Fecha apertura:</label>
-    <input type="date" name="fechaApertura" value="${fechaAperturaFormateada}"><!-- hay que coger la fecha porque sino puede dar null -->
-    <br>
+	<form:input path="fechaApertura" type="date"/>
+	<br>
 
-    <fmt:formatDate value="${incidencia.fechaCierre}" pattern="yyyy-MM-dd" var="fechaCierreFormateada"/>
     <label>Fecha cierre:</label>
-    <input type="date" name="fechaCierre" value="${fechaCierreFormateada}"><!-- hay que coger la fecha porque sino puede dar null -->
-    <br>
+	<form:input path="fechaCierre" type="date"/>
+	<br>
 
     <button type="submit"><!-- para que salga un botón o el otro -->
 	    <c:choose>
