@@ -34,17 +34,17 @@ public class Usuario {
 	@Id // Clave primaria INT
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Anotacion para generar automaticamente el ID en la base de datos (AUTO_INCREMENT)
 														 
-	@Column(name = "id_usuario") // Anotacion que indica como se llama la tabla que representa
+	@Column(name = "id_usuario") // Anotacion que indica como se llama la columna que representa
 	private int idUsuario;
 
-	@Column(name = "username") // Anotacion que indica como se llama la tabla que representa
+	@Column(name = "username") // Anotacion que indica como se llama la columna que representa
 	private String username;
 
-	@Column(name = "password") // Anotacion que indica como se llama la tabla que representa
+	@Column(name = "password") // Anotacion que indica como se llama la columna que representa
 	private String password;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "rol")
+	@Enumerated(EnumType.STRING) // Anotacion para definir el enum y su tipo
+	@Column(name = "rol") // Anotacion que indica como se llama la columna que representa
 	private Rol rol;
 
 	// CONSTRUCTOR VACIO (obligatorio)
@@ -77,9 +77,9 @@ public class Usuario {
 	/**
 	 * Metodo get que devuelve el campo 'id' de la tabla 'usuarios'
 	 * 
-	 * @return id_usuario
+	 * @return idUsuario
 	 */
-	public int getId_usuario() {
+	public int getIdUsuario() {
 		return idUsuario;
 	}
 
