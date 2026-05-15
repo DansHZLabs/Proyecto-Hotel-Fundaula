@@ -2,11 +2,12 @@ package es.accenture.dao;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
+
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.accenture.entity.Usuario;
 import es.accenture.interfaces.IUsuarioDao;
@@ -42,7 +43,7 @@ public class UsuarioDao implements IUsuarioDao {
 	}
 
 	@Transactional // Etiqueta de Spring para crear y cerrar de forma automatica las Transacciones (se crea la SessionFactory, se abre una sesion y se inicia la transaccion)					 
-	@Override // Se implementa el metodo de la interfaz IUsuarioDAO
+	@Override // Se implementa el metodo de la interfaz IUsuarioDao
 	public List<Usuario> buscarUsuario(String usuario) {
 
 		/**

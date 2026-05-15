@@ -14,7 +14,7 @@ import es.accenture.entity.Usuario;
  */
 public interface IUsuarioDao {
 
-	// Metodo a implementar por el UsuarioDAO
+	// Metodo a implementar por el UsuarioDao
 
 	/**
 	 * Metodo que se comunica con la BBDD para comprobar si existe el usuario con el
@@ -22,7 +22,7 @@ public interface IUsuarioDao {
 	 * informacion de ese registro
 	 * 
 	 * @param usuario
-	 * @return
+	 * @return Lista con objetos de tipo Usuario (entidad ORM)
 	 */
 	List<Usuario> buscarUsuario(String usuario);
 
