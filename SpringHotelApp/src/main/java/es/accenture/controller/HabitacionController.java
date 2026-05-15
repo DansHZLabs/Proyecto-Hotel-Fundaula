@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.accenture.entity.Habitacion;
+import es.accenture.exceptions.ActualizarException;
+import es.accenture.exceptions.BuscarException;
+import es.accenture.exceptions.EliminarException;
+import es.accenture.exceptions.GuardarException;
 import es.accenture.interfaces.IHabitacionService;
 
 @Controller //Anotación que le dice a Spring que esta clase es un controller, es como zidane reparte juego y mueve el balón, el dispatcherServlet es el entrenador que dice a que medio hay que poner en el campo, vinicius es el service porque hace el regate, luego valverde conecta con bbdd y centra y cristiano es la jsp remata y muestra el resultado
@@ -41,12 +45,25 @@ public class HabitacionController {
     // método para ver el detalle de una habitación
     @GetMapping("/detalle") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "habitacion" y devuelve la vista detalleHabitacion
     public String verDetalle(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
-
+    	
+    	try {
+    		
         Habitacion habitacion=habitacionService.buscarHabitacionPorId(id); //obtiene una habitación por su Id a través del service
 
         model.addAttribute("habitacion",habitacion); //model es la caja que guarda el objeto habitacion en model con el nombre habitacion, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitacion} expression language desde la jsp
 
         return "DetalleHabitacion"; //devuelve la jsp de detalle
+        
+    }catch(BuscarException e) {
+    	
+    	model.addAttribute("error", e.getMessage());
+
+		model.addAttribute("habitaciones",habitacionService.buscarHabitaciones());
+
+		return "Habitaciones";
+		
+    	}
+    
     }
 
     // método para mostrar el formulario de alta
@@ -74,9 +91,9 @@ public class HabitacionController {
     	}
     	
         return "redirect:/habitaciones"; // Redirige a la jsp habitaciones y muestra el listado
-    }catch(Exception e) {
+    }catch(GuardarException|ActualizarException e) {
     	
-    	model.addAttribute("error","Todos los campos deben estar rellenos");
+    	model.addAttribute("error",e.getMessage());
     	
     	model.addAttribute("habitacion",habitacion);
     	
@@ -89,7 +106,9 @@ public class HabitacionController {
     // método para mostrar el formulario para editar
     @GetMapping("/editar") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien pinche en editar se ejecuta el método mostrarFormularioEditar, hace la caja en model con "habitacion" y devuelve la vista formularioHabitacion
     public String mostrarFormularioEditar(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
-
+    	
+    	try {
+    		
         // Busca la habitación existente
         Habitacion habitacion=habitacionService.buscarHabitacionPorId(id); //obtiene una habitación por su id a través del service
 
@@ -97,6 +116,14 @@ public class HabitacionController {
         model.addAttribute("habitacion",habitacion); //model es la caja que guarda el objeto habitacion en model con el nombre habitacion, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitacion} expression language desde la jsp
 
         return "FormularioHabitacion"; //devuelve la jsp formulario, se cambia porque da problemas con guardar y se hace otra jsp solo para editar y así para separar los caminos de guardar y editar
+   
+    	} catch (BuscarException e) {
+    	
+    	model.addAttribute("error",e.getMessage());
+    	
+    	return "Habitaciones";
+    	
+    	}
     }
 
     // método para actualizar habitación en bbdd             //este ya no se va a usar porque al arreglar el formulario se hace desde guardar
@@ -112,12 +139,12 @@ public class HabitacionController {
 
     // método para eliminar habitación de bbdd
     @GetMapping("/eliminar") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien pinche en eliminar se ejecuta el método eliminarHabitacion, ejecuta el método del service y lo borra de bbdd a través del dao, luego redirige a la jsp habitaciones y muestra el listado
-    public String eliminarHabitacion(@RequestParam int id,Model model) throws Exception{ //PathVariable recoge el id de la url y se crea un objeto model de tipo Model para poder usarlo
+    public String eliminarHabitacion(@RequestParam int id,Model model) { //PathVariable recoge el id de la url y se crea un objeto model de tipo Model para poder usarlo
     	try {
     		
     		habitacionService.eliminarHabitacion(id); // borra de bbdd a través del service
     	
-    	}catch(Exception e){
+    	}catch(EliminarException | BuscarException e){
     		
     		model.addAttribute("error",e.getMessage()); //crea la caja model donde se añade el error que recupera el mensaje de la excepción
     		

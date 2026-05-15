@@ -21,17 +21,17 @@ public class Habitacion {
 
 	//clase interna para crear los enum y poner las opciones que se quiere establecer
     public enum Tipo {
-        individual,doble,suite
+        INDIVIDUAL,DOBLE,SUITE
     }
 
     //clase interna para crear los enum y poner las opciones que se quiere establecer
     public enum Disponibilidad {
-        disponible,ocupada,limpieza,mantenimiento
+        DISPONIBLE,OCUPADA,LIMPIEZA,MANTENIMIENTO
     }
     
     //clase interna para crear los enum y poner las opciones que se quiere establecer
     public enum Orientacion {
-    	interior,exterior
+    	INTERIOR,EXTERIOR
     }
 
     @Id //clave primaria INT

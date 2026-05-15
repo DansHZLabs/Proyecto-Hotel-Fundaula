@@ -257,7 +257,11 @@ public class IncidenciaDao implements IIncidenciaDao { //devuelve la List de tip
 
 			//tx.commit(); // commit para los cambios de la transacción en bbdd, confirma la transacción, aquí se acaba oficialmente la transacción
 
+			if(incidencia!=null) {//si no hay incidencia sino daría nullpoint
+				
 			incidencia.getHabitacion().getNumeroHabitacion(); //se traen los datos
+			
+			}
 			
 			return incidencia; //después del commit devolver la incidencia
 

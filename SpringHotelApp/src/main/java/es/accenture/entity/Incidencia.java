@@ -23,8 +23,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name="incidencias") // Anotación que indica cómo se llama la tabla que representa
 public class Incidencia {
 	
-	public enum EstadoIncidencia {abierta,en_curso,cerrada} //clase interna para crear los enum y poner las opciones que se quiere establecer
-	public enum PrioridadIncidencia {baja,media,alta} //clase interna para crear los enum y poner las opciones que se quiere establecer
+	public enum EstadoIncidencia {ABIERTA,EN_CURSO,CERRADA} //clase interna para crear los enum y poner las opciones que se quiere establecer
+	public enum PrioridadIncidencia {BAJA,MEDIA,ALTA} //clase interna para crear los enum y poner las opciones que se quiere establecer
 	
 	@Id //clave primaria INT
 	@GeneratedValue(strategy=GenerationType.IDENTITY)//Anotación para generar automáticamente el ID en la base de datos (AUTO_INCREMENT)

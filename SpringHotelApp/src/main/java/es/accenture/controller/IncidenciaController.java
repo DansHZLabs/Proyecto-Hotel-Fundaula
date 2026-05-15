@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import es.accenture.entity.Habitacion;
 import es.accenture.entity.Incidencia;
+import es.accenture.exceptions.ActualizarException;
+import es.accenture.exceptions.BuscarException;
+import es.accenture.exceptions.EliminarException;
+import es.accenture.exceptions.GuardarException;
 import es.accenture.interfaces.IHabitacionService;
 import es.accenture.interfaces.IIncidenciaService;
 
@@ -40,14 +44,27 @@ public class IncidenciaController {
 	// método para ver el detalle de una incidencia
 	@GetMapping("/detalle") //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "incidencia" y devuelve la vista detalleIncidencia
 	public String verDetalle(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
-
+		
+		try {
+			
 		Incidencia incidencia=incidenciaService.buscarIncidenciaPorId(id); //obtiene una incidencia por su Id a través del service que la coge del dao que mira en bbdd
 
 		model.addAttribute("incidencia",incidencia); //model es la caja que guarda el objeto incidencia en model con el nombre incidencia, luego se recupera desde la jsp con ${expresion language}
 
 		return "DetalleIncidencia"; //devuelve la jsp de detalleIncidencia
-	}
+		
+		}catch(BuscarException e) {
+			
+			model.addAttribute("error",e.getMessage());
+			
+			model.addAttribute("incidencias",incidenciaService.buscarTodasIncidencias());
+			
+			return "Incidencias";
+			
+		}
 
+	}
+	
 	// método para mostrar el formulario de alta
 	@GetMapping("/nueva") //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en nueva se ejecuta el método mostrarFormularioAlta, hace la caja en model con "habitaciones" y con "incidencias" que es la lista donde se guardan y lo muestra devolviendo la vista
 	public String mostrarFormularioAlta(Model model) {
@@ -77,9 +94,9 @@ public class IncidenciaController {
 		}
 
 		
-	}catch(Exception e) {
+	}catch(GuardarException|ActualizarException e) {
 			
-			model.addAttribute("error","Todos los campos obligatorios deben estar rellenos");
+			model.addAttribute("error",e.getMessage());
 			
 			model.addAttribute("incidencia",incidencia);
 			
@@ -97,6 +114,8 @@ public class IncidenciaController {
 	@GetMapping("/editar") //Anotación que dice cuál es la url de entrada que coge el método
 	public String mostrarFormularioEditar(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
 
+		try {
+			
 		Incidencia incidencia=incidenciaService.buscarIncidenciaPorId(id); //obtiene una incidencia por su id a través del service,dao,bbdd
 
 		model.addAttribute("incidencia",incidencia); //model es la caja que guarda el objeto incidencia en model con el nombre incidencia, luego desde la jsp se recoge con ${expression language}
@@ -106,6 +125,17 @@ public class IncidenciaController {
 		model.addAttribute("habitaciones",habitaciones); //guarda la lista habitaciones en model para usarla en el formulario, luego desde jsp se cogen con ${expresion languanges}
 
 		return "FormularioIncidencia"; //devuelve la jsp formularioEditarIncidencia
+		
+		}catch(BuscarException e) {
+			
+			model.addAttribute("error",e.getMessage());
+
+			model.addAttribute("incidencias",incidenciaService.buscarTodasIncidencias());
+
+			return "Incidencias";
+			
+		}
+		
 	}
 
 	// método para actualizar incidencia en bbdd //este método se borra y se meterá en guardar con una comprobación de si hay datos porque tienen que ir juntos en la jsp y sino no veo forma
@@ -119,13 +149,13 @@ public class IncidenciaController {
 
 	// método para eliminar incidencia de bbdd
 	@GetMapping("/eliminar") //Anotación que dice cuál es la url de entrada que coge el método
-	public String eliminarIncidencia(@RequestParam int id,Model model)throws Exception{ //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
+	public String eliminarIncidencia(@RequestParam int id,Model model){ //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
 
 		try {
 
 			incidenciaService.eliminarIncidencia(id); // borra de bbdd a través del service,dao,bbdd
 
-		}catch(Exception e){
+		}catch(EliminarException |BuscarException e){
 
 			model.addAttribute("error",e.getMessage()); //crea la caja model, ahí se añade el error que recupera el mensaje de la excepción
 
@@ -140,7 +170,9 @@ public class IncidenciaController {
 	// método para obtener incidencias por el id de una habitación
 	@GetMapping("/habitacion") //Anotación que dice cuál es la url de entrada que coge el método
 	public String obtenerIncidenciasPorHabitacion(@RequestParam int idHabitacion, Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidenciass/4 si se cambia el valor de id por ejemplo REST
-
+		
+		try {
+			
 		List<Incidencia>incidencias=incidenciaService.buscarIncidenciasPorIdHabitacion(idHabitacion); //obtiene las incidencias de una habitación y las guarda en la lista incidencias
 
 		Habitacion habitacion=habitacionService.buscarHabitacionPorId(idHabitacion); //obtiene la habitación por su id y la guarda en habitacion, service,dao,bbdd
@@ -150,6 +182,17 @@ public class IncidenciaController {
 		model.addAttribute("habitacion",habitacion); //guarda la habitación en model, luego se cogerán en jsp con ${expresion language}
 
 		return "Incidencias"; //devuelve la jsp incidencias y muestra las de esa habitación
-	}
+		
+		}catch (BuscarException e) {
+			
+			model.addAttribute("error", e.getMessage());
 
+			model.addAttribute("habitaciones",habitacionService.buscarHabitaciones());
+		
+			return "Habitaciones";
+			
+		}
+		
+	}
+	
 }

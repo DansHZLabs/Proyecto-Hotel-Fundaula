@@ -7,6 +7,10 @@ import org.springframework.stereotype.Service;
 
 import es.accenture.entity.Incidencia;
 import es.accenture.entity.Incidencia.EstadoIncidencia;
+import es.accenture.exceptions.ActualizarException;
+import es.accenture.exceptions.BuscarException;
+import es.accenture.exceptions.EliminarException;
+import es.accenture.exceptions.GuardarException;
 import es.accenture.interfaces.IIncidenciaDao;
 import es.accenture.interfaces.IIncidenciaService;
 
@@ -34,32 +38,37 @@ public class IncidenciaService implements IIncidenciaService {
 
 	//método para el alta de una incidencia
     @Override //Anotación para sobreescribir el método de la interfaz
-	public void guardarIncidencia(Incidencia incidencia) {
+	public void guardarIncidencia(Incidencia incidencia)throws GuardarException {
 		// TODO Auto-generated method stub
+    	
+    	if(incidencia==null||incidencia.getFechaApertura()==null){throw new GuardarException("Error al guardar la incidencia");}//hay que comprobar la incidencia y la fecha
+    	
     	incidenciaDao.guardarIncidencia(incidencia); //aquí se llama a dao para guardar la incidencia
 	}
 
     //método para la modificación de una incidencia
     @Override //Anotación para sobreescribir el método de la interfaz
-	public void actualizarIncidencia(Incidencia incidencia) {
+	public void actualizarIncidencia(Incidencia incidencia)throws ActualizarException {
 		// TODO Auto-generated method stub
+    	
+    	if(incidencia==null){throw new ActualizarException("Error al actualizar la incidencia");}//si no hay incidencia lanzar excepción
 		
     	incidenciaDao.actualizarIncidencia(incidencia); //aquí se llama a dao para actualizar en la bbdd
 	}
 
     //método para la eliminación de una incidencia
     @Override //Anotación para sobreescribir el método de la interfaz
-	public void eliminarIncidencia(int idIncidencia) throws Exception {
+	public void eliminarIncidencia(int idIncidencia) throws EliminarException,BuscarException {
 		// TODO Auto-generated method stub
     	
     	// obtener la incidencia
     	Incidencia incidencia=incidenciaDao.buscarIncidenciaPorId(idIncidencia); //se obtiene por el Id a través del dao
     	
     	//si no hay incidencia porque es igual a null
-    	if(incidencia==null) {throw new Exception("La incidencia no existe");}
+    	if(incidencia==null) {throw new BuscarException("La incidencia no existe");}
     	
     	//poner la lógica aquí, no eliminar si la incidencia no tiene de estado cerrada
-    	if(incidencia.getEstadoIncidencia()!=EstadoIncidencia.cerrada) {throw new Exception("La incidencia no se puede eliminar porque no está cerrada");}
+    	if(incidencia.getEstadoIncidencia()!=EstadoIncidencia.CERRADA) {throw new EliminarException("La incidencia no se puede eliminar porque no está cerrada");}
 
     	incidenciaDao.eliminarIncidencia(idIncidencia); //lo manda al dao para borrarlo en bbdd
 		
@@ -67,9 +76,15 @@ public class IncidenciaService implements IIncidenciaService {
 
     // método para obtener una incidencia por su id
     @Override
-    public Incidencia buscarIncidenciaPorId(int idIncidencia) {
+    public Incidencia buscarIncidenciaPorId(int idIncidencia)throws BuscarException {
 
-        return incidenciaDao.buscarIncidenciaPorId(idIncidencia); //llama al dao para buscar la incidencia en bbdd y la devuelve
+    	Incidencia incidencia=incidenciaDao.buscarIncidenciaPorId(idIncidencia);
+
+    	if(incidencia==null){throw new BuscarException("La incidencia no existe");
+    	
+    	}
+
+    	return incidencia;
     }
 
 	@Override

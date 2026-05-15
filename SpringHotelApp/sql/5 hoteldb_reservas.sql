@@ -4,8 +4,8 @@ CREATE TABLE reservas (
   fecha_salida DATE NOT NULL,
   id_huesped INT NOT NULL,
   id_habitacion INT NOT NULL,
-  tipo_pension ENUM('alojamiento','media','completa'),
-  estado_reserva ENUM('pendiente','confirmada','cancelada'),
+  tipo_pension ENUM('ALOJAMIENTO','MEDIA','COMPLETA'),
+  estado_reserva ENUM('PENDIENTE','CONFIRMADA','CANCELADA'),
   numero_huespedes INT NOT NULL,
   observaciones TEXT,
   CONSTRAINT fk_reserva_huesped
