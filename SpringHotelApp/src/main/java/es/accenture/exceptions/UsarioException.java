@@ -22,7 +22,7 @@ public class UsarioException extends Exception {
 	 * el texto personalizado de error en cada caso). Utilizo el super porque el
 	 * error que voy a usar en el catch en la logica de negocio va a ser de tipo
 	 * Exception (ya que asi coge tmbn los errores no personalizados), por lo que
-	 * para que el mensaje se almacene en la clase Exeption hay que usar una
+	 * para que el mensaje se almacene en la clase Exception hay que usar una
 	 * referencia a su constructor.
 	 * 
 	 * @param mensaje de excepcion personalizado

@@ -47,7 +47,8 @@ public class HuespedDao implements IHuespedDao {
 	@Override // Se implementa el metodo de la interfaz IHuespedDao
 	public List<Huesped> listarHuespedes() {
 
-		return mySessionFactory.getCurrentSession().createQuery("from Huesped", Huesped.class).getResultList();
+		return mySessionFactory.getCurrentSession()
+				.createQuery(" SELECT h.idHuesped, h.nombre, h.apellidos from Huesped h", Huesped.class).getResultList();
 	}
 	
 
