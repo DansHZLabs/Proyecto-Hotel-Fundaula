@@ -27,7 +27,7 @@ public class ReservasController {
 	
 	
     @GetMapping //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en reservas, se ejecuta el método listarReservas, va al service, de ahí al dao, lo saca de bbdd, lo guarda en la lista y devuelve la vista reservas con el listado
-    public String listarReservas(Model model) {
+    public String obtenerReservas(Model model) {
 
         List<Reserva>reservas=reservaService.buscarReservas(); //llama al service de ahí al dao y a bbdd y lo guarda en la lista reservas
 
@@ -39,7 +39,7 @@ public class ReservasController {
 	
     // método para ver el detalle de una reserva
     @GetMapping("/detalle") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "reserva" y devuelve la vista detalleReserva
-    public String verDetalle(@RequestParam int id,Model model) { //se pone RequestParam para ocultar la url por contraseñas, así no usamos REST con PathVariable
+    public String detalleReserva(@RequestParam int id,Model model) { //se pone RequestParam para ocultar la url por contraseñas, así no usamos REST con PathVariable
     	
     	try {
     		

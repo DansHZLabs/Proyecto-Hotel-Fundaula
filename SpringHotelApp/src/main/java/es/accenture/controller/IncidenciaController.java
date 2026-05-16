@@ -32,7 +32,7 @@ public class IncidenciaController {
 
 	// método para listar incidencias
 	@GetMapping //Anotación que dice cuál es la url de entrada que coge el método como va también a /incidencias y ya está en la general del requestMapping no se pone porque sino quedaría /incidencias/incidencias y no estaría bien
-	public String listarIncidencias(Model model) {
+	public String obtenerIncidencias(Model model) {
 
 		List<Incidencia>incidencias=incidenciaService.buscarTodasIncidencias(); //llama al service de ahí al dao y a bbdd y lo guarda en esta lista incidencias
 
@@ -43,7 +43,7 @@ public class IncidenciaController {
 
 	// método para ver el detalle de una incidencia
 	@GetMapping("/detalle") //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "incidencia" y devuelve la vista detalleIncidencia
-	public String verDetalle(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
+	public String detalleIncidencia(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
 		
 		try {
 			
@@ -67,7 +67,7 @@ public class IncidenciaController {
 	
 	// método para mostrar el formulario de alta
 	@GetMapping("/nueva") //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en nueva se ejecuta el método mostrarFormularioAlta, hace la caja en model con "habitaciones" y con "incidencias" que es la lista donde se guardan y lo muestra devolviendo la vista
-	public String mostrarFormularioAlta(Model model) {
+	public String nuevaIncidencia(Model model) {
 
 		model.addAttribute("incidencia",new Incidencia()); //model es la caja que guarda un objeto creado nuevo de tipo incidencia en model con el nombre incidencia
 
@@ -112,7 +112,7 @@ public class IncidenciaController {
 
 	// método para mostrar el formulario para editar
 	@GetMapping("/editar") //Anotación que dice cuál es la url de entrada que coge el método
-	public String mostrarFormularioEditar(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
+	public String editarIncidencia(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
 
 		try {
 			
