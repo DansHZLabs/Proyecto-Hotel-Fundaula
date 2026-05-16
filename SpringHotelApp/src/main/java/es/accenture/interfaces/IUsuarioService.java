@@ -10,7 +10,7 @@ package es.accenture.interfaces;
  */
 public interface IUsuarioService {
 
-	// Metodo a implementar por el ServiceUsuario
+	// Metodo a implementar por el UsuarioService
 
 	/**
 	 * Metodo que comprueba las credenciales del usuario para dar o denegar el

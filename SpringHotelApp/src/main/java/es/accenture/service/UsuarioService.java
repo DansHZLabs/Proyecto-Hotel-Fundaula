@@ -32,10 +32,10 @@ public class UsuarioService implements IUsuarioService {
 
 	/**
 	 * * Constructor por parametros en el que se usa la inyeccion de dependencias
-	 * del IUsuarioDAO (su implementacion) y el HttpSession. Se hace aqui y no en
+	 * del IUsuarioDao (su implementacion) y el HttpSession. Se hace aqui y no en
 	 * el atributo para que Spring cree al mismo tiempo el objeto de tipo
 	 * ServiceUsuario y sus dependencias, evitando un NullPointerException al crear
-	 * en primera instancia un InUsuarioDAO o un HttpSession null
+	 * en primera instancia un InUsuarioDao o un HttpSession null
 	 * 
 	 * @param repositorioUsuario
 	 * @param session

@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.accenture.entity.Huesped;
-
+import es.accenture.exceptions.HuespedException;
 import es.accenture.interfaces.IHuespedDao;
 
 /**
@@ -66,11 +67,23 @@ public class HuespedDao implements IHuespedDao {
 
 	@Transactional // Etiqueta de Spring para crear y cerrar de forma automatica las Transacciones (se crea la SessionFactory, se abre una sesion y se inicia la transaccion)
 	@Override // Se implementa el metodo de la interfaz IHuespedDao
-	public void actualizarHuesped(Huesped huespedModificado) {
+	public void actualizarHuesped(Huesped huespedModificado) throws HuespedException {
 
 		/* el objeto de tipo huesped se envia en la request al darle al boton de guardar
-		en el 'FormularioHuesped.jsp' */
+		en el 'FormularioHuesped.jsp'. Viaja desde esa parte pasando por Controller->Service->Dao*/
+		
+		try {//IA: consulto como se llama el tipo de error de Hibernate generado al no ensertar datos de la tabla que deben ser not null. Me aconseja hacer un flush para que se envie directamente la info a la BBDD y asi poder obtener el error en el try catch 
+			
+		
+		
 		mySessionFactory.getCurrentSession().update(huespedModificado);
+		
+		mySessionFactory.getCurrentSession().flush();
+		
+		} catch (DataIntegrityViolationException e) {
+			
+			throw new HuespedException(HuespedException.ActualizarException);
+		}
 	}
 
 	
@@ -93,12 +106,40 @@ public class HuespedDao implements IHuespedDao {
 	
 	@Transactional // Etiqueta de Spring para crear y cerrar de forma automatica las Transacciones (se crea la SessionFactory, se abre una sesion y se inicia la transaccion)
 	@Override // Se implementa el metodo de la interfaz IHuespedDao
-	public void guardarHuesped(Huesped huespedNuevo) {
+	public void guardarHuesped(Huesped huespedNuevo) throws HuespedException {
 
 		/* el objeto de tipo huesped se envia en la request al darle al boton de guardar
-		en el 'FormularioHuesped.jsp' */
+		en el 'FormularioHuesped.jsp'. Viaja desde esa parte pasando por Controller->Service->Dao*/
+		
+		try {//IA: consulto como se llama el tipo de error de Hibernate generado al no ensertar datos de la tabla que deben ser not null. Me aconseja hacer un flush para que se envie directamente la info a la BBDD y asi poder obtener el error en el try catch 
+			
+		
 		mySessionFactory.getCurrentSession().save(huespedNuevo);
+		
+		mySessionFactory.getCurrentSession().flush();
+		
+		} catch (DataIntegrityViolationException e) {
+			
+			throw new HuespedException(HuespedException.GuardarException);
+		
+		}
 
+	}
+	
+	
+	@Transactional // Etiqueta de Spring para crear y cerrar de forma automatica las Transacciones (se crea la SessionFactory, se abre una sesion y se inicia la transaccion)
+	@Override // Se implementa el metodo de la interfaz IHuespedDao
+	public void comprobarDuplicadoTelefonoHuesped (String telefonoFormularioHuesped) throws HuespedException {
+		
+		List<Huesped> huespedTelefonoCoincidente = mySessionFactory.getCurrentSession()
+				.createQuery("FROM Huesped h WHERE h.email = :email", Huesped.class).
+				setParameter("email", telefonoFormularioHuesped).getResultList();
+		
+		if (huespedTelefonoCoincidente.isEmpty()) {
+			
+			throw new HuespedException(HuespedException.TelefonoDuplicadoException);
+		}
+		
 	}
 
 }

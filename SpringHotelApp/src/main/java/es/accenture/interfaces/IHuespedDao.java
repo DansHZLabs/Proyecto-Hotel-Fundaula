@@ -3,6 +3,7 @@ package es.accenture.interfaces;
 import java.util.List;
 
 import es.accenture.entity.Huesped;
+import es.accenture.exceptions.HuespedException;
 
 /**
  * Interfaz que genera un desacoplamiento al poder utilizar cualquier tipo de
@@ -37,8 +38,9 @@ public interface IHuespedDao {
 	 * Metodo que actualiza los datos de un determinado Huesped de la BBDD
 	 * 
 	 * @param Huesped (objeto de tipo huesped ORM con toda la info a actualizar)
+	 * @throws HuespedException 
 	 */
-	void actualizarHuesped(Huesped huespedModificado);
+	void actualizarHuesped(Huesped huespedModificado) throws HuespedException;
 
 	/**
 	 * Metodo que elimina un determinado Huesped y sus caracteristicas de la BBDD
@@ -51,7 +53,17 @@ public interface IHuespedDao {
 	 * Metodo que guarda un nuevo Huesped en la BBDD con los datos que le asignemos
 	 * 
 	 * @param huespedNuevo (objeto de tipo huesped ORM con toda la info a crear)
+	 * @throws HuespedException 
 	 */
-	void guardarHuesped(Huesped huespedNuevo);
+	void guardarHuesped(Huesped huespedNuevo) throws HuespedException;
+
+	/**
+	 * Metodo que comprueba si el telefono guardado en el formulario rellenado por el usuario, existe en la BBDD.
+	 * En caso afirmativo se envia un mensaje de error para que el usuario lo cambie por otro no coincidente(
+	 * se supone que tiene que haber un telefono unico por usuario)
+	 * @param emailFormulario
+	 * @throws HuespedException 
+	 */
+	void comprobarDuplicadoTelefonoHuesped(String telefonoFormularioHuesped) throws HuespedException;
 
 }
