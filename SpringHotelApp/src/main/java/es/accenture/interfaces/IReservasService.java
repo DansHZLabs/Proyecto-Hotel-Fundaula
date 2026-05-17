@@ -8,7 +8,7 @@ import es.accenture.exceptions.BuscarException;
 import es.accenture.exceptions.EliminarException;
 import es.accenture.exceptions.GuardarException;
 
-public interface IReservaService {
+public interface IReservasService {
 
 	List<Reserva>buscarReservas(); //obtiene todos los datos de reservas y los guarda en una lista, luego se mostrarán mediante la vista
 

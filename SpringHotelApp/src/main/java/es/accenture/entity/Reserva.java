@@ -14,14 +14,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity // Anotación para representar una tabla en BBDD
 @Table(name="reservas") // Anotación que indica cómo se llama la tabla que representa
 public class Reserva {
 	
-	public enum EstadoReserva {pendiente,confirmada,cancelada} //clase interna para crear los enum y poner las opciones que se quiere establecer
-	public enum TipoPension {alojamiento,media,completa} //clase interna para crear los enum y poner las opciones que se quiere establecer
+	public enum EstadoReserva {PENDIENTE,CONFIRMADA,CANCELADA} //clase interna para crear los enum y poner las opciones que se quiere establecer
+	public enum TipoPension {ALOJAMIENTO,MEDIA,COMPLETA} //clase interna para crear los enum y poner las opciones que se quiere establecer
 	
-	@Id
+	@Id //clave primaria INT
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //GenerateValue dice a BBDD que genere ID automático cada vez que guardemos una reserva con autoincrement que es IDENTITY INT
 	@Column(name="id_reserva",nullable=false) //Anotación para decir a Spring que la columna es id_reserva y no puede estar vacía ni repetirse INT
 	private int idReserva;
@@ -34,9 +36,11 @@ public class Reserva {
 	@JoinColumn(name="id_habitacion",nullable=false) //Anotación para decir a Spring a que tabla referencia y que es requerido INT
 	private Habitacion habitacion;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd") //Anotación para el formato de la fecha porque sino spring no la reconoce como fecha
 	@Column(name="fecha_entrada",nullable=false) //Anotación para decir a Spring que la columna es fecha_entrada y no puede estar vacía ni repetirse DATE
 	private Date fechaEntrada;
 	
+	@DateTimeFormat(pattern="yyyy-MM-dd") //Anotación para el formato de la fecha porque sino spring no la reconoce como fecha
 	@Column(name="fecha_salida",nullable=false) //Anotación para decir a Spring que la columna es fecha_salida y no puede estar vacía ni repetirse DATE
 	private Date fechaSalida;
 	
@@ -52,7 +56,7 @@ public class Reserva {
 	private int numeroHuespedes;
 	
 	@Column(name="observaciones")  //Anotación para decir a Spring que la columna es observaciones TEXT
-	private String observaciones;
+	private String observaciones; //aunque coincida el nombre y no haga falta Israel dice en el video que la buena práctica es ponerlo
 	
 	public Reserva() {
 		

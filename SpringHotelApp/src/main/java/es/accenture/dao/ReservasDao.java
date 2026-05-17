@@ -9,16 +9,16 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import es.accenture.entity.Reserva;
-import es.accenture.interfaces.IReservaDao;
+import es.accenture.interfaces.IReservasDao;
 
 @Transactional //para que Spring gestione automáticamente las transacciones
 @Repository // Anotación para decirle a Spring que esta clase es un DAO para acceder a bbdd, spring crea objeto automáticamente
-public class ReservaDao implements IReservaDao{
+public class ReservasDao implements IReservasDao{
 	
 	 private SessionFactory mySessionFactory; //se crea una variable mySessionFactory de tipo SessionFactory
 
 	 @Autowired //inyección por constructor
-	    public ReservaDao(SessionFactory mySessionFactory) {
+	    public ReservasDao(SessionFactory mySessionFactory) {
 	        this.mySessionFactory = mySessionFactory;
 	        
 	    }

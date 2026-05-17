@@ -11,16 +11,16 @@ import es.accenture.exceptions.ActualizarException;
 import es.accenture.exceptions.BuscarException;
 import es.accenture.exceptions.EliminarException;
 import es.accenture.exceptions.GuardarException;
-import es.accenture.interfaces.IReservaDao;
-import es.accenture.interfaces.IReservaService;
+import es.accenture.interfaces.IReservasDao;
+import es.accenture.interfaces.IReservasService;
 
 @Service //Anotación para decirle a Spring que es un service
-public class ReservaService implements IReservaService{
+public class ReservasService implements IReservasService{
 
-	private IReservaDao reservaDao;
+	private IReservasDao reservaDao;
 
 	@Autowired //inyección por constructor
-	public ReservaService(IReservaDao reservaDao) {
+	public ReservasService(IReservasDao reservaDao) {
 		
 	    this.reservaDao = reservaDao;
 	    

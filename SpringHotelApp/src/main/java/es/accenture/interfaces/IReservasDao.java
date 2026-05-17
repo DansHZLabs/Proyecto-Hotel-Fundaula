@@ -4,7 +4,7 @@ import java.util.List;
 
 import es.accenture.entity.Reserva;
 
-public interface IReservaDao {
+public interface IReservasDao {
 	
 	List<Reserva>buscarReservas(); //obtiene todos los datos de reservas y los guarda en una lista, luego se mostrarán mediante la vista
 
