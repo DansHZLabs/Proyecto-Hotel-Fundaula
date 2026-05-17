@@ -1,5 +1,7 @@
 package es.accenture.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -111,9 +113,30 @@ public class LoginController {
 
 			return "Login";
 
-		}
+		}	
 
 		return "Principal";
 	}
 
+	
+	/**
+	 * Metodo que cierra la sesion del usuario, volviendo a la pagina de inicio de introduccion de credenciales. 
+	 * 
+	 * @param model (para poder almacenar atributos y otra informacion entre
+	 *                requests)
+	 * @param sesion (para poder invalidar/eliminar la sesion actual)
+	 * 
+	 * @return redirect al metodo 'mostrarLogin' (devuelve la vista 'Login')
+	 */
+	@PostMapping("/cerrarSesion") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente. En este caso uso el metodo POST por razones de seguridad.
+	public String cerrarSesion (Model model, HttpSession sesion) {
+		
+		sesion.invalidate();
+		
+		return mostrarLogin(model);
+		
+	}
+	
+	
+	
 }
