@@ -683,6 +683,8 @@ He hecho una lista del Mapeo ORM y al pegarlo en el README de mi proyecto se pie
 Dame un icono para pegar en cada título que corresponda con los nombres de los apartados</br>
 Dime como meter una línea al final de cada apartado del readme</br>
 Dime una descripción buena para poner en este readme</br>
+Estos son los css que ha puesto mi compañero en las vistas del proyecto, dime en qué parte tengo que pegarlos y si tengo que cambiar algo más para que queden con su estilo, los puedo pegar en cualquier parte?
+<br>
 </td>
 </tr>
 </table>
