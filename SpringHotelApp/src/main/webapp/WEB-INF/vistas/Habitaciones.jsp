@@ -5,12 +5,46 @@
 <html>
 <head>
     <title>Habitaciones</title> <!-- título de la pestaña del navegador -->
+    <style type="text/css">
+
+.fondo {
+    background-color: #E8B0E8;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo-principal {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333333;
+    margin: 40px 0;
+    text-align: center;
+}
+
+.error {
+    text-align: center;
+    color: #D93D2E;
+}
+
+table {
+    background-color: white;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+</style>
 </head>
-<body>
+<body class="fondo">
 
-<h1>Lista de Habitaciones</h1><!-- título, se puede cambiar el tamaño poniendo h2 o h3 o lo que sea -->
+<h1 class="titulo-principal">Lista de Habitaciones</h1><!-- título, se puede cambiar el tamaño poniendo h2 o h3 o lo que sea -->
 
-<p style="color:red;"> ${error}</p> <!-- error al borrar habitación, cambia solo el mensaje porque enlaza al error y muestra el texto que sea -->
+<p class="error">${error}</p> <!-- error al borrar habitación, cambia solo el mensaje porque enlaza al error y muestra el texto que sea -->
 
 <c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
     <a href="${pageContext.request.contextPath}/habitaciones/nueva">Nueva habitación</a>
@@ -37,10 +71,10 @@
 			<td>${habitacion.orientacionHabitacion}</td>
             <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
                 <a href="${pageContext.request.contextPath}/habitaciones/detalle?id=${habitacion.idHabitacion}">Ver</a>
-                <c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
+         		<c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
                 <a href="${pageContext.request.contextPath}/habitaciones/editar?id=${habitacion.idHabitacion}">Editar</a>
                 <a href="${pageContext.request.contextPath}/habitaciones/eliminar?id=${habitacion.idHabitacion}">Eliminar</a>
-                 </c:if>
+      			</c:if>
             </td>
         </tr>
     </c:forEach>
