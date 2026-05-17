@@ -31,7 +31,7 @@ public class LoginController {
 	private IUsuarioService usuarioService;
 
 	/**
-	 * Constructor por parametros en la que se usa la inyeccion de dependencias del
+	 * Constructor por parametros en el que se usa la inyeccion de dependencias del
 	 * Servicio de Usuario. Se hace aqui y no en el atributo para que Spring cree al
 	 * mismo tiempo el objeto de tipo LoginController y su dependencia
 	 * IUsuarioService, evitando un NullPointerException al crear en primera
@@ -39,8 +39,7 @@ public class LoginController {
 	 * 
 	 * @param usuarioService
 	 */
-	@Autowired // Etiqueta de Spring para la inyeccion de dependencias al detectar una clase
-				// como 'component' o similar en el paquete seleccionado en la configuracion.
+	@Autowired // Etiqueta de Spring para la inyeccion de dependencias al detectar una clase como 'component' o similar en el paquete seleccionado en la configuracion.
 	public LoginController(IUsuarioService usuarioService) {
 
 		this.usuarioService = usuarioService;
