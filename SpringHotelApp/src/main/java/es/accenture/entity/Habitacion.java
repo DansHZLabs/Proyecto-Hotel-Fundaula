@@ -1,4 +1,5 @@
-package es.accenture.entity;          
+package es.accenture.entity;
+
 
 public class Habitacion {
 

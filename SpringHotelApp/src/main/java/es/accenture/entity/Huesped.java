@@ -1,10 +1,14 @@
 package es.accenture.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -34,11 +38,14 @@ public class Huesped {
 	@Column(name = "direccion",nullable=false) // Anotacion que indica como se llama la columna que representa
 	private String direccion;
 
-	@Column(name = "telefono",nullable=false) // Anotacion que indica como se llama la columna que representa
+	@Column(name = "telefono",nullable=false, unique=true) // Anotacion que indica como se llama la columna que representa
 	private String telefono;
 
 	@Column(name = "email") // Anotacion que indica como se llama la columna que representa
 	private String email;
+	
+	//@OneToMany(mappedBy = "huespedes", fetch=FetchType.LAZY) // Anotacion para definir la relacion de uno a muchos (1 huesped puede tener muchas resercas)
+	//private List<Reserva> reservas; // Lista en la que se van a almacenar las reservas
 
 	// CONSTRUCTOR VACIO (obligatorio)
 
@@ -164,11 +171,28 @@ public class Huesped {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
-	}
+	}	
 	
-	// METODO toString
+	/**
+	 * 
+	 * @return
+	 */
+	/*public List<Reserva> getReservas() {
+		return reservas;
+	}*/
 	
+	/**
+	 * 
+	 * @param reservas
+	 */
+	/*public void setReservas(List<Reserva> reservas) {
+		this.reservas = reservas;
+	}*/
+
 	
+	// METODO toString	
+	
+
 	/**
 	 * Sobrecarga del toString para que devuelva texto en vez de la direccion de
 	 * memoria del objeto
@@ -178,5 +202,7 @@ public class Huesped {
 		return "Huesped [idHuesped=" + idHuesped + ", nombre=" + nombre + ", apellidos=" + apellidos + ", direccion="
 				+ direccion + ", telefono=" + telefono + ", email=" + email + "]";
 	}
+	
+	//TODO valorar si se necesita un metodo que meta las reservas a este huesped y viceversa (aunque tal vez deberia ir en el service donde esta la logica)
 		
 }
