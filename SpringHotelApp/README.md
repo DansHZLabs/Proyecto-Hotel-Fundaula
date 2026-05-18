@@ -348,6 +348,7 @@ Merge final a main
 ## 👥 Reparto de tareas:
 
 A Javi → Habitaciones + Incidencias + Reservas
+<br>
 B Jorge → Huéspedes + Login + Reservas
 
 ---
