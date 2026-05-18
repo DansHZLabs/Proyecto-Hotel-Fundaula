@@ -81,6 +81,14 @@ public class HuespedService implements IHuespedService {
 	@Override
 	public void actualizarHuesped(Huesped huespedModificado) throws Exception {
 
+		if (huespedModificado.getNombre().isEmpty()
+				|| huespedModificado.getApellidos().isEmpty()
+				|| huespedModificado.getDireccion().isEmpty()
+				|| huespedModificado.getTelefono().isEmpty()) {
+			
+			throw new HuespedException(HuespedException.ActualizarException);
+		}
+		
 		if (!huespedModificado.getTelefono().isEmpty()) {
 
 			/*
@@ -88,7 +96,7 @@ public class HuespedService implements IHuespedService {
 			 * creado en el DAO En caso afirmativo mandamos un mensaje de error para que el
 			 * usuario haga los cambios pertinentes
 			 */
-			huespedRepositorio.comprobarDuplicadoTelefonoHuesped(huespedModificado.getTelefono());
+			huespedRepositorio.comprobarDuplicadoTelefonoHuesped(huespedModificado.getTelefono(), huespedModificado.getIdHuesped());
 		}
 
 		/*
@@ -113,6 +121,14 @@ public class HuespedService implements IHuespedService {
 	@Override
 	public void guardarHuesped(Huesped huespedNuevo) throws Exception {
 		
+		if (huespedNuevo.getNombre().isEmpty()
+				|| huespedNuevo.getApellidos().isEmpty()
+				|| huespedNuevo.getDireccion().isEmpty()
+				|| huespedNuevo.getTelefono().isEmpty()) {
+			
+			throw new HuespedException(HuespedException.ActualizarException);
+		}
+		
 		if (!huespedNuevo.getTelefono().isEmpty()) {
 
 			/*
@@ -120,7 +136,7 @@ public class HuespedService implements IHuespedService {
 			 * creado en el DAO En caso afirmativo mandamos un mensaje de error para que el
 			 * usuario haga los cambios pertinentes
 			 */
-			huespedRepositorio.comprobarDuplicadoTelefonoHuesped(huespedNuevo.getTelefono());
+			huespedRepositorio.comprobarDuplicadoTelefonoHuesped(huespedNuevo.getTelefono(),0);
 		}
 
 		/*

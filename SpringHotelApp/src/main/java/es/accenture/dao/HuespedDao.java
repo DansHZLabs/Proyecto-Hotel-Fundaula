@@ -74,18 +74,13 @@ public class HuespedDao implements IHuespedDao {
 		/* el objeto de tipo huesped se envia en la request al darle al boton de guardar
 		en el 'FormularioHuesped.jsp'. Viaja desde esa parte pasando por Controller->Service->Dao*/
 		
-		try {//IA: consulto como se llama el tipo de error de Hibernate generado al no ensertar datos de la tabla que deben ser not null. Me aconseja hacer un flush para que se envie directamente la info a la BBDD y asi poder obtener el error en el try catch 
+		
 			
 		
 		
 		mySessionFactory.getCurrentSession().update(huespedModificado);
 		
-		mySessionFactory.getCurrentSession().flush();
-		
-		} catch (DataIntegrityViolationException e) {
-			
-			throw new HuespedException(HuespedException.ActualizarException);
-		}
+	
 	}
 
 	
@@ -119,29 +114,25 @@ public class HuespedDao implements IHuespedDao {
 		/* el objeto de tipo huesped se envia en la request al darle al boton de guardar
 		en el 'FormularioHuesped.jsp'. Viaja desde esa parte pasando por Controller->Service->Dao*/
 		
-		try {//IA: consulto como se llama el tipo de error de Hibernate generado al no ensertar datos de la tabla que deben ser not null. Me aconseja hacer un flush para que se envie directamente la info a la BBDD y asi poder obtener el error en el try catch 
+		
 			
 		
 		mySessionFactory.getCurrentSession().save(huespedNuevo);
 		
-		mySessionFactory.getCurrentSession().flush();
-		
-		} catch (DataIntegrityViolationException e) {
-			
-			throw new HuespedException(HuespedException.GuardarException);
-		
-		}
+	
 
 	}
 	
 	
 	@Transactional // Etiqueta de Spring para crear y cerrar de forma automatica las Transacciones (se crea la SessionFactory, se abre una sesion y se inicia la transaccion)
 	@Override // Se implementa el metodo de la interfaz IHuespedDao
-	public void comprobarDuplicadoTelefonoHuesped (String telefonoFormularioHuesped) throws HuespedException {
+	public void comprobarDuplicadoTelefonoHuesped (String telefonoFormularioHuesped, int idFormularioHuesped) throws HuespedException {
 		
 		List<Huesped> huespedTelefonoCoincidente = mySessionFactory.getCurrentSession()
-				.createQuery("FROM Huesped h WHERE h.telefono = :telefono", Huesped.class).
-				setParameter("telefono", telefonoFormularioHuesped).getResultList();
+				.createQuery("FROM Huesped h WHERE h.telefono = :telefono AND h.idHuesped != :id", Huesped.class).
+				setParameter("telefono", telefonoFormularioHuesped)
+				.setParameter("id", idFormularioHuesped)
+				.getResultList();
 		
 		if (!huespedTelefonoCoincidente.isEmpty()) {
 			

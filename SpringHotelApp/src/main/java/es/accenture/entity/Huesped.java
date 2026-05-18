@@ -22,19 +22,19 @@ public class Huesped {
 
 	@Id // Clave primaria INT
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Anotacion para generar automaticamente el ID en la base de datos (AUTO_INCREMENT)
-	@Column(name = "id_huesped") // Anotacion que indica como se llama la columna que representa
+	@Column(name = "id_huesped",nullable=false) // Anotacion que indica como se llama la columna que representa
 	private int idHuesped;
 
-	@Column(name = "nombre") // Anotacion que indica como se llama la columna que representa
+	@Column(name = "nombre",nullable=false) // Anotacion que indica como se llama la columna que representa
 	private String nombre;
 
-	@Column(name = "apellidos") // Anotacion que indica como se llama la columna que representa
+	@Column(name = "apellidos",nullable=false) // Anotacion que indica como se llama la columna que representa
 	private String apellidos;
 
-	@Column(name = "direccion") // Anotacion que indica como se llama la columna que representa
+	@Column(name = "direccion",nullable=false) // Anotacion que indica como se llama la columna que representa
 	private String direccion;
 
-	@Column(name = "telefono") // Anotacion que indica como se llama la columna que representa
+	@Column(name = "telefono",nullable=false) // Anotacion que indica como se llama la columna que representa
 	private String telefono;
 
 	@Column(name = "email") // Anotacion que indica como se llama la columna que representa
@@ -71,6 +71,16 @@ public class Huesped {
 		return idHuesped;
 	}
 
+	/**
+	 * Metodo set que asigna el valor que le pasemos como parametro al campo
+	 * 'id' de la tabla 'huespedes'
+	 * @param idHuesped
+	 */
+	public void setIdHuesped(int idHuesped) {
+		
+		this.idHuesped = idHuesped;
+	}
+	
 	/**
 	 * Metodo get que devuelve el campo 'nombre' de la tabla 'huespedes'
 	 * @return nombre

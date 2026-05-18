@@ -42,7 +42,7 @@
 	<!-- se obtienen los datos obtenidos del formulario gracias al sesion almacenado en la Request  -->
 	Tiene usted permisos de: ${usuarioLogueado.rol}
 	
-	<nav>
+	
 	
 	<ul>
 		<li><a href="habitaciones">Habitaciones</a></li>
@@ -54,7 +54,7 @@
 	
 	</ul>
 	
-	</nav>
+	
 
 	<br><br><br><br>
 	

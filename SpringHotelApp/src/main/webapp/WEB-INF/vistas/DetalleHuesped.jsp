@@ -52,9 +52,11 @@
 
 <h3>Detalles huespedes</h3>
 
-<br><br><br>
+<br>
 
+<a href="huespedes">Volver</a>
 
+<br><br>
 
 <table class="tabla">
 

@@ -77,8 +77,10 @@
 					<td>${huesped.nombre}</td>
 					<td>${huesped.apellidos}</td>
 					<td><a href="detalleHuesped?idHuesped=${huesped.idHuesped}">Detalle</a> &nbsp;&nbsp;&nbsp;&nbsp;
+					<c:if test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">
 					<a href="modificarHuesped?idHuesped=${huesped.idHuesped}">Modificar</a> &nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="eliminarHuesped?idHuesped=${huesped.idHuesped}">Eliminar</a>
+					</c:if>
 </td>
 </tr>
 						
@@ -98,13 +100,15 @@
 			</div>
 			
 			<br><br><br>
-			
+	
+	<c:if test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">		
 	<form:form action="nuevoHuesped" method="get">
 
 		<!-- Al pulsar sobre el boton se envia la accion de Login definida para el formulario -->
 		<button type="submit">Nuevo Huesped</button>
 
 	</form:form>
+	</c:if>
 	
 	<br><br>
 	

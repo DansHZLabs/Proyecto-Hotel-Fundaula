@@ -102,11 +102,12 @@ public class HuespedController {
 	 * @return
 	 */
 	@GetMapping("/modificarHuesped") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
-	public String modificarHuesped (@ModelAttribute("idHuesped") Huesped huesped, Model model) {
+	public String modificarHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
 		
-		Huesped detalleHuesped = huespedService.buscarHuesped(huesped.getIdHuesped());
+		Huesped detalleHuesped = huespedService.buscarHuesped(idHuesped);
 		
 		model.addAttribute("plantillaHuesped",detalleHuesped); //puede que tengamos conflictos aqui con el jsp de formulario ya que tiene que tener el mismo atributo para nuevo y modificar
+		model.addAttribute("tipoFormulario", "modificado");
 		
 		return "FormularioHuesped";
 	}
@@ -129,7 +130,7 @@ public class HuespedController {
 			
 		} catch(Exception e) {
 			
-			model.addAttribute("errorEliminarHuesped", e); 	
+			model.addAttribute("errorEliminarHuesped", e.getMessage()); 	
 			
 			
 			
@@ -147,6 +148,7 @@ public class HuespedController {
 	public String nuevoHuesped (Model model) {
 		
 		model.addAttribute("plantillaHuesped", new Huesped());
+		model.addAttribute("tipoFormulario", "nuevo");
 		
 		return "FormularioHuesped";		
 		
@@ -168,9 +170,13 @@ public class HuespedController {
 		
 		} catch (Exception e) {
 			
-			model.addAttribute("errorActualizarHuesped",e);
+			model.addAttribute("errorActualizarHuesped",e.getMessage());
 			
-			return modificarHuesped(huesped, model);
+			model.addAttribute("plantillaHuesped", huesped);
+			
+			model.addAttribute("tipoFormulario", "modificado");
+			
+			return "FormularioHuesped";
 		}
 		
 		return obtenerHuespedes(model);
@@ -192,7 +198,7 @@ public class HuespedController {
 			
 			} catch (Exception e) {
 				
-				model.addAttribute("errorActualizarHuesped",e);
+				model.addAttribute("errorActualizarHuesped",e.getMessage());
 				
 				return nuevoHuesped(model); // a lo mejor aqui hay problemas porque desaparecen los datos y hay que volver a rellenarlos
 			}

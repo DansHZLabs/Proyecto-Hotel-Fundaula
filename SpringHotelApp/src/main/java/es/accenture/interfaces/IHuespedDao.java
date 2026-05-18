@@ -64,6 +64,6 @@ public interface IHuespedDao {
 	 * @param emailFormulario
 	 * @throws HuespedException 
 	 */
-	void comprobarDuplicadoTelefonoHuesped(String telefonoFormularioHuesped) throws HuespedException;
+	void comprobarDuplicadoTelefonoHuesped(String telefonoFormularioHuesped, int idFormularioHuesped) throws HuespedException;
 
 }
