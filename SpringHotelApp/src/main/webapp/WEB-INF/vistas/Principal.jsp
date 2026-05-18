@@ -16,10 +16,22 @@
 
 
 <title>Datos del usuario</title>
+
+<style>
+
+.fondo {
+	background-color: #E8B0E8;
+	font-family: Arial, sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+</style>
 </head>
 
 
-<body>
+<body class= "fondo">
 
 
 	<h3 class="registration">HOTEL FUNDAULA</h3>
@@ -52,6 +64,8 @@
 		<button type="submit">Cerrar sesion</button>
 
 	</form:form>
+	
+	
 
 </body>
 </html>

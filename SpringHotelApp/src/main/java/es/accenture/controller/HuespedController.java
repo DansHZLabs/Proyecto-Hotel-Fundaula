@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.accenture.entity.Huesped;
 import es.accenture.interfaces.IHuespedService;
@@ -84,9 +85,9 @@ public class HuespedController {
 	 * @return
 	 */
 	@GetMapping("/detalleHuesped") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
-	public String detalleHuesped (@ModelAttribute("idHuesped") Huesped huesped, Model model) {
+	public String detalleHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
 		
-		Huesped detalleHuesped = huespedService.buscarHuesped(huesped.getIdHuesped());
+		Huesped detalleHuesped = huespedService.buscarHuesped(idHuesped);
 		
 		model.addAttribute("detalleHuesped",detalleHuesped);
 		
@@ -117,16 +118,20 @@ public class HuespedController {
 	 * @return
 	 */
 	@GetMapping("/eliminarHuesped") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
-	public String eliminarHuesped (@ModelAttribute("idHuesped") Huesped huesped, Model model) {
+	public String eliminarHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
 		
-		
+	
 		try {
 			
-			huespedService.eliminarHuesped(huesped.getIdHuesped());
+			huespedService.eliminarHuesped(idHuesped);
+			
+		
 			
 		} catch(Exception e) {
 			
-			model.addAttribute("errorEliminarHuesped", e); 			
+			model.addAttribute("errorEliminarHuesped", e); 	
+			
+			
 			
 		} 			
 			return obtenerHuespedes(model);		

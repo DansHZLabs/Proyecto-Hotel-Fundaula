@@ -8,6 +8,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mysql.cj.MysqlxSession;
+
 import es.accenture.entity.Huesped;
 import es.accenture.exceptions.HuespedException;
 import es.accenture.interfaces.IHuespedDao;
@@ -49,7 +51,7 @@ public class HuespedDao implements IHuespedDao {
 	public List<Huesped> listarHuespedes() {
 
 		return mySessionFactory.getCurrentSession()
-				.createQuery(" SELECT h.idHuesped, h.nombre, h.apellidos from Huesped h", Huesped.class).getResultList();
+				.createQuery("FROM Huesped h", Huesped.class).getResultList();
 	}
 	
 
@@ -99,8 +101,14 @@ public class HuespedDao implements IHuespedDao {
 
 			mySessionFactory.getCurrentSession().delete(huesped);
 			
+			
+			
+		
+			
 			//TODO: PONER EXCEPCION NO SE PUEDA BORRAR ADEMAS DE SI ES NULL SI EN LA TABLA DE RESERVAS EL ENUM DEL ESTADO_RESERVA ES IGUAL A 'PENDIENTE' (SI SE PUEDE SE HACE AUTOMATICO POR EL ON DELETE CASCADE QUE PONDRE AL ORM DE HUESPED)
-		}
+		
+		
+		} 
 	}
 
 	
@@ -132,10 +140,10 @@ public class HuespedDao implements IHuespedDao {
 	public void comprobarDuplicadoTelefonoHuesped (String telefonoFormularioHuesped) throws HuespedException {
 		
 		List<Huesped> huespedTelefonoCoincidente = mySessionFactory.getCurrentSession()
-				.createQuery("FROM Huesped h WHERE h.email = :email", Huesped.class).
-				setParameter("email", telefonoFormularioHuesped).getResultList();
+				.createQuery("FROM Huesped h WHERE h.telefono = :telefono", Huesped.class).
+				setParameter("telefono", telefonoFormularioHuesped).getResultList();
 		
-		if (huespedTelefonoCoincidente.isEmpty()) {
+		if (!huespedTelefonoCoincidente.isEmpty()) {
 			
 			throw new HuespedException(HuespedException.TelefonoDuplicadoException);
 		}
