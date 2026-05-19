@@ -1,7 +1,7 @@
 CREATE TABLE `incidencias` (
   `id_incidencia` int NOT NULL AUTO_INCREMENT,
-  `estado_incidencia` enum('abierta', 'en_curso', 'cerrada') NOT NULL,
-  `prioridad` enum('baja', 'media', 'alta') NOT NULL,
+  `estado_incidencia` enum('ABIERTA', 'EN_CURSO', 'CERRADA') NOT NULL,
+  `prioridad` enum('BAJA', 'MEDIA', 'ALTA') NOT NULL,
   `descripcion_incidencia` TEXT DEFAULT NULL,
   `fecha_apertura` DATE NOT NULL,
   `fecha_cierre` DATE,
