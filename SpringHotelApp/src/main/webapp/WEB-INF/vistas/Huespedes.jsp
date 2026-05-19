@@ -67,7 +67,7 @@ th, td {
 
 	<c:if
 		test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">		
-		<a href="nuevoHuesped">Nuevo huesped</a> <!-- Al pulsar sobre el boton se envia la accion de Login definida para el formulario -->
+		<a href="huespedes/nuevo">Nuevo huesped</a> <!-- Al pulsar sobre el boton se envia la accion de Login definida para el formulario -->
 	</c:if>
 
 	<br>
@@ -86,10 +86,10 @@ th, td {
 					<td>${huesped.idHuesped}</td>
 					<td>${huesped.nombre}</td>
 					<td>${huesped.apellidos}</td>
-					<td><a href="detalleHuesped?idHuesped=${huesped.idHuesped}">Ver</a>
+					<td><a href="huespedes/detalle?idHuesped=${huesped.idHuesped}">Ver</a>
 					 <c:if test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">
-							<a href="modificarHuesped?idHuesped=${huesped.idHuesped}">Editar</a> 
-							<a href="eliminarHuesped?idHuesped=${huesped.idHuesped}">Eliminar</a>
+							<a href="huespedes/modificar?idHuesped=${huesped.idHuesped}">Editar</a> 
+							<a href="huespedes/eliminar?idHuesped=${huesped.idHuesped}">Eliminar</a>
 						</c:if></td>
 				</tr>
 

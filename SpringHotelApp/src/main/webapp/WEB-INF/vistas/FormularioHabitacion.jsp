@@ -6,6 +6,7 @@
 
 <html>
 <head>
+
     <title>Formulario Habitación</title><!-- título de la pestaña del navegador -->
     <style type="text/css">
 
@@ -107,7 +108,8 @@
         <option value="EXTERIOR">Exterior</option>
     </select>
     
-
+	<p style="color:red; text-align:center">${error}</p><!-- el error si no se completan los campos -->
+	
     <button type="submit" class="boton-formulario">
         <c:choose>
             <c:when test="${habitacion.idHabitacion != 0}">
@@ -120,7 +122,7 @@
     </button>
 </form>
 
-<p style="color:red">${error}</p><!-- el error si no se completan los campos -->
+
 
 <a href="${pageContext.request.contextPath}/habitaciones" class="enlace-volver">Volver</a>
 

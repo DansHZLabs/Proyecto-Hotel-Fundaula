@@ -7,6 +7,7 @@
 
 <html>
 <head>
+
     <title>Formulario Incidencia</title><!-- título de la pestaña del navegador -->
     <style type="text/css">
 
@@ -109,6 +110,8 @@
 	<form:input path="fechaCierre" class="input-formulario" type="date"/>
 	<br>
 
+	<p style="color:red; text-align:center">${error}</p><!-- el error si no se completan los campos -->
+
     <button type="submit" class="boton-formulario"><!-- para que salga un botón o el otro -->
 	    <c:choose>
        		 <c:when test="${incidencia.idIncidencia != 0}">Actualizar</c:when>
@@ -117,7 +120,7 @@
 	</button>
 </form:form>
 
-<p style="color:red">${error}</p><!-- el error si no se completan los campos -->
+
 
 <a href="${pageContext.request.contextPath}/incidencias" class="enlace-volver">Volver</a><!-- botón volver para cambiar de vista al listado-->
 

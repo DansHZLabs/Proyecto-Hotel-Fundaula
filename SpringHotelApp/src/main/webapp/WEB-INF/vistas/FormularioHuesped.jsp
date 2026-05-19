@@ -80,7 +80,7 @@
 <h1>Nuevo Huesped</h1>
 
 <form:form modelAttribute="plantillaHuesped" autocomplete="off"
-			method="get" action="guardarHuesped" cssClass="contenedor-formulario">
+			method="post" action="guardar" cssClass="contenedor-formulario">
 			
 			Nombre del huesped:
 			
@@ -117,7 +117,7 @@
 <c:if test="${tipoFormulario == 'modificado'}">
 <h1>Editar Huesped</h1>
 <form:form modelAttribute="plantillaHuesped" autocomplete="off"
-			method="get" action="actualizarHuesped" cssClass="contenedor-formulario">
+			method="post" action="actualizar" cssClass="contenedor-formulario">
 			
 			<form:hidden path="idHuesped"/>
 			
@@ -153,7 +153,7 @@
 </c:if>
 
 
-<a href="huespedes">Volver</a>
+<a href="${pageContext.request.contextPath}/huespedes">Volver</a>
 
 </body>
 </html>

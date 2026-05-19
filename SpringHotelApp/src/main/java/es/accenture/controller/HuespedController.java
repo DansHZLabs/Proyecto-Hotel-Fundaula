@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.accenture.entity.Huesped;
@@ -20,6 +22,7 @@ import es.accenture.interfaces.IHuespedService;
  * @author danih y javi
  * @version 1.0
  */
+@RequestMapping("/huespedes")
 @Controller // Anotacion de Spring para mapear la clase como controlador
 public class HuespedController {
 
@@ -59,7 +62,7 @@ public class HuespedController {
 	 *              requests)
 	 * @return String con la vista 'Huespedes'
 	 */
-	@GetMapping("/huespedes") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	@GetMapping("") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String obtenerHuespedes(Model model) {
 		
 		List<Huesped> listaHuespedes = null;
@@ -84,7 +87,7 @@ public class HuespedController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/detalleHuesped") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	@GetMapping("/detalle") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String detalleHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
 		
 		Huesped detalleHuesped = huespedService.buscarHuesped(idHuesped);
@@ -101,7 +104,7 @@ public class HuespedController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/modificarHuesped") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	@GetMapping("/modificar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String modificarHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
 		
 		Huesped detalleHuesped = huespedService.buscarHuesped(idHuesped);
@@ -118,7 +121,7 @@ public class HuespedController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/eliminarHuesped") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	@GetMapping("/eliminar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String eliminarHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
 		
 	
@@ -135,7 +138,7 @@ public class HuespedController {
 			
 			
 		} 			
-			return obtenerHuespedes(model);		
+			return "redirect:/huespedes";		
 		
 	}
 	
@@ -144,7 +147,7 @@ public class HuespedController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/nuevoHuesped") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	@GetMapping("/nuevo") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String nuevoHuesped (Model model) {
 		
 		model.addAttribute("plantillaHuesped", new Huesped());
@@ -161,7 +164,7 @@ public class HuespedController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/actualizarHuesped") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	@PostMapping("/actualizar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String actualizarHuesped (@ModelAttribute("plantillaHuesped") Huesped huesped, Model model) {	
 		
 		try {
@@ -179,7 +182,7 @@ public class HuespedController {
 			return "FormularioHuesped";
 		}
 		
-		return obtenerHuespedes(model);
+		return "redirect:/huespedes";
 	}
 	
 	
@@ -189,7 +192,7 @@ public class HuespedController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/guardarHuesped") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	@PostMapping("/guardar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String guardarHuesped (@ModelAttribute("plantillaHuesped") Huesped huesped, Model model) {
 		
 		try {
@@ -203,7 +206,7 @@ public class HuespedController {
 				return nuevoHuesped(model); // a lo mejor aqui hay problemas porque desaparecen los datos y hay que volver a rellenarlos
 			}
 			
-			return obtenerHuespedes(model);
+			return "redirect:/huespedes";
 		}
 	
 	

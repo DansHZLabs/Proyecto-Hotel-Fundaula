@@ -88,7 +88,7 @@
 </div>
 
 
-<a href="huespedes">Volver</a>
+<a href="${pageContext.request.contextPath}/huespedes">Volver</a>
 
 </body>
 </html>
