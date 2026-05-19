@@ -92,7 +92,7 @@ th, td {
 
 <p class="error">${error}</p><!-- error al borrar habitación, cambia solo el mensaje porque enlaza al error y muestra el texto que sea -->
 
-<form:form action="vueltaPrincipal" method="post">
+<form:form action="vueltaPrincipal" method="get">
 
 <!-- Al pulsar sobre el boton se vuelve al controlador del menu principal que envia la vista jsp 'Principal' -->
 <button type="submit">Vover al menu principal</button>

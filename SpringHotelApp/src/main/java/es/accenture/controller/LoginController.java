@@ -115,7 +115,7 @@ public class LoginController {
 
 		}	
 
-		return "Principal";
+		return "redirect:/vueltaPrincipal"; //IA: investigo con Gemini que metodo es mas correcto (redirect o forward) para limpiar la url y que no de errores al hacer f5
 	}
 
 	
@@ -133,11 +133,11 @@ public class LoginController {
 		
 		sesion.invalidate();
 		
-		return mostrarLogin(model);
+		return "redirect:/"; // IA: investigo con gemini el mejor metodo para que no aparezca el /cerrar sesion otra vez en la url y no de errores al pulsar f5
 		
 	}
 	
-	@PostMapping("/vueltaPrincipal")
+	@GetMapping("/vueltaPrincipal")
 	public String vueltaPrincipal () {
 		
 		return "Principal";
