@@ -1,3 +1,5 @@
+<!-- IA: se solicitó a chat gpt un fondo morado con un dibujo-->
+
 <h1 align="center" style="
 background: linear-gradient(135deg, #7b2ff7, #f107a3);
 padding: 18px;
@@ -9,10 +11,15 @@ box-shadow: 0 0 15px rgba(241, 7, 163, 0.6);
 🏨 SpringHotelApp
 </h1>
 
+<!--esta descripción se solicitó a chat gpt-->
+<!--se solicitó a chat gpt que me dijera como poner los títulos más grandes y luego le pedí un icono para cada uno relaccionado con la temática-->
+
 ## 📌 Descripción:
 Aplicación web desarrollada con Spring MVC y Hibernate para la gestión de un hotel. Permite administrar habitaciones, huéspedes, reservas e incidencias, así como autenticación de usuarios con distintos roles (recepcionista y supervisor).
 
 El sistema cubre operaciones CRUD completas y simula un entorno real de gestión hotelera con control de acceso según perfil.
+
+<!--se preguntó a chat gpt como poner una raya que dividiera apartados del readme y luego la puse en todos-->
 
 ---
 
@@ -31,7 +38,7 @@ El sistema cubre operaciones CRUD completas y simula un entorno real de gestión
 1. Clonar el repositorio:
 
 ```
-git clone https://github.com/PrimeraEdicionFlexible/ProyectoFinalEquipoL.git
+git clone https://github.com/PrimeraEdicionFlexible/ProyectoFinalEquipoM.git
 ```
 
 2. Importar el proyecto en el IDE (Eclipse como Maven project)
@@ -65,6 +72,8 @@ ORDEN CORRECTO PARA EJECUTAR LOS SCRIPTS:
 4. hoteldb_habitaciones.sql  
 5. hoteldb_reservas.sql  
 6. hoteldb_incidencias.sql  
+
+<!--se pidió a chat gpt que hiciera responsive la imagen luego en las otras copié y pegué cambiando la imagen en cada una-->
 
 <p align="center">
   <img src="docs/images/diagrama ER BBDD.png" style="max-width: 100%; height: auto;" />
@@ -135,6 +144,9 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 
 ## 🛠️ Tecnologías utilizadas
 
+<!-- se preguntó a chat gpt como poner el texto diferente que se viera más y me dió varias opciones y elegí esta-->
+
+
 ### 🔧 Backend
 - ☕ **Java 11**  
 - 🌱 **Spring MVC**  
@@ -158,6 +170,9 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 ## 🧱 Estructura del proyecto:
 
 Arquitectura en capas:
+
+<!-- IA: se preguntó a chat gpt como poner el texto diferente para direrenciarlo y me dió varias opciones y elegí esta-->
+
 
 ```
 es.accenture.config       → configuración
@@ -187,20 +202,21 @@ HibernateConfig   → configura conexión a base de datos + ORM + transacciones
 ### PAQUETE CONTROLLER: recibe las peticiones HTTP, llama al service y da la respuesta
 
 ```
-nombreController → gestiona el login, el logout y la sesión de usuario
-nombreController → gestiona las peticiones del CRUD de habitaciones
-nombreController → gestiona las peticiones del CRUD de huéspedes
-nombreController → gestiona las peticiones del CRUD de reservas
+LoginController → gestiona el login, el logout y la sesión de usuario
+HabitacionController → gestiona las peticiones del CRUD de habitaciones
+IncidenciaController → gestiona las peticiones del CRUD de incidencias
+HuespedController → gestiona las peticiones del CRUD de huéspedes
+ReservaController → gestiona las peticiones del CRUD de reservas
 ```
 
 ### PAQUETE DAO: es el acceso a BBDD, lo usa Services para el acceso a datos
 
 ```
-nombreDao → establece la lógica del acceso a los datos de...
-nombreDao → establece la lógica del acceso a los datos de...
-nombreDao → establece la lógica del acceso a los datos de...
-nombreDao → establece la lógica del acceso a los datos de...
-nombreDao → establece la lógica del acceso a los datos de...
+LoginDao → establece la lógica del acceso a los datos de la funcionalidad Login
+HabitacionDao → establece la lógica del acceso a los datos de la funcionalidad Habitaciones
+IncidenciaDao → establece la lógica del acceso a los datos de la funcionalidad Incidencias
+HuespedDao → establece la lógica del acceso a los datos de la funcionalidad Huespedes
+ReservaDao → establece la lógica del acceso a los datos de la funcionalidad Reservas
 ```
 
 ### PAQUETE ENTITIES: entidades de la bbdd
@@ -216,31 +232,36 @@ Usuario → es representación de la tabla usuarios (login y roles)
 ### PAQUETE EXCEPTIONS: son las excepciones personalizadas
 
 ```
-nombreException → error de acceso a base de datos
-nombreException → error de autentificación
-nombreException → no encontrado
-nombreException → el error que sea
+GuardarException → error al guardar
+EliminarException → error al eliminar
+ActualizarException → error al actualizar
+BuscarException → error al buscar
+PONER AQUÍ LAS QUE SE USEN EN LA PARTE DEL LOGIN
 ```
 
 ### PAQUETE INTERFACES: son las interfaces que definen los contratos de métodos que se deben cumplir
 
 ```
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
+IHabitacionDao → interfaz que establece el contrato de los métodos de HabitacionDao
+IHabitacionService → interfaz que establece el contrato de los métodos de HabitacionService
+IHuespedDao → interfaz que establece el contrato de los métodos de HuespedDao
+IHuespedService → interfaz que establece el contrato de los métodos de HuespedService
+IIncidenciaDao → interfaz que establece el contrato de los métodos de IncidenciaDao
+IIncidenciaService → interfaz que establece el contrato de los métodos de IncidenciaService
+ILoginDao → interfaz que establece el contrato de los métodos de LoginDao
+ILoginService → interfaz que establece el contrato de los métodos de LoginService
+IReservaDao → interfaz que establece el contrato de los métodos de ReservaDao
+IReservaService → interfaz que establece el contrato de los métodos de ReservaService
 ```
 
 ### PAQUETE SERVICES: es la lógica, se manda a DAO para las consultas a BBDD
 
 ```
-nombreService → servicio del que se encarga
-nombreService → servicio del que se encarga
-nombreService → servicio del que se encarga
-nombreService → servicio del que se encarga
+HabitacionService → servicio que se encarga de la lógica de Service
+HuespedService → servicio que se encarga de la lógica de Huesped
+IncidenciaService → servicio que se encarga de la lógica de Incidencia
+LoginService → servicio que se encarga de la lógica de Login
+ReservaService → servicio que se encarga de la lógica de Reservas
 ```
 
 ### PAQUETE UTILS: tareas adicionales
@@ -255,12 +276,20 @@ nombreUtils →
 ### VISTAS: (van en WebInf, Vistas)
 
 ```
-nombre.jsp → vista de la pantalla de...
-nombre.jsp → vista de la pantalla de...
-nombre.jsp → vista de la pantalla de...
-nombre.jsp → vista de la pantalla de...
-nombre.jsp → vista de la pantalla de...
-nombre.jsp → vista de la pantalla de...
+DetalleHabitacion.jsp → vista de la pantalla de detalle de cada habitación
+DetalleIncidencia.jsp → vista de la pantalla de detalle de cada incidencia
+DetalleHuesped.jsp → vista de la pantalla de detalle de cada huésped
+DetalleReserva.jsp → vista de la pantalla de detalle de cada reserva
+Login.jsp → vista de la pantalla de inicio de sesión para introducir credenciales
+Principal.jsp → vista de la pantalla principal tras iniciar sesión
+Huespedes.jsp → vista de la pantalla del listado de huespedes
+Habitaciones.jsp → vista de la pantalla del listado de habitaciones
+Incidencias.jsp → vista de la pantalla del listado de incidencias
+Reservas.jsp → vista de la pantalla del listado de reservas
+FormularioHabitacion.jsp → vista de la pantalla de creación para nueva habitación
+FormularioIncidencia.jsp → vista de la pantalla de creación para nueva incidencia
+FormularioHuesped.jsp → vista de la pantalla de creación para nuevo huésped
+FormularioReserva.jsp → vista de la pantalla de creación para nueva reserva
 ```
 
 (en SRC, Main, Resources)
@@ -318,8 +347,10 @@ Merge final a main
 
 ## 👥 Reparto de tareas:
 
-A Javi → (ej: Habitaciones + Incidencias)  
-B Jorge → (ej: Huéspedes + Login)  
+A Javi → Habitaciones + Incidencias + Reservas
+<br>
+
+B Daniel → Huéspedes + Login + Reservas
 
 ---
 
@@ -370,10 +401,11 @@ Resolución manual combinando cambios de los dos desarrolladores.
 - Representan los datos
 
 ## Base de datos (MySQL)
-- Devuelve los datos
+- Devuelve los datos a DAO
 
 ## Flujo de datos
 BD → DAO → Service → Controller → JSP (vista con los datos)
+Flujo de vuelta inverso → mediante returns
 
 ---
 
@@ -383,9 +415,8 @@ Habitaciones.jsp → click “ver listado”
 HabitacionController → obtenerHabitaciones()  
 Service valida datos  
 HabitacionDAO → query Hibernate  
-Habitacion (Entity) ← datos  
-Controller mete datos en Model  
-JSP muestra listado
+Controller mete datos al Model  
+Habitaciones.jsp muestra listado
 
 ---
 
@@ -395,14 +426,13 @@ JSP muestra listado
 
 **Incidencias**
 - abierta → ❌ No
-- en_proceso → ❌ No
-- cerrada → ❌ No
+- en_curso → ❌ No
+- cerrada → ✔️ Sí
 
 **Reservas**
 - pendiente → ❌ No
 - confirmada → ❌ No
 - cancelada → ❌ No
-- finalizada → ❌ No
 
 **Disponibilidad**
 - disponible → ✔️ Sí
@@ -446,18 +476,24 @@ Proyecto (PDF)
 
 ---
 
-## Uso de inteligencia artificial
+<!--IA: se ha usado chat gpt para cambiar el formato de la tabla que entregó el profesor y que se vea bien en el preview -->
+
+## Uso de inteligencia artificial Alumno A
 ### Herramientas utilizadas
 **Alumno A — Javier Roldán Pomareta
 - ChatGPT (versión: 5.5)
 
 Usos:
 
-**Alumno B — *(Nombre Apellido)*:**
-- Claude (versión: ...)
-- Otra: ...
-(Cada alumno marca solo las que haya usado. Si alguno no usó ninguna, escribir «Ninguna»
-en su bloque.)
+- Confirmar validez de las clases de configuración rápidamente.
+- Resolver la falta de una dependencia del POM.
+- Confirmar resto de dependencias del POM.
+- Buscar fallos de sintáxis
+- Pedir explicaciones de funcionamientos
+- Pedir explicaciones de buenas prácticas
+- Pedir explicaciones de apuntes y temarios que no entendía
+- Preguntas sobre HTML básico que no me acordaba
+- Pedir explicación sobre errores de consola
 
 ---
 
@@ -465,16 +501,14 @@ en su bloque.)
 
 <table>
 <tr>
-<th>Componente</th>
-<th>Quién</th>
+<th>Componente A</th>
 <th>¿Has usado IA?</th>
 <th>¿Para qué?</th>
 </tr>
 
 <tr>
 <td>POM</td>
-<td>A</td>
-<td>Sí / -</td>
+<td>Sí</td>
 <td>En el Eclipse de mis compañeros saltaba un error en el POM (no me acuerdo cuál era) pero a mi sí me funcionaba, faltaba la dependencia de plugging de Maven porque yo uso una versión diferente porque aunque tengo todas instaladas me gusta más, se copió y se pegó y se comprobó que funcionaba</br>
 Tengo estas dependencias que he ido buscando en foros y copiando de otros proyectos para mi proyecto es un proyecto de Spring MVC que vamos a usar Hibernate, mysql (y no me acuerdo qué más le puse en el prompt) dime si me falta alguna y me dijo que no.
 </td>
@@ -482,75 +516,67 @@ Tengo estas dependencias que he ido buscando en foros y copiando de otros proyec
 
 <tr>
 <td>Configuración de Spring (XML / Java Config)</td>
-<td>A</td>
-<td>Sí / -</td>
+<td>Sí</td>
 <td>He copiado estas clases de configuración de un proyecto para meterlas en el mío que es un proyecto Maven con configuración por clases e Hibernate, dime si están bien y si los comentarios que he puesto son correctos para explicar cada cosa o estoy poniendo alguna burrada</td>
 </tr>
 
 <tr>
 <td>Excepciones personalizadas</td>
-<td>Ambos</td>
-<td>Sí / No</td>
-<td>Ej: «plantilla de clase de excepción»</td>
+<td>No</td>
+<td>No</td>
+<td></td>
 </tr>
 
 <tr>
 <td>Entidad / DAO / Controller / vistas de Habitaciones</td>
-<td>A</td>
-<td>Sí / No</td>
-<td>...</td>
+<td>No</td>
+<td>No</td>
 </tr>
 
 <tr>
 <td>Entidad / DAO / Controller / vistas de Incidencias</td>
-<td>A</td>
-<td>Sí / No</td>
-<td>...</td>
+<td>No</td>
+<td>No</td>
 </tr>
 
 <tr>
 <td>Entidad Reserva + DAO de Reservas (común)</td>
-<td>quien lo desarrolló</td>
-<td>Sí / No</td>
-<td>...</td>
+<td>No</td>
+<td>No</td>
 </tr>
 
 <tr>
 <td>Reservas — listado / detalle / eliminación + JSPs</td>
-<td>A</td>
-<td>Sí / No</td>
-<td>...</td>
-</tr>
+
+<td>No</td>
+<td>No</td>
+<</tr>
 
 <tr>
 <td>Entidad Usuario / DAO Usuario / LoginController</td>
-<td>B</td>
-<td>Sí / No</td>
-<td>...</td>
+<td>No</td>
+<td>No</td>
 </tr>
 
 <tr>
 <td>Entidad / DAO / Controller / vistas de Huéspedes</td>
-<td>B</td>
-<td>Sí / No</td>
-<td>...</td>
+<td>No</td>
+<td>No</td>
 </tr>
 
 <tr>
 <td>Reservas — alta / modificación + FormularioReserva.jsp</td>
-<td>B</td>
-<td>Sí / No</td>
-<td>...</td>
+<td>No</td>
+<td>No</td>
 </tr>
 
 <tr>
 <td>Documentación (Readme)</td>
-<td>A / - / -</td>
-<td>Sí / -</td>
+<td>Sí</td>
 <td>Dime cómo se ponen los títulos en grande en el readme</br>
 Dime cómo se pone color morado de fondo en el título principal del readme y ponle un dibujito</br>
 Dame el código para meter una imagen en un div en el readme para que quede responsive</br>
-El profe me ha dado esta tabla para meter en el readme pero se ve un truño en el preview, dámela en h
+El profe me ha dado esta tabla para meter en el readme pero se ve muy mal en el preview, dámela en h
 tml</br>
 Dame un icono para pegar en cada título que corresponda con los nombres de los apartados</br>
 Dime como meter una línea al final de cada apartado del readme</br>
@@ -559,11 +585,9 @@ Dime una descripción buena para poner en este readme</br>
 </tr>
 </table>
 
-<tr>
+<<tr>
 <td>Documentación (Javadoc)</td>
-<td>A / B / Ambos</td>
-<td>Sí / No</td>
-<td>...</td>
+<td>No</td>
 </tr>
 </table>
 
@@ -577,7 +601,118 @@ Puedo explicar qué hace cada fragmento marcado como IA, justificar por qué enc
 
 — Alumno A: Javier Roldán Pomareta
 
-— Alumno B: *(Nombre del alumno)*
+---
+
+## Uso de inteligencia artificial Alumno B
+### Herramientas utilizadas
+**Alumno B — Daniel Herráiz Bastida
+- 
+
+Usos:
+
+- 
+
+
+---
+
+### Áreas en las que se ha usado
+
+<table>
+<tr>
+<th>Componente A</th>
+<th>¿Has usado IA?</th>
+<th>¿Para qué?</th>
+</tr>
+
+<tr>
+<td>POM</td>
+<td>Sí/NO</td>
+<td>...</br>
+...
+</td>
+</tr>
+
+<tr>
+<td>Configuración de Spring (XML / Java Config)</td>
+<td>Sí/NO</td>
+<td>...</td>
+</tr>
+
+<tr>
+<td>Excepciones personalizadas</td>
+<td>Sí/NO</td>
+<td>...</td>
+<td></td>
+</tr>
+
+<tr>
+<td>Entidad / DAO / Controller / vistas de Habitaciones</td>
+<td>Sí/NO</td>
+<td>...</td>
+</tr>
+
+<tr>
+<td>Entidad / DAO / Controller / vistas de Incidencias</td>
+<td>Sí/NO</td>
+<td>...</td>
+</tr>
+
+<tr>
+<td>Entidad Reserva + DAO de Reservas (común)</td>
+<td>Sí/NO</td>
+<td>...</td>
+</tr>
+
+<tr>
+<td>Reservas — listado / detalle / eliminación + JSPs</td>
+
+<td>Sí/NO</td>
+<td>...</td>
+<</tr>
+
+<tr>
+<td>Entidad Usuario / DAO Usuario / LoginController</td>
+<td>Sí/NO</td>
+<td>...</td>
+</tr>
+
+<tr>
+<td>Entidad / DAO / Controller / vistas de Huéspedes</td>
+<td>Sí/NO</td>
+<td>...</td>
+</tr>
+
+<tr>
+<td>Reservas — alta / modificación + FormularioReserva.jsp</td>
+<td>Sí/NO</td>
+<td>...</td>
+</tr>
+
+<tr>
+<td>Documentación (Readme)</td>
+<td>Sí/NO</td>
+<td>...</br>
+...</br>
+</td>
+</tr>
+</table>
+
+<<tr>
+<td>Documentación (Javadoc)</td>
+<td>Sí/NO</td>
+<td>...</td>
+</tr>
+</table>
+
+---
+
+### Compromiso
+
+Declaro que entiendo todo el código que entrego.
+
+Puedo explicar qué hace cada fragmento marcado como IA, justificar por qué encaja en el proyecto y modificarlo durante la defensa si fuera necesario.
+
+— Alumno B: Daniel Herráiz Bastida
 
 ---
 

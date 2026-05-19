@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %> <!-- esta vista es para probar luego hay que cambiarla -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- librería jstl -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
 <html>
 <head>
@@ -11,7 +12,9 @@
 
 <p style="color:red;"> ${error}</p> <!-- error al borrar habitación, cambia solo el mensaje porque enlaza al error y muestra el texto que sea -->
 
-<a href="${pageContext.request.contextPath}/habitaciones/nueva">Nueva habitación</a><!-- obtiene la ruta y saca la url -->
+<c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
+    <a href="${pageContext.request.contextPath}/habitaciones/nueva">Nueva habitación</a>
+</c:if>
 <br><!-- espacio en blanco, deja una línea -->
 
 <table border="1"><!-- tabla con borde, tr son las filas y td las columnas,th es la cabecera de cada columna -->
@@ -21,6 +24,7 @@
         <th>Tipo de la habitación</th>
         <th>Precio por noche</th>
         <th>Disponibilidad de la habitación</th>
+        <th>Orientación</th>
         <th>Acciones</th>
     </tr>
     <c:forEach var="habitacion" items="${habitaciones}"><!-- recorre la list y cada objeto de habitación es una habitación -->
@@ -30,10 +34,13 @@
             <td>${habitacion.tipo}</td>
             <td>${habitacion.precioPorNoche}</td>
 			<td>${habitacion.disponibilidad}</td>
+			<td>${habitacion.orientacionHabitacion}</td>
             <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
-                <a href="${pageContext.request.contextPath}/habitaciones/${habitacion.idHabitacion}">Ver</a>
-                <a href="${pageContext.request.contextPath}/habitaciones/editar/${habitacion.idHabitacion}">Editar</a>
-                <a href="${pageContext.request.contextPath}/habitaciones/eliminar/${habitacion.idHabitacion}">Eliminar</a>
+                <a href="${pageContext.request.contextPath}/habitaciones/detalle?id=${habitacion.idHabitacion}">Ver</a>
+                <c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
+                <a href="${pageContext.request.contextPath}/habitaciones/editar?id=${habitacion.idHabitacion}">Editar</a>
+                <a href="${pageContext.request.contextPath}/habitaciones/eliminar?id=${habitacion.idHabitacion}">Eliminar</a>
+                 </c:if>
             </td>
         </tr>
     </c:forEach>
@@ -41,3 +48,4 @@
 
 </body>
 </html>
+<!-- no se pueden usar los form tags en este porque no funcionan con las tablas relacionadas solo en objetos libres -->

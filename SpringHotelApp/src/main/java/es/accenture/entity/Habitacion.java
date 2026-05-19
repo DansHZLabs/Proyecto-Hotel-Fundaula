@@ -22,17 +22,17 @@ public class Habitacion {
 
 	//clase interna para crear los enum y poner las opciones que se quiere establecer
     public enum Tipo {
-        individual,doble,suite
+        INDIVIDUAL,DOBLE,SUITE
     }
 
     //clase interna para crear los enum y poner las opciones que se quiere establecer
     public enum Disponibilidad {
-        disponible,ocupada,limpieza,mantenimiento
+        DISPONIBLE,OCUPADA,LIMPIEZA,MANTENIMIENTO
     }
     
     //clase interna para crear los enum y poner las opciones que se quiere establecer
     public enum Orientacion {
-    	interior,exterior
+    	INTERIOR,EXTERIOR
     }
 
     @Id //clave primaria INT
@@ -58,11 +58,15 @@ public class Habitacion {
     @Column(name="orientacion_habitacion")//Anotación que indica cómo se llama la tabla que representa ENUM
     private Orientacion orientacionHabitacion;
     
-    @OneToMany(mappedBy="habitacion",fetch=FetchType.LAZY)//Anotación para la relación 1N con incidencia, 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda
-    													      //sin Cascade para propagar el CRUD de lo que se haga en habitación a incidencias porque nos rompe la lógica de negocio    
+    @OneToMany(mappedBy="habitacion",fetch=FetchType.LAZY)//Anotación para la relación 1N con incidencia, 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda, se cambia a EAGER porque con Lazy
+    														//al borrar por ejemplo no carga las incidencias porque ya está cerrada la conexión, se vuelve a quitar porque no se pueden poner 2 eager a la vez, mirarlo cuando
+    														//haga reservas todo junto
+    													    //sin Cascade para propagar el CRUD de lo que se haga en habitación a incidencias porque nos rompe la lógica de negocio    
     private List<Incidencia>incidencias; //lista donde se guardan las incidencias
     
-    @OneToMany(mappedBy = "habitacion",fetch=FetchType.LAZY)//Anotación para la relación 1N con reserva, 1 habitación puede tener muchas reservas y Lazy porque se dan datos bajo demanda
+    @OneToMany(mappedBy = "habitacion",fetch=FetchType.LAZY)//Anotación para la relación 1N con reserva, 1 habitación puede tener muchas reservas y Lazy porque se dan datos bajo demanda, se cambia a EAGER porque con Lazy
+															 //al borrar por ejemplo no carga las incidencias porque ya está cerrada la conexión, se vuelve a quitar porque no se pueden poner 2 eager a la vez, mirarlo cuando
+    														 //haga reservas todo junto
     private List<Reserva> reservas; //lista donde se guardan las reservas
     
     // Constructor vacío (es obligatorio)

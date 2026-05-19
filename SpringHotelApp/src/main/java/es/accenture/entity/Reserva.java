@@ -52,7 +52,7 @@ public class Reserva {
 	private int numeroHuespedes;
 	
 	@Column(name="observaciones")  //Anotación para decir a Spring que la columna es observaciones TEXT
-	private String observaciones;
+	private String observaciones; //aunque coincida el nombre y no haga falta Israel dice en el video que la buena práctica es ponerlo
 	
 	public Reserva() {
 		
