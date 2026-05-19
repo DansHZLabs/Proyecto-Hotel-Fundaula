@@ -15,7 +15,7 @@ public class WebConfig {
     @Bean
     public ViewResolver viewResolver() { //Convierte lo que le devuelve el controller en una jsp
         InternalResourceViewResolver vr = new InternalResourceViewResolver();
-        vr.setPrefix("/WEB-INF/views/");
+        vr.setPrefix("/WEB-INF/vistas/");
         vr.setSuffix(".jsp");
         return vr;
     }

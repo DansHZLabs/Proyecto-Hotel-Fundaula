@@ -37,7 +37,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
         factory.setDataSource(dataSource());
-        factory.setPackagesToScan("es.accenture.model");
+        factory.setPackagesToScan("es.accenture.entity");
 
         Properties props = new Properties();
         props.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
