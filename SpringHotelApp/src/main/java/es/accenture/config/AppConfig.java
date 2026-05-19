@@ -1,4 +1,4 @@
-package es.accenture.config;
+package es.accenture.config;  //copiada de otro proyecto y consultado si estaba bien con chat gpt
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

@@ -4,7 +4,7 @@ CREATE TABLE `incidencias` (
   `prioridad` enum('baja', 'media', 'alta') NOT NULL,
   `descripcion_incidencia` TEXT DEFAULT NULL,
   `fecha_apertura` DATE NOT NULL,
-  `fecha_cierre` DATE NOT NULL,
+  `fecha_cierre` DATE,
   `id_habitacion` int NOT NULL,
   PRIMARY KEY (`id_incidencia`),
   CONSTRAINT `fk_incidencias_habitacion` 
