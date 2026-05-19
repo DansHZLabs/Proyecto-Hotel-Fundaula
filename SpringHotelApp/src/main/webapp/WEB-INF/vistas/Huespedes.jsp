@@ -88,7 +88,7 @@ th, td {
 					<td>${huesped.apellidos}</td>
 					<td><a href="huespedes/detalle?idHuesped=${huesped.idHuesped}">Ver</a>
 					 <c:if test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">
-							<a href="huespedes/modificar?idHuesped=${huesped.idHuesped}">Editar</a> 
+							<a href="huespedes/editar?idHuesped=${huesped.idHuesped}">Editar</a> 
 							<a href="huespedes/eliminar?idHuesped=${huesped.idHuesped}">Eliminar</a>
 						</c:if></td>
 				</tr>

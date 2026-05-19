@@ -104,8 +104,8 @@ public class HuespedController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/modificar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
-	public String modificarHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
+	@GetMapping("/editar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	public String editarHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
 		
 		Huesped detalleHuesped = huespedService.buscarHuesped(idHuesped);
 		
