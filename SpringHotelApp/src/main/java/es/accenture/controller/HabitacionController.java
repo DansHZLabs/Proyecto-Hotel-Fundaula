@@ -33,7 +33,7 @@ public class HabitacionController {
 	}
 	
     @GetMapping //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en habitaciones, se ejecuta el método listarHabitaciones, va al service, de ahí al dao, lo saca de bbdd, lo guarda en la lista y devuelve la vista habitaciones con el listado
-    public String listarHabitaciones(Model model) {
+    public String obtenerHabitaciones(Model model) {
 
         List<Habitacion>habitaciones=habitacionService.buscarHabitaciones(); //llama al service de ahí al dao y a bbdd y lo guarda en la lista habitaciones
 
@@ -44,7 +44,7 @@ public class HabitacionController {
 
     // método para ver el detalle de una habitación
     @GetMapping("/detalle") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "habitacion" y devuelve la vista detalleHabitacion
-    public String verDetalle(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
+    public String detalleHabitacion(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
     	
     	try {
     		
@@ -68,7 +68,7 @@ public class HabitacionController {
 
     // método para mostrar el formulario de alta
     @GetMapping("/nueva") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien entre en nueva se ejecuta el método mostrarFormularioAlta, hace la caja en model con "habitacion" y devuelve la vista formularioAltaHabitacion
-    public String mostrarFormularioAlta(Model model) {
+    public String nuevaHabitacion(Model model) {
 
         model.addAttribute("habitacion",new Habitacion()); //model es la caja que guarda un objeto creado nuevo de tipo habitacion en model con el nombre habitacion, controller es repartidor, model mochila con datos, jsp pantalla que enseña datos, luego se recogen los datos con ${habitacion} expression language desde la jsp
 
@@ -105,7 +105,7 @@ public class HabitacionController {
 
     // método para mostrar el formulario para editar
     @GetMapping("/editar") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien pinche en editar se ejecuta el método mostrarFormularioEditar, hace la caja en model con "habitacion" y devuelve la vista formularioHabitacion
-    public String mostrarFormularioEditar(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
+    public String editarHabitacion(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como habitaciones/5 o habitaciones/4 si se cambia el valor de id por ejemplo REST
     	
     	try {
     		

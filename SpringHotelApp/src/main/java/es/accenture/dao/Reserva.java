@@ -1,4 +1,4 @@
-package es.accenture.entity;                          //esto lo hace cualquiera entero A o B
+package es.accenture.dao;                          //esto lo hace cualquiera entero A o B
 
 import java.util.Date;
 

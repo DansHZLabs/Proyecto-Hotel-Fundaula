@@ -11,8 +11,8 @@ box-shadow: 0 0 15px rgba(241, 7, 163, 0.6);
 🏨 SpringHotelApp
 </h1>
 
-<!--esta descripción se solicitó a chat gpt-->
-<!--se solicitó a chat gpt que me dijera como poner los títulos más grandes y luego le pedí un icono para cada uno relaccionado con la temática-->
+<!--IA: esta descripción se solicitó a chat gpt-->
+<!--IA: se solicitó a chat gpt que me dijera como poner los títulos más grandes y luego le pedí un icono para cada uno relaccionado con la temática-->
 
 ## 📌 Descripción:
 Aplicación web desarrollada con Spring MVC y Hibernate para la gestión de un hotel. Permite administrar habitaciones, huéspedes, reservas e incidencias, así como autenticación de usuarios con distintos roles (recepcionista y supervisor).
@@ -73,7 +73,7 @@ ORDEN CORRECTO PARA EJECUTAR LOS SCRIPTS:
 5. hoteldb_reservas.sql  
 6. hoteldb_incidencias.sql  
 
-<!--se pidió a chat gpt que hiciera responsive la imagen luego en las otras copié y pegué cambiando la imagen en cada una-->
+<!--IA: se pidió a chat gpt que hiciera responsive la imagen luego en las otras copié y pegué cambiando la imagen en cada una-->
 
 <p align="center">
   <img src="docs/images/diagrama ER BBDD.png" style="max-width: 100%; height: auto;" />
@@ -144,7 +144,7 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 
 ## 🛠️ Tecnologías utilizadas
 
-<!-- se preguntó a chat gpt como poner el texto diferente que se viera más y me dió varias opciones y elegí esta-->
+<!-- IA: se preguntó a chat gpt como poner el texto diferente que se viera más y me dió varias opciones y elegí esta-->
 
 
 ### 🔧 Backend
@@ -349,8 +349,7 @@ Merge final a main
 
 A Javi → Habitaciones + Incidencias + Reservas
 <br>
-
-B Daniel → Huéspedes + Login + Reservas
+B Jorge → Huéspedes + Login + Reservas
 
 ---
 
@@ -454,6 +453,108 @@ Habitaciones.jsp muestra listado
 - abierta → ❌ No
 - en_proceso → ❌ No
 - cerrada → ❌ No
+
+---
+
+<!--IA: se preguntó a chat gpt como dejar el texto del Mapeo como lo hice y que saliera igual en el Preview y me dijo que poniendo esto al principio "```text" y esto al final "```"-->
+
+```text
+MAPEO ORM Y RELACIONAL POR ENTITIES:
+
+ENTITY Habitacion:
+
+@Entity
+@Table(name="habitaciones")
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+@OneToMany(mappedBy="habitacion",fetch=FetchType.LAZY) -- es la relación con Incidencia
+private List<Incidencia>incidencias;
+@OneToMany(mappedBy="habitacion",fetch=FetchType.LAZY) -- es la relación con Reserva
+private List<Reserva>reservas;
+
+idHabitacion           - @Column(name="id_habitacion",nullable=false)                 - INT
+numeroHabitacion       - @Column(name="numero_habitacion",nullable=false,unique=true) - INT
+tipo (de habitación)   - @Column(name="tipo_habitacion",nullable=false)               - ENUM (INDIVIDUAL,DOBLE,SUITE)
+precioPorNoche         - @Column(name="precio_noche",nullable=false)                  - BigDecimal (se usa para dinero)
+disponibilidad         - @Column(name="disponibilidad_habitacion",nullable=false)     - ENUM (DISPONIBLE,OCUPADA,LIMPIEZA,MANTENIMIENTO)
+orientacionHabitacion  - @Column(name="orientacion_habitacion")                       - ENUM (INTERIOR,EXTERIOR)
+
+
+ENTITY Incidencia:
+
+@Entity
+@Table(name="incidencias")
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+@ManyToOne(fetch=FetchType.LAZY) -- es la relación con Habitación
+@JoinColumn(name="id_habitacion")
+private Habitacion habitacion;
+
+idIncidencia                          - @Column(name="id_incidencia",nullable=false)     - INT
+estadoIncidencia                      - @Column(name="estado_incidencia",nullable=false) - ENUM (ABIERTA,EN_CURSO,CERRADA)
+prioridadIncidencia                   - @Column(name="prioridad",nullable=false)         - ENUM (BAJA,MEDIA,ALTA)
+descripcionIncidencia                 - @Column(name="descripcion_incidencia")           - String
+@DateTimeFormat(pattern="yyyy-MM-dd") - anotación para fecha
+fechaApertura                         - @Column(name="fecha_apertura",nullable=false)    - Date
+@DateTimeFormat(pattern="yyyy-MM-dd") - anotación para fecha
+fechaCierre                           - @Column(name="fecha_cierre")                     - Date
+
+
+ENTITY Usuario: -- sin relaciones, que esta no tiene
+
+@Entity
+@Table(name="usuarios")
+@IdUsuario
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+@Enumerated(EnumType.STRING)
+
+idUsuario  - @Column(name="id_usuario",nullable=false) - INT
+username   - @Column(name="username",nullable=false)   - String
+password   - @Column(name="password",nullable=false)   - String
+rol        - @Column(name="rol",nullable=false)        - ENUM (RECEPCIONISTA,SUPERVISOR)
+
+
+ENTITY Huesped:
+
+@Entity
+@Table(name="huespedes")
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+@OneToMany(mappedBy="huesped",fetch=FetchType.LAZY) -- es la relación con Reserva
+private List<Reserva>reservas;
+
+idHuesped  - @Column(name="id_huesped",nullable=false) - INT
+nombre     - @Column(name="nombre",nullable=false)     - VARCHAR(50)
+apellidos  - @Column(name="apellidos",nullable=false)  - VARCHAR(50)
+direccion  - @Column(name="direccion",nullable=false)  - VARCHAR(50)
+telefono   - @Column(name="telefono",nullable=false)   - VARCHAR(20)
+email      - @Column(name="email",nullable=false)      - VARCHAR(20)
+
+
+ENTITY Reserva:
+
+@Entity
+@Table(name="reservas")
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+@ManyToOne(fetch=FetchType.LAZY) -- es la relación con Habitación
+@JoinColumn(name="id_habitacion")
+private Habitacion habitacion;
+
+@ManyToOne(fetch=FetchType.LAZY) -- es la relación con Huesped
+@JoinColumn(name="id_huesped")
+private Huesped huesped;
+
+idReserva                             - @Column(name="id_reserva",nullable=false)       - INT
+@DateTimeFormat(pattern="yyyy-MM-dd") - anotación para fecha
+fechaEntrada                          - @Column(name="fecha_entrada",nullable=false)    - Date
+@DateTimeFormat(pattern="yyyy-MM-dd") - anotación para fecha
+fechaSalida                           - @Column(name="fecha_salida",nullable=false)     - Date
+tipoPension                           - @Column(name="tipo_pension")                    - ENUM (PENDIENTE,CONFIRMADA,CANCELADA)
+estadoReserva                         - @Column(name="estado_reserva")                  - ENUM (ALOJAMIENTO,MEDIA,COMPLETA)
+numeroHuespedes                       - @Column(name="numero_huespedes",nullable=false) - INT
+observaciones                         - @Column(name="observaciones")                   - String
+```
 
 ---
 
@@ -578,9 +679,13 @@ Dime cómo se pone color morado de fondo en el título principal del readme y po
 Dame el código para meter una imagen en un div en el readme para que quede responsive</br>
 El profe me ha dado esta tabla para meter en el readme pero se ve muy mal en el preview, dámela en h
 tml</br>
+He hecho una lista del Mapeo ORM y al pegarlo en el README de mi proyecto se pierde el formato, dime cómo mantengo el formato exacto del texto y me dijo que así, poniendo esto al principio: "```text" y esto al final: "```"
+<br>
 Dame un icono para pegar en cada título que corresponda con los nombres de los apartados</br>
 Dime como meter una línea al final de cada apartado del readme</br>
 Dime una descripción buena para poner en este readme</br>
+Estos son los css que ha puesto mi compañero en las vistas del proyecto, dime en qué parte tengo que pegarlos y si tengo que cambiar algo más para que queden con su estilo, los puedo pegar en cualquier parte?
+<br>
 </td>
 </tr>
 </table>
