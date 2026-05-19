@@ -1,4 +1,4 @@
-package es.accenture.config;
+package es.accenture.config; //copiada de otro proyecto y consultado si estaba bien con chat gpt
 
 import java.util.Properties;
 
