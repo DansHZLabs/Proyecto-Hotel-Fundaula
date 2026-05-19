@@ -45,7 +45,7 @@ th, td {
 
 <p class="error">${error}</p><!-- error al borrar habitación, cambia solo el mensaje porque enlaza al error y muestra el texto que sea -->
 
-<c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
+<c:if test="${sessionScope.usuarioLogueado.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
     <a href="${pageContext.request.contextPath}/incidencias/nueva">Nueva incidencia</a>
 </c:if>
 <br><!-- espacio en blanco, deja una línea -->
@@ -72,7 +72,7 @@ th, td {
             <td>${incidencia.fechaCierre}</td>
             <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
                 <a href="${pageContext.request.contextPath}/incidencias/detalle?id=${incidencia.idIncidencia}">Ver</a>
-                <c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
+                <c:if test="${sessionScope.usuarioLogueado.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
                 <a href="${pageContext.request.contextPath}/incidencias/editar?id=${incidencia.idIncidencia}">Editar</a>
                 <a href="${pageContext.request.contextPath}/incidencias/eliminar?id=${incidencia.idIncidencia}">Eliminar</a>
                  </c:if>

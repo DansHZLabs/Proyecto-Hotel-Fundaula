@@ -51,6 +51,8 @@
 </head>
 <body class="fondo">
 
+<h2 class="titulo-principal">Detalle Habitacion</h2>
+
 <div class="contenedor-formulario">
 <form:form modelAttribute="habitacion">
     <p>
