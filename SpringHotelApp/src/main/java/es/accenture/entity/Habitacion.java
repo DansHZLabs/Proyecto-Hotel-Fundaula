@@ -1,3 +1,4 @@
+
 package es.accenture.entity;             //Esta ya está terminada, falta poner la relación con incidencia
 										 //habrá que poner @OneToMany(mappedBy="habitacion" //Relación 1:N con incidencia encima de private List<Incidencia>incidencias; y sus imports y luego comprobar y en incidencia meter la suya que manda sobre ella, no poner cascade por las reglas sde negocio
 										 //dudas sintaxis video de hibernate de clase hasta el minuto 10 viene casi todo

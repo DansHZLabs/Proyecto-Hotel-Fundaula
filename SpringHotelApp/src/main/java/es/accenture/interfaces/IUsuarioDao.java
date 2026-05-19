@@ -12,9 +12,9 @@ import es.accenture.entity.Usuario;
  * @version 1.0
  *
  */
-public interface InUsuarioDAO {
+public interface IUsuarioDao {
 
-	// Metodo a implementar por el UsuarioDAO
+	// Metodo a implementar por el UsuarioDao
 
 	/**
 	 * Metodo que se comunica con la BBDD para comprobar si existe el usuario con el
@@ -22,8 +22,8 @@ public interface InUsuarioDAO {
 	 * informacion de ese registro
 	 * 
 	 * @param usuario
-	 * @return
+	 * @return Lista con objetos de tipo Usuario (entidad ORM)
 	 */
-	List<Usuario> obtenerUsuario(String usuario);
+	List<Usuario> buscarUsuario(String usuario);
 
 }

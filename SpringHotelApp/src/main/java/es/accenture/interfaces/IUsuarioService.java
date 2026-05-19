@@ -8,9 +8,9 @@ package es.accenture.interfaces;
  * @author danih y javi
  * @version 1.0
  */
-public interface InServiceUsuario {
+public interface IUsuarioService {
 
-	// Metodo a implementar por el ServiceUsuario
+	// Metodo a implementar por el UsuarioService
 
 	/**
 	 * Metodo que comprueba las credenciales del usuario para dar o denegar el
