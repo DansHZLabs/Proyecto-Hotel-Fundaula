@@ -44,8 +44,6 @@ th, td {
 
 <h1 class="titulo-principal">Lista de Habitaciones</h1><!-- título, se puede cambiar el tamaño poniendo h2 o h3 o lo que sea -->
 
-<p class="error">${error}</p> <!-- error al borrar habitación, cambia solo el mensaje porque enlaza al error y muestra el texto que sea -->
-
 <c:if test="${sessionScope.usuarioLogueado.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
     <a href="${pageContext.request.contextPath}/habitaciones/nueva">Nueva habitación</a>
 </c:if>
@@ -79,6 +77,15 @@ th, td {
         </tr>
     </c:forEach>
 </table>
+
+<p class="error">${error}</p> <!-- error al borrar habitación, cambia solo el mensaje porque enlaza al error y muestra el texto que sea -->
+
+<form:form action="vueltaPrincipal" method="post">
+
+<!-- Al pulsar sobre el boton se vuelve al controlador del menu principal que envia la vista jsp 'Principal' -->
+<button type="submit">Vover al menu principal</button>
+
+</form:form>
 
 </body>
 </html>

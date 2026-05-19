@@ -137,8 +137,8 @@ public class LoginController {
 		
 	}
 	
-	@PostMapping("/vueltaSesion")
-	public String vueltaSesion () {
+	@PostMapping("/vueltaPrincipal")
+	public String vueltaPrincipal () {
 		
 		return "Principal";
 	}
