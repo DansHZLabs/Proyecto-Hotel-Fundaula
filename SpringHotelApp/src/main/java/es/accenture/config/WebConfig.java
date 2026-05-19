@@ -26,7 +26,7 @@ public class WebConfig implements WebMvcConfigurer {//esto le dice a Spring que 
     @Override //Anotación que dice que se sobre escribe el método de WebMvcConfigurer
     public void addViewControllers(ViewControllerRegistry registry) {
 
-        registry.addViewController("/").setViewName("forward:/login.jsp"); //Esto hace que al entrar en localhost se abra login
+        registry.addViewController("/").setViewName("forward:/Login.jsp"); //Esto hace que al entrar en localhost se abra login
 
     }
 }

@@ -68,7 +68,7 @@ public class LoginController {
 
 		System.out.println("Entrando al login");
 
-		return "Login";
+		return "forward:/Login.jsp"; //IA: al meter el 'Login.jsp' fuera de web-inf le pregunto a Gemini como saltarme el viewResolver configurado (anade la ruta desde web inf + extension jsp) y poder enlazar a este de manera excepcional
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class LoginController {
 			 */
 			model.addAttribute("credencialesLogin", new Usuario());
 
-			return "Login";
+			return "forward:Login.jsp"; //IA: al meter el 'Login.jsp' fuera de web-inf le pregunto a Gemini como saltarme el viewResolver configurado (anade la ruta desde web inf + extension jsp) y poder enlazar a este de manera excepcional
 
 		}	
 
