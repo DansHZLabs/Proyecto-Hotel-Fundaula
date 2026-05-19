@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
 
 
@@ -28,14 +29,24 @@
 }
 
 
-.tabla {
-	border: 2pt solid;
-	width: 50%;
+.titulo-principal {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333333;
+    margin: 40px 0;
+    text-align: center;
 }
 
-.cabecera {
-	font-weight: bold;
-	background-color: #D9A35D;
+.contenedor-formulario {
+    margin-top: 40px;
+    max-width: 400px;
+    width: 100%;
+}
+
+.input-formulario {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 </style>
@@ -44,52 +55,40 @@
 
 <body class="fondo">
 
-<h1>HOTEL FUNDAULA</h1>
 
-<br><br><br>
+<h2 class="titulo-principal">Detalle Huesped</h2>
 
-<h2>HUESPEDES</h2>
+<div class="contenedor-formulario">
+<form:form modelAttribute="detalleHuesped">
+    <p>
+        <strong>ID del huesped:</strong>
+        <form:input cssClass="input-formulario" path="idHuesped" disabled="true"/>
+    </p>
+    <p>
+        <strong>Nombre del huesped:</strong>
+        <form:input cssClass="input-formulario" path="nombre" disabled="true"/>
+    </p>
+    <p>
+        <strong>Apellidos del huesped:</strong>
+        <form:input cssClass="input-formulario" path="apellidos" disabled="true"/>
+    </p>
+    <p>
+        <strong>Direccion del huesped:</strong>
+        <form:input cssClass="input-formulario" path="direccion" disabled="true"/>
+    </p>
+    <p>
+        <strong>Telefono del huesped:</strong>
+        <form:input cssClass="input-formulario" path="telefono" disabled="true"/>
+    </p>    
+    <p>
+        <strong>Email del huesped:</strong>
+        <form:input cssClass="input-formulario" path="idHuesped" disabled="true"/>
+    </p>
+</form:form>
+</div>
 
-<h3>Detalles huespedes</h3>
-
-<br>
 
 <a href="huespedes">Volver</a>
-
-<br><br>
-
-<table class="tabla">
-
-
-<tr class="cabecera">
-
-<td>ID del huesped</td>
-<td>Nombre del huesped</td>
-<td>Apellidos del huesped</td>
-<td>Direccion del huesped</td>
-<td>Telefono del huesped</td>
-<td>Email del huesped</td>
-
-
-
-</tr>		
-				<tr>
-					<td>${detalleHuesped.idHuesped}</td>
-					<td>${detalleHuesped.nombre}</td>
-					<td>${detalleHuesped.apellidos}</td>
-					<td>${detalleHuesped.direccion}</td>
-					<td>${detalleHuesped.telefono}</td>
-					<td>${detalleHuesped.email}</td>
-					
-
-</tr>
-						
-			
-
-</table>
-
-
-
 
 </body>
 </html>

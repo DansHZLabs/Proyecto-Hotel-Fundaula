@@ -27,18 +27,20 @@
 	align-items: center;
 }
 
-
-form {
-	width: 400px;
-	font-weight: bold;
-	color: #333;
-	margin: 0 auto;
+.titulo-principal {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333333;
+    margin: 40px 0;
+    text-align: center;
 }
 
-
-form, form text {
-	display: block; 
+.contenedor-formulario {
+    margin-top: 40px;
+    max-width: 400px;
+    width: 100%;
 }
+
 
 
 .formulario-huespedes {
@@ -54,6 +56,8 @@ form, form text {
 	color: #D93D2E;
 }
 
+
+
 .boton-almacenarHuesped {
 	display: block;
 	margin: 55px auto;
@@ -63,44 +67,38 @@ form, form text {
 }
 
 
+
 </style>
 
 </head>
 
 <body class= "fondo">
 
-<h1>HOTEL FUNDAULA</h1>
-	<br><br><br><br>
-
-<h2>HUESPEDES</h2>
-
-<br>
-
-<a href="huespedes">Volver</a>
-
-<br><br>
+<h2 class="titulo-principal">Formulario Huesped</h2>
 
 <c:if test="${tipoFormulario == 'nuevo'}">
+<h1>Nuevo Huesped</h1>
+
 <form:form modelAttribute="plantillaHuesped" autocomplete="off"
-			method="get" action="guardarHuesped">
+			method="get" action="guardarHuesped" cssClass="contenedor-formulario">
 			
-			Nombre del Huesped
+			Nombre del huesped:
 			
 			<form:input cssClass="formulario-huespedes" path="nombre"/>
 			
-			Apellidos del Huesped
+			Apellidos del huesped:
 			
 			<form:input cssClass="formulario-huespedes" path="apellidos"/>
 			
-			Direccion del Huesped
+			Direccion del huesped:
 			
 			<form:input cssClass="formulario-huespedes" path="direccion"/>
 			
-			Telefono del Huesped
+			Telefono del huesped:
 			
 			<form:input cssClass="formulario-huespedes" path="telefono"/>
 			
-			Email del Huesped
+			Email del huesped:
 			
 			<form:input cssClass="formulario-huespedes" path="email"/>
 
@@ -117,28 +115,29 @@ form, form text {
 
 
 <c:if test="${tipoFormulario == 'modificado'}">
+<h1>Editar Huesped</h1>
 <form:form modelAttribute="plantillaHuesped" autocomplete="off"
-			method="get" action="actualizarHuesped">
+			method="get" action="actualizarHuesped" cssClass="contenedor-formulario">
 			
 			<form:hidden path="idHuesped"/>
 			
-			Nombre del Huesped
+			Nombre del huesped:
 			
 			<form:input cssClass="formulario-huespedes" path="nombre"/>
 			
-			Apellidos del Huesped
+			Apellidos del huesped:
 			
 			<form:input cssClass="formulario-huespedes" path="apellidos"/>
 			
-			Direccion del Huesped
+			Direccion del huesped:
 			
 			<form:input cssClass="formulario-huespedes" path="direccion"/>
 			
-			Telefono del Huesped
+			Telefono del huesped:
 			
 			<form:input cssClass="formulario-huespedes" path="telefono"/>
 			
-			Email del Huesped
+			Email del huesped:
 			
 			<form:input cssClass="formulario-huespedes" path="email"/>
 
@@ -147,14 +146,14 @@ form, form text {
 				<c:out value="${errorActualizarHuesped}"></c:out>
 			</div>
 	
-			<button type="submit" class="boton-almacenarHuesped">Guardar</button>
+			<button type="submit" class="boton-almacenarHuesped">Actualizar</button>
 
 
 </form:form>
 </c:if>
 
 
-
+<a href="huespedes">Volver</a>
 
 </body>
 </html>

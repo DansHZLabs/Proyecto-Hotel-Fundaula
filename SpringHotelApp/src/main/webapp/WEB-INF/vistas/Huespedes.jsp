@@ -13,8 +13,10 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>HUESPEDES</title>
+<title>Lista de Huespedes</title>
+
 <style>
+
 .titulo-principal {
 	font-size: 3rem;
 	font-weight: bold;
@@ -31,14 +33,24 @@
 	align-items: center;
 }
 
-.tabla {
-	border: 2pt solid;
-	width: 100%;
+.cabecera {	
+	background-color: #D18400;
 }
 
-.cabecera {
-	font-weight: bold;
-	background-color: #D9A35D;
+
+.sub-cabecera {
+	
+	background-color: #CCFFFF;
+}
+
+table {
+    background-color: white;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid black;
 }
 
 .error {
@@ -51,47 +63,33 @@
 
 <body class="fondo">
 
-	<h1 class="titulo-principal">HUESPEDES</h1>
-
-	<br>
-	<br>
-	<br>
+	<h1 class="titulo-principal">Lista de Huespedes</h1>
 
 	<c:if
-		test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">
-		<!-- Al pulsar sobre el boton se envia la accion de Login definida para el formulario -->
-		<a href="nuevoHuesped">Nuevo huesped</a>
+		test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">		
+		<a href="nuevoHuesped">Nuevo huesped</a> <!-- Al pulsar sobre el boton se envia la accion de Login definida para el formulario -->
 	</c:if>
 
 	<br>
-
-	<div class="marco">
-
-		<table class="tabla">
-
-
+	
+		<table border="1">
+		
 			<tr class="cabecera">
-
-				<td>ID del huesped</td>
-				<td>Nombre del huesped</td>
-				<td>Apellidos del huesped</td>
-				<td>Acciones</td>
-
-
+				<th>ID del huesped</th>
+				<th>Nombre del huesped</th>
+				<th>Apellidos del huesped</th>
+				<th>Acciones</th>
 			</tr>
-
-
-			<%--Este bucle recorre la lista de grupos musicales que nos ha enviado el Servlet a traves de la variable 'GruposMusicales' --%>
+						
 			<c:forEach var="huesped" items="${listaHuespedes}">
-				<tr class="datos">
+				<tr class="sub-cabecera">
 					<td>${huesped.idHuesped}</td>
 					<td>${huesped.nombre}</td>
 					<td>${huesped.apellidos}</td>
-					<td><a href="detalleHuesped?idHuesped=${huesped.idHuesped}">Detalle</a>
-						&nbsp;&nbsp;&nbsp;&nbsp; <c:if
-							test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">
-							<a href="modificarHuesped?idHuesped=${huesped.idHuesped}">Modificar</a> &nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="eliminarHuesped?idHuesped=${huesped.idHuesped}">Eliminar</a>
+					<td><a href="detalleHuesped?idHuesped=${huesped.idHuesped}">Ver</a>
+					 <c:if test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">
+							<a href="modificarHuesped?idHuesped=${huesped.idHuesped}">Editar</a> 
+							<a href="eliminarHuesped?idHuesped=${huesped.idHuesped}">Eliminar</a>
 						</c:if></td>
 				</tr>
 
@@ -101,7 +99,7 @@
 
 
 
-	</div>
+
 
 	<div class="error">
 		<!-- recupera de la request el mensaje de error que hemos almacenado -->

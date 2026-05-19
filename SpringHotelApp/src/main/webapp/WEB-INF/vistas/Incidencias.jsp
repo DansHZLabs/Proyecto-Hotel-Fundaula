@@ -28,6 +28,16 @@
     color: #D93D2E;
 }
 
+.cabecera {	
+	background-color: #D18400;
+}
+
+
+.sub-cabecera {
+	
+	background-color: #CCFFFF;
+}
+
 table {
     background-color: white;
     border-collapse: collapse;
@@ -50,7 +60,7 @@ th, td {
 <br><!-- espacio en blanco, deja una línea -->
 
 <table border="1"><!-- tabla con borde, tr son las filas y td las columnas,th es la cabecera de cada columna -->
-    <tr>
+    <tr class="cabecera">
         <th>ID de la incidencia</th>
         <th>Número de la Habitación</th>
         <th>Estado de la incidencia</th>
@@ -61,7 +71,7 @@ th, td {
         <th>Acciones</th>
     </tr>
     <c:forEach var="incidencia" items="${incidencias}"><!-- recorre la list y cada objeto de incidencia es una incidencia -->
-        <tr>
+        <tr class="sub-cabecera">
             <td>${incidencia.idIncidencia}</td><!-- $expresion languages para llamar y traerse algo como un get -->
             <td>${incidencia.habitacion.numeroHabitacion}</td>
             <td>${incidencia.estadoIncidencia}</td>

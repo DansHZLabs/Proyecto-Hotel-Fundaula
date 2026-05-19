@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!-- librería jstl para formatear fechas -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
-<p style="color:red">${error}</p><!-- el error si no se completan los campos -->
+
 
 <html>
 <head>
@@ -33,9 +33,19 @@
 }
 
 .input-formulario {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+  	width: 100%;           
+	margin-top: 5px;       
+	margin-bottom: 18px;   
+	padding: 8px;          
+	box-sizing: border-box;
+}
+
+.enlace-volver {
+
+	display: block;
+	text-align: center;
+	margin-top: 20px;
+
 }
 
 .boton-formulario {
@@ -69,7 +79,7 @@
        			 <option value="${habitacion.idHabitacion}"<c:if test="${incidencia.habitacion != null&& habitacion.idHabitacion == incidencia.habitacion.idHabitacion}">selected</c:if>>${habitacion.numeroHabitacion}</option>
     		 </c:forEach>
 		</select>
-    <br>
+   
 
     <label>Estado de la incidencia:</label>
     <form:select class="input-formulario" path="estadoIncidencia">
@@ -77,7 +87,7 @@
     <form:option value="EN_CURSO">en curso</form:option>
     <form:option value="CERRADA">cerrada</form:option>
 </form:select>
-    <br>
+    
 
     <label>Prioridad de la incidencia:</label>
     <form:select class="input-formulario" path="prioridadIncidencia">
@@ -85,15 +95,15 @@
     <form:option value="MEDIA">media</form:option>
     <form:option value="ALTA">alta</form:option>
 </form:select>
-    <br>
+    
 
     <label>Descripción de la incidencia:</label>
    <form:input class="input-formulario" path="descripcionIncidencia"/>
-    <br>
+    
 
     <label>Fecha apertura:</label>
 	<form:input path="fechaApertura" class="input-formulario" type="date"/>
-	<br>
+	
 
     <label>Fecha cierre:</label>
 	<form:input path="fechaCierre" class="input-formulario" type="date"/>
@@ -106,10 +116,12 @@
 	    </c:choose>
 	</button>
 </form:form>
-</div>
-<br>
 
-<a href="${pageContext.request.contextPath}/incidencias">Volver</a><!-- botón volver para cambiar de vista al listado-->
+<p style="color:red">${error}</p><!-- el error si no se completan los campos -->
+
+<a href="${pageContext.request.contextPath}/incidencias" class="enlace-volver">Volver</a><!-- botón volver para cambiar de vista al listado-->
+
+</div>
 
 </body>
 </html>

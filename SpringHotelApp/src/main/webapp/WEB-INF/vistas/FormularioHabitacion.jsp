@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!-- librería jstl -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
-<p style="color:red">${error}</p><!-- el error si no se completan los campos -->
+
 
 <html>
 <head>
@@ -31,12 +31,22 @@
     width: 100%;
 }
 
+
 .input-formulario {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+ 	width: 100%;           
+	margin-top: 5px;       
+	margin-bottom: 18px;   
+	padding: 8px;          
+	box-sizing: border-box;
 }
 
+.enlace-volver {
+
+	display: block;
+	text-align: center;
+	margin-top: 20px;
+
+}
 .boton-formulario {
     display: block;
     margin: 55px auto;
@@ -66,37 +76,37 @@
 
     <input type="hidden" name="idHabitacion" value="${habitacion.idHabitacion}"><!-- guarda el id para actualizar pero no lo enseña y así sabe cuál es -->
 
-    <label>Número:</label><!-- aquí hay que poner lo que es el hueco de cada campo que hay que rellenar -->
+    <label>Número de la habitación:</label><!-- aquí hay que poner lo que es el hueco de cada campo que hay que rellenar -->
     <input type="text" name="numeroHabitacion" class="input-formulario" value="${habitacion.numeroHabitacion}">
-    <br>
+    
 
-    <label>Tipo:</label>
+    <label>Tipo de la habitación:</label>
     <select name="tipo" class="input-formulario">
         <option value="INDIVIDUAL">Individual</option>
         <option value="DOBLE">Doble</option>
         <option value="SUITE">Suite</option>
     </select>
-    <br>
+    
 
-    <label>Precio:</label>
+    <label>Precio de la habitación:</label>
     <input type="text" name="precioPorNoche" class="input-formulario" value="${habitacion.precioPorNoche}">
-    <br>
+    
 
-    <label>Disponibilidad:</label>
+    <label>Disponibilidad de la habitación:</label>
     <select name="disponibilidad" class="input-formulario">
         <option value="DISPONIBLE">disponible</option>
         <option value="OCUPADA">ocupada</option>
         <option value="LIMPIEZA">limpieza</option>
         <option value="MANTENIMIENTO">mantenimiento</option>
     </select>
-    <br>
+    
 
-    <label>Orientación:</label>
+    <label>Orientación de la habitación:</label>
     <select name="orientacionHabitacion" class="input-formulario">
         <option value="INTERIOR">Interior</option>
         <option value="EXTERIOR">Exterior</option>
     </select>
-    <br>
+    
 
     <button type="submit" class="boton-formulario">
         <c:choose>
@@ -109,10 +119,12 @@
         </c:choose>
     </button>
 </form>
-</div>
-<br>
 
-<a href="${pageContext.request.contextPath}/habitaciones">Volver</a>
+<p style="color:red">${error}</p><!-- el error si no se completan los campos -->
+
+<a href="${pageContext.request.contextPath}/habitaciones" class="enlace-volver">Volver</a>
+
+</div>
 
 </body>
 </html>

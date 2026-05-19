@@ -40,11 +40,6 @@
     box-sizing: border-box;
 }
 
-.boton-volver {
-    display: block;
-    margin-top: 30px;
-    text-align: center;
-}
 
 </style>
 

@@ -4,6 +4,14 @@
 
 <html>
 <head>
+
+
+<!-- Etiquetas para caracteres y diseno responsivo -->
+
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
     <title>Habitaciones</title> <!-- título de la pestaña del navegador -->
     <style type="text/css">
 
@@ -13,6 +21,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+
+.cabecera {	
+	background-color: #D18400;
+}
+
+
+.sub-cabecera {
+	
+	background-color: #CCFFFF;
 }
 
 .titulo-principal {
@@ -50,7 +69,7 @@ th, td {
 <br><!-- espacio en blanco, deja una línea -->
 
 <table border="1"><!-- tabla con borde, tr son las filas y td las columnas,th es la cabecera de cada columna -->
-    <tr>
+    <tr class="cabecera">
         <th>Id de la habitacion</th>
         <th>Número de la habitación</th>
         <th>Tipo de la habitación</th>
@@ -60,7 +79,7 @@ th, td {
         <th>Acciones</th>
     </tr>
     <c:forEach var="habitacion" items="${habitaciones}"><!-- recorre la list y cada objeto de habitación es una habitación -->
-        <tr>
+        <tr class="sub-cabecera">
             <td>${habitacion.idHabitacion}</td><!-- $expresion languages para llamar y traerse algo como un get -->
             <td>${habitacion.numeroHabitacion}</td>
             <td>${habitacion.tipo}</td>
