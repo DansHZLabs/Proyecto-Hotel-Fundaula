@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import es.accenture.entity.Reserva;
 import es.accenture.exceptions.BuscarException;
 import es.accenture.exceptions.EliminarException;
-import es.accenture.interfaces.IReservaService;
+import es.accenture.interfaces.IReservasService;
 
 @Controller //Anotación que le dice a Spring que esta clase es un controller
 @RequestMapping("/reservas") //Anotación que asigna una url al controller, es la ruta general y luego se especifica con getmapping para donde va
 public class ReservasController {
 	
-	private IReservaService reservaService;
+	private IReservasService reservaService;
 
 	@Autowired // inyección en el constructor
-	public ReservasController(IReservaService reservaService) {
+	public ReservasController(IReservasService reservaService) {
 	    this.reservaService = reservaService;
 	}
 	

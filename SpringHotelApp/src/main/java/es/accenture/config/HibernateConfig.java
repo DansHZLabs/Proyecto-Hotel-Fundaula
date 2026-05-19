@@ -20,8 +20,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @PropertySource("classpath:application.properties") // Anotación para cargar el properties
 public class HibernateConfig {
 
-    @Autowired //Anotación para la injection de dependencias para leer el application properties
-    private Environment env;
+    //Intyeccion por constructor
+    private final Environment env;
+    
+    @Autowired 
+    public HibernateConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean // Bean para crear la conexión con BBDD y mapea las entidades
     public DataSource dataSource() {
