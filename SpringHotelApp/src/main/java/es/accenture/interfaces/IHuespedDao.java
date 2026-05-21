@@ -48,7 +48,7 @@ public interface IHuespedDao {
 	 * 
 	 * @param idHuesped (identificador del huesped a eliminar)
 	 */
-	void eliminarHuesped(int idHuesped);
+	void eliminarHuesped(int idHuesped) throws HuespedException;
 
 	/**
 	 * Metodo que guarda un nuevo Huesped en la BBDD con los datos que le asignemos

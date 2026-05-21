@@ -85,11 +85,18 @@ public class HuespedDao implements IHuespedDao {
 	
 	@Transactional // Etiqueta de Spring para crear y cerrar de forma automatica las Transacciones (se crea la SessionFactory, se abre una sesion y se inicia la transaccion)
 	@Override // Se implementa el metodo de la interfaz IHuespedDao
-	public void eliminarHuesped(int idHuesped) {
+	public void eliminarHuesped(int idHuesped) throws HuespedException {
 
 		/* el id de huesped se obtiene al clicar en la palabra 'eliminar' en la fila
 		 correpondiente de la tabla de la vista 'Huespedes.jsp' */
-		Huesped huesped = mySessionFactory.getCurrentSession().get(Huesped.class, idHuesped);		
+		Huesped huesped = mySessionFactory.getCurrentSession().get(Huesped.class, idHuesped);
+		
+		List<Reserva> listaReservas = huesped.getReservas();
+		
+		if(!listaReservas.isEmpty()) {
+			
+			throw new HuespedException(HuespedException.EliminarException);		
+		}
 
 			mySessionFactory.getCurrentSession().delete(huesped);		
 			

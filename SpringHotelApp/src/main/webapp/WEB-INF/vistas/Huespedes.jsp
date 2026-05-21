@@ -67,7 +67,7 @@ th, td {
 
 	<c:if
 		test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">		
-		<a href="huespedes/nuevo">Nuevo huesped</a> <!-- Al pulsar sobre el boton se envia la accion de Login definida para el formulario -->
+		<a href="${pageContext.request.contextPath}/huespedes/nuevo">Nuevo huesped</a> <!-- Al pulsar sobre el boton se envia la accion de Login definida para el formulario -->
 	</c:if>
 
 	<br>
@@ -86,10 +86,10 @@ th, td {
 					<td>${huesped.idHuesped}</td>
 					<td>${huesped.nombre}</td>
 					<td>${huesped.apellidos}</td>
-					<td><a href="huespedes/detalle?idHuesped=${huesped.idHuesped}">Ver</a>
+					<td><a href="${pageContext.request.contextPath}/huespedes/detalle?idHuesped=${huesped.idHuesped}">Ver</a>
 					 <c:if test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">
-							<a href="huespedes/editar?idHuesped=${huesped.idHuesped}">Editar</a> 
-							<a href="huespedes/eliminar?idHuesped=${huesped.idHuesped}">Eliminar</a>
+							<a href="${pageContext.request.contextPath}/huespedes/editar?idHuesped=${huesped.idHuesped}">Editar</a> 
+							<a href="${pageContext.request.contextPath}/huespedes/eliminar?idHuesped=${huesped.idHuesped}">Eliminar</a>
 						</c:if></td>
 				</tr>
 
@@ -99,25 +99,10 @@ th, td {
 
 
 
+<p class="error">${errorEliminarHuesped}</p>
 
 
-	<div class="error">
-		<!-- recupera de la request el mensaje de error que hemos almacenado -->
-		<c:out value="${errorObtenerHuespedes}"></c:out>
-		<c:out value="${errorEliminarHuesped}"></c:out>
-		<c:out value="${errorActualizarHuesped}"></c:out>
-	</div>
-
-	<br>
-	<br>
-	<br>
-
-
-
-	<br>
-	<br>
-
-	<form:form action="vueltaPrincipal" method="get">
+	<form:form action="${pageContext.request.contextPath}/vueltaPrincipal" method="get">
 
 		<!-- Al pulsar sobre el boton se vuelve al controlador del menu principal que envia la vista jsp 'Principal' -->
 		<button type="submit">Vover al menu principal</button>

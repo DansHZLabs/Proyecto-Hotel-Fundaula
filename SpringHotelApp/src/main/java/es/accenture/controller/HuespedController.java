@@ -133,8 +133,9 @@ public class HuespedController {
 			
 		} catch(Exception e) {
 			
-			model.addAttribute("errorEliminarHuesped", e.getMessage()); 	
+			model.addAttribute("errorEliminarHuesped", e.getMessage()); 
 			
+			return obtenerHuespedes(model);		
 			
 			
 		} 			

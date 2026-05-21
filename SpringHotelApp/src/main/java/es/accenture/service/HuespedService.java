@@ -110,35 +110,21 @@ public class HuespedService implements IHuespedService {
 
 	}
 
-	@Transactional
+	
 	@Override
 	public void eliminarHuesped(int idHuesped) throws Exception {
-		// TODO PREGUNTAR JAVI poner excepcion si no encuentra ese usuario con ese id
-
-		Huesped huespedActual = huespedRepositorio.buscarHuesped(idHuesped);
-		
-		List<Reserva> listaReservas = huespedActual.getReservas();
-		
-		for(Reserva r : listaReservas) {
-				
-			if("PENDIENTE".equals(r.getEstadoReserva().name())) {
-				
-				throw new HuespedException(HuespedException.EliminarException);				
-				
-			}
-			
-		}
-		
+		// TODO PREGUNTAR JAVI poner excepcion si no encuentra ese usuario con ese id		
+					
 		//if (!listaReservas.isEmpty()) {
 			
 			//throw new HuespedException(HuespedException.EliminarException);
 	//	}
-		
-		
+				
 		huespedRepositorio.eliminarHuesped(idHuesped);
 
 	}
 
+	
 	@Override
 	public void guardarHuesped(Huesped huespedNuevo) throws Exception {
 		
