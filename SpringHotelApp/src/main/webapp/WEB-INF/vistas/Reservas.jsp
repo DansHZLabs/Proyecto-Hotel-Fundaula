@@ -67,10 +67,10 @@ th, td {
     <c:forEach var="reserva" items="${reservas}"><!-- recorre la list y cada objeto de reserva es una reserva -->
         <tr>
             <td>${reserva.idReserva}</td><!-- $expresion languages para llamar y traerse algo como un get -->
-            <td>${reserva.idHabitacion}</td>
+            <td>${reserva.habitacion.idHabitacion}</td>
             <td>${reserva.fechaEntrada}</td>
             <td>${reserva.fechaSalida}</td>
-            <td>${reserva.idHuesped}</td>
+            <td>${reserva.huesped.idHuesped}</td>
 			<td>${reserva.tipoPension}</td>
 			<td>${reserva.estadoReserva}</td>
 			<td>${reserva.numeroHuespedes}</td>

@@ -44,8 +44,8 @@ public class Huesped {
 	@Column(name = "email") // Anotacion que indica como se llama la columna que representa
 	private String email;
 	
-	//@OneToMany(mappedBy = "huespedes", fetch=FetchType.LAZY) // Anotacion para definir la relacion de uno a muchos (1 huesped puede tener muchas resercas)
-	//private List<Reserva> reservas; // Lista en la que se van a almacenar las reservas
+	@OneToMany(mappedBy = "huesped", fetch=FetchType.LAZY) // Anotacion para definir la relacion de uno a muchos (1 huesped puede tener muchas resercas)
+	private List<Reserva> reservas; // Lista en la que se van a almacenar las reservas
 
 	// CONSTRUCTOR VACIO (obligatorio)
 
@@ -177,17 +177,17 @@ public class Huesped {
 	 * 
 	 * @return
 	 */
-	/*public List<Reserva> getReservas() {
+	public List<Reserva> getReservas() {
 		return reservas;
-	}*/
+	}
 	
 	/**
 	 * 
 	 * @param reservas
 	 */
-	/*public void setReservas(List<Reserva> reservas) {
+	public void setReservas(List<Reserva> reservas) {
 		this.reservas = reservas;
-	}*/
+	}
 
 	
 	// METODO toString	

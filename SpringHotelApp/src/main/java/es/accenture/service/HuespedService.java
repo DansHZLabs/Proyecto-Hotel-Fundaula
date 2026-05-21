@@ -3,11 +3,13 @@ package es.accenture.service;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.accenture.entity.Huesped;
+import es.accenture.entity.Reserva;
 import es.accenture.exceptions.HuespedException;
 import es.accenture.interfaces.IHuespedDao;
 import es.accenture.interfaces.IHuespedService;
@@ -108,11 +110,30 @@ public class HuespedService implements IHuespedService {
 
 	}
 
+	@Transactional
 	@Override
-	public void eliminarHuesped(int idHuesped) {
+	public void eliminarHuesped(int idHuesped) throws Exception {
 		// TODO PREGUNTAR JAVI poner excepcion si no encuentra ese usuario con ese id
 
-		// TODO poner condicion con reservas de si existe alguna con
+		Huesped huespedActual = huespedRepositorio.buscarHuesped(idHuesped);
+		
+		List<Reserva> listaReservas = huespedActual.getReservas();
+		
+		for(Reserva r : listaReservas) {
+				
+			if("PENDIENTE".equals(r.getEstadoReserva().name())) {
+				
+				throw new HuespedException(HuespedException.EliminarException);				
+				
+			}
+			
+		}
+		
+		//if (!listaReservas.isEmpty()) {
+			
+			//throw new HuespedException(HuespedException.EliminarException);
+	//	}
+		
 		
 		huespedRepositorio.eliminarHuesped(idHuesped);
 

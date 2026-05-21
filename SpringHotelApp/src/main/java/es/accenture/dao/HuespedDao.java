@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mysql.cj.MysqlxSession;
 
+import es.accenture.entity.Reserva;
 import es.accenture.entity.Huesped;
 import es.accenture.exceptions.HuespedException;
 import es.accenture.interfaces.IHuespedDao;
@@ -90,22 +89,27 @@ public class HuespedDao implements IHuespedDao {
 
 		/* el id de huesped se obtiene al clicar en la palabra 'eliminar' en la fila
 		 correpondiente de la tabla de la vista 'Huespedes.jsp' */
-		Huesped huesped = mySessionFactory.getCurrentSession().get(Huesped.class, idHuesped);
+		Huesped huesped = mySessionFactory.getCurrentSession().get(Huesped.class, idHuesped);		
 
-		if (huesped != null) {
-
-			mySessionFactory.getCurrentSession().delete(huesped);
-			
-			
-			
-		
+			mySessionFactory.getCurrentSession().delete(huesped);		
 			
 			//TODO: PONER EXCEPCION NO SE PUEDA BORRAR ADEMAS DE SI ES NULL SI EN LA TABLA DE RESERVAS EL ENUM DEL ESTADO_RESERVA ES IGUAL A 'PENDIENTE' (SI SE PUEDE SE HACE AUTOMATICO POR EL ON DELETE CASCADE QUE PONDRE AL ORM DE HUESPED)
+				
 		
-		
-		} 
 	}
 
+	//@Transactional  // Etiqueta de Spring para crear y cerrar de forma automatica las Transacciones (se crea la SessionFactory, se abre una sesion y se inicia la transaccion)
+	//@Override // Se implementa el metodo de la interfaz IHuespedDao
+	//public List<Reserva> comprobarReservas(int idHuesped) {
+		
+		//return  mySessionFactory.getCurrentSession().createQuery("FROM Reserva r WHERE r.idHuesped = :idHuesped", Reserva.class)
+			//	.setParameter("idHuesped", idHuesped).getResultList();
+		
+	//}
+	
+	
+	
+	
 	
 	@Transactional // Etiqueta de Spring para crear y cerrar de forma automatica las Transacciones (se crea la SessionFactory, se abre una sesion y se inicia la transaccion)
 	@Override // Se implementa el metodo de la interfaz IHuespedDao

@@ -47,7 +47,7 @@ public interface IHuespedService {
 	 * Metodo que elimina un determinado huesped de la BBDD
 	 * @param idHuesped (este identificador viaja en el objeto Model de la request)
 	 */
-	void eliminarHuesped (int idHuesped);
+	void eliminarHuesped (int idHuesped) throws Exception;
 	
 	
 	/**
