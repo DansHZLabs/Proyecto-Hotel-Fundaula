@@ -8,7 +8,7 @@
 
 
     <title>Incidencias</title><!-- título de la pestaña del navegador -->
-    <style type="text/css">
+    <style>
 
 .fondo {
     background-color: #E8B0E8;

@@ -51,7 +51,7 @@ public class IncidenciaService implements IIncidenciaService {
 	public void actualizarIncidencia(Incidencia incidencia)throws ActualizarException {
 		// TODO Auto-generated method stub
     	
-    	if(incidencia==null){throw new ActualizarException("Error al actualizar la incidencia");}//si no hay incidencia lanzar excepción
+    	if(incidencia==null||incidencia.getFechaApertura()==null){throw new ActualizarException("Error al actualizar la incidencia");}//si no hay incidencia lanzar excepción
 		
     	incidenciaDao.actualizarIncidencia(incidencia); //aquí se llama a dao para actualizar en la bbdd
 	}
