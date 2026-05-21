@@ -20,7 +20,7 @@ import es.accenture.interfaces.IHabitacionService;
 import es.accenture.interfaces.IHuespedService;
 import es.accenture.interfaces.IReservasService;
 
-@Controller //Anotación que le dice a Spring que esta clase es un controller
+@Controller
 @RequestMapping("/reservas") //Anotación que asigna una url al controller, es la ruta general y luego se especifica con getmapping para donde va
 public class ReservasController {
 	
@@ -30,7 +30,7 @@ public class ReservasController {
 	
 	private IHuespedService huespedService;
 
-	@Autowired // inyección en el constructor
+	@Autowired
 	public ReservasController(IReservasService reservaService, IHabitacionService habitacionService, IHuespedService huespedService) {
 	    this.reservaService = reservaService;
 	    this.habitacionService = habitacionService;
@@ -38,28 +38,28 @@ public class ReservasController {
 	}
 	
 	
-    @GetMapping //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en reservas, se ejecuta el método listarReservas, va al service, de ahí al dao, lo saca de bbdd, lo guarda en la lista y devuelve la vista reservas con el listado
+    @GetMapping //Anotación que dice cuál es la url de entrada
     public String obtenerReservas(Model model) {
 
-        List<Reserva>reservas=reservaService.buscarReservas(); //llama al service de ahí al dao y a bbdd y lo guarda en la lista reservas
+        List<Reserva>reservas=reservaService.buscarReservas();
 
-        model.addAttribute("reservas",reservas); //model es la caja que guarda la lista reservas en model con el nombre reservas
+        model.addAttribute("reservas",reservas);
 
-        return "Reservas"; //devuelve la vista jsp de reservas y muestra el listado
+        return "Reservas";
         
     }
 	
     // método para ver el detalle de una reserva
-    @GetMapping("/detalle") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "reserva" y devuelve la vista detalleReserva
-    public String detalleReserva(@RequestParam int idReserva,Model model) { //se pone RequestParam para ocultar la url por contraseñas, así no usamos REST con PathVariable
+    @GetMapping("/detalle") //Anotación que dice cuál es la url de entrada
+    public String detalleReserva(@RequestParam int idReserva,Model model) {
     	
     	try {
     		
-        Reserva reserva=reservaService.buscarReservaPorId(idReserva); //obtiene una reserva por su Id a través del service
+        Reserva reserva=reservaService.buscarReservaPorId(idReserva);
 
-        model.addAttribute("reserva",reserva); //model es la caja que guarda el objeto reserva en model con el nombre reserva
+        model.addAttribute("reserva",reserva);
 
-        return "DetalleReserva"; //devuelve la jsp de detalle
+        return "DetalleReserva";
         
     }catch(BuscarException e) {
     	
@@ -108,35 +108,29 @@ public class ReservasController {
 			return "Reservas";
 		}
 		
-		}
-	
-    
-    
-    
-    
+		}   
 
     // método para eliminar reserva de bbdd
-    @GetMapping("/eliminar") //Anotación que dice cuál es la url de entrada que coge el método, cuándo alguien pinche en eliminar se ejecuta el método eliminarReserva, ejecuta el método del service y lo borra de bbdd a través del dao, luego redirige a la jsp reservas y muestra el listado
+    @GetMapping("/eliminar") //Anotación que dice cuál es la url de entrada
     public String eliminarReserva(@RequestParam int idReserva,Model model) {
     	
     	try {
     		
-    		reservaService.eliminarReserva(idReserva); // borra de bbdd a través del service
+    		reservaService.eliminarReserva(idReserva);
     	
     	}catch(EliminarException | BuscarException e){
     		
-    		model.addAttribute("error",e.getMessage()); //crea la caja model donde se añade el error que recupera el mensaje de la excepción
+    		model.addAttribute("error",e.getMessage());
     		
-    		model.addAttribute("reservas",reservaService.buscarReservas()); //se vuelve a cargar la lista de reservas porque sino al salir el mensaje en rojo no aparece
+    		model.addAttribute("reservas",reservaService.buscarReservas());
 
-    		return "Reservas"; //vuelve a la jsp reservas
+    		return "Reservas";
     		
     	}
     		
-        return "redirect:/reservas"; // Redirige a la jsp reservas y muestra el listado si todo sale bien
+        return "redirect:/reservas";
         
     }
-    
     
 	/**
 	 * Metodo
@@ -172,7 +166,6 @@ public class ReservasController {
 		return "FormularioReserva";		
 		
 	}
-	
     
 	/**
 	 * Metodo

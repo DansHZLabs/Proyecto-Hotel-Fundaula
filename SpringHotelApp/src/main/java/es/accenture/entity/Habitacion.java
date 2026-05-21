@@ -1,7 +1,6 @@
 
-package es.accenture.entity;             //Esta ya está terminada, falta poner la relación con incidencia
-										 //habrá que poner @OneToMany(mappedBy="habitacion" //Relación 1:N con incidencia encima de private List<Incidencia>incidencias; y sus imports y luego comprobar y en incidencia meter la suya que manda sobre ella, no poner cascade por las reglas sde negocio
-										 //dudas sintaxis video de hibernate de clase hasta el minuto 10 viene casi todo
+package es.accenture.entity;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -16,64 +15,56 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Entity //Anotación para representar una tabla en la BBDD
-@Table(name="habitaciones") //Anotación que indica cómo se llama la tabla que representa
+@Entity
+@Table(name="habitaciones")
 public class Habitacion {
 
-	//clase interna para crear los enum y poner las opciones que se quiere establecer
     public enum Tipo {
         INDIVIDUAL,DOBLE,SUITE
     }
 
-    //clase interna para crear los enum y poner las opciones que se quiere establecer
     public enum Disponibilidad {
         DISPONIBLE,OCUPADA,LIMPIEZA,MANTENIMIENTO
     }
     
-    //clase interna para crear los enum y poner las opciones que se quiere establecer
     public enum Orientacion {
     	INTERIOR,EXTERIOR
     }
 
-    @Id //clave primaria INT
-    @GeneratedValue(strategy=GenerationType.IDENTITY)//Anotación para generar automáticamente el ID en la base de datos (AUTO_INCREMENT)
-    @Column(name="id_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido aunque al ser PK nullable=false no haría falta INT
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id_habitacion",nullable=false)
     private int idHabitacion;
 
-    @Column(name="numero_habitacion",nullable=false,unique=true) //Anotación que indica cómo se llama la tabla que representa y que es requerido INT
+    @Column(name="numero_habitacion",nullable=false,unique=true)
     private String numeroHabitacion;
 
-    @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
-    @Column(name="tipo_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido ENUM
+    @Enumerated(EnumType.STRING)
+    @Column(name="tipo_habitacion",nullable=false)
     private Tipo tipo;
 
-    @Column(name="precio_noche",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido DECIMAL(7,2)
+    @Column(name="precio_noche",nullable=false)
     private BigDecimal precioPorNoche;
 
-    @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
-    @Column(name="disponibilidad_habitacion",nullable=false) //Anotación que indica cómo se llama la tabla que representa y que es requerido ENUM
+    @Enumerated(EnumType.STRING)
+    @Column(name="disponibilidad_habitacion",nullable=false)
     private Disponibilidad disponibilidad;
 
-    @Enumerated(EnumType.STRING) //Anotación para los enum, le dice a bbdd que son strings
-    @Column(name="orientacion_habitacion")//Anotación que indica cómo se llama la tabla que representa ENUM
+    @Enumerated(EnumType.STRING)
+    @Column(name="orientacion_habitacion")
     private Orientacion orientacionHabitacion;
     
-    @OneToMany(mappedBy="habitacion",fetch=FetchType.LAZY)//Anotación para la relación 1N con incidencia, 1 habitación puede tener muchas incidencias y Lazy porque se dan datos bajo demanda, se cambia a EAGER porque con Lazy
-    														//al borrar por ejemplo no carga las incidencias porque ya está cerrada la conexión, se vuelve a quitar porque no se pueden poner 2 eager a la vez, mirarlo cuando
-    														//haga reservas todo junto
-    													    //sin Cascade para propagar el CRUD de lo que se haga en habitación a incidencias porque nos rompe la lógica de negocio    
-    private List<Incidencia>incidencias; //lista donde se guardan las incidencias
+    @OneToMany(mappedBy="habitacion",fetch=FetchType.LAZY)  
+    private List<Incidencia>incidencias;
     
-    @OneToMany(mappedBy = "habitacion",fetch=FetchType.LAZY)//Anotación para la relación 1N con reserva, 1 habitación puede tener muchas reservas y Lazy porque se dan datos bajo demanda, se cambia a EAGER porque con Lazy
-															 //al borrar por ejemplo no carga las incidencias porque ya está cerrada la conexión, se vuelve a quitar porque no se pueden poner 2 eager a la vez, mirarlo cuando
-    														 //haga reservas todo junto
-    private List<Reserva> reservas; //lista donde se guardan las reservas
+    @OneToMany(mappedBy = "habitacion",fetch=FetchType.LAZY)
+    private List<Reserva> reservas;
     
-    // Constructor vacío (es obligatorio)
+    // Constructor vacío
     public Habitacion() {
     }
 
-    // Constructor con parámetros (buena práctica, el id no se mete porque es autoincrement)
+    // Constructor con parámetros
     public Habitacion(String numeroHabitacion, Tipo tipo,
                       BigDecimal precioPorNoche, Disponibilidad disponibilidad,
                       Orientacion orientacionHabitacion) {

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> <!-- esta vista es para probar luego hay que cambiarla, buscar en las plantillas de las tiendas a ver si alguna encaja -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!-- librería jstl -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
@@ -62,7 +62,7 @@ th, td {
 </c:if>
 <br><!-- espacio en blanco, deja una línea -->
 
-<table border="1"><!-- tabla con borde, tr son las filas y td las columnas,th es la cabecera de cada columna -->
+<table border="1">
     <tr class="cabecera">
         <th>ID de la incidencia</th>
         <th>Número de la Habitación</th>
@@ -82,7 +82,7 @@ th, td {
             <td>${incidencia.descripcionIncidencia}</td>
             <td>${incidencia.fechaApertura}</td>
             <td>${incidencia.fechaCierre}</td>
-            <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
+            <td>
                 <a href="${pageContext.request.contextPath}/incidencias/detalle?id=${incidencia.idIncidencia}">Ver</a>
                 <c:if test="${sessionScope.usuarioLogueado.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
                 <a href="${pageContext.request.contextPath}/incidencias/editar?id=${incidencia.idIncidencia}">Editar</a>

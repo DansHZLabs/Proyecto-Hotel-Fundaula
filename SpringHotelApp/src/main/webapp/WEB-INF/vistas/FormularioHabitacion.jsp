@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> <!-- se pueden poner br muchas encadenadas y así se deja más hueco -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!-- librería jstl -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
@@ -61,7 +61,7 @@
 <body class="fondo">
 <h2 class="titulo-principal">Formulario Habitación</h2>
 
-<h1><!-- para cambiar entre guardar y editar --><!-- aquí no se llega según el rol porque ya se ocultó la opción en la lista-->
+<h1><!-- para cambiar entre guardar y editar -->
     <c:choose>
         <c:when test="${habitacion.idHabitacion != 0}">
             Editar Habitación
@@ -73,11 +73,11 @@
 </h1>
 
 <div class="contenedor-formulario">
-<form action="${pageContext.request.contextPath}/habitaciones/guardar" method="post"><!-- formulario para actualizar manda los datos al controller -->
+<form action="${pageContext.request.contextPath}/habitaciones/guardar" method="post">
 
-    <input type="hidden" name="idHabitacion" value="${habitacion.idHabitacion}"><!-- guarda el id para actualizar pero no lo enseña y así sabe cuál es -->
+    <input type="hidden" name="idHabitacion" value="${habitacion.idHabitacion}">
 
-    <label>Número de la habitación:</label><!-- aquí hay que poner lo que es el hueco de cada campo que hay que rellenar -->
+    <label>Número de la habitación:</label>
     <input type="text" name="numeroHabitacion" class="input-formulario" value="${habitacion.numeroHabitacion}">
     
 

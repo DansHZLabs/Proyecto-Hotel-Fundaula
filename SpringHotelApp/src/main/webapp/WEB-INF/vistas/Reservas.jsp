@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> <!-- esta vista es para probar luego hay que cambiarla -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- librería jstl -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
-<!-- es igual todo que habitación, solo hay que cambiar nombres -->
+
 <html>
 <head>
     <title>Reservas</title> <!-- título de la pestaña del navegador -->
@@ -61,7 +61,7 @@ th, td {
 </c:if>
 <br><!-- espacio en blanco, deja una línea -->
 
-<table border="1"><!-- tabla con borde, tr son las filas y td las columnas,th es la cabecera de cada columna -->
+<table border="1">
     <tr class="cabecera">
         <th>Id de la reserva</th>
         <th>Id de la habitación</th>
@@ -74,9 +74,9 @@ th, td {
         <th>Observaciones</th>
         <th>Acciones</th>
     </tr>
-    <c:forEach var="reserva" items="${reservas}"><!-- recorre la list y cada objeto de reserva es una reserva -->
+    <c:forEach var="reserva" items="${reservas}">
         <tr class="sub-cabecera">
-            <td>${reserva.idReserva}</td><!-- $expresion languages para llamar y traerse algo como un get -->
+            <td>${reserva.idReserva}</td>
             <td>${reserva.habitacion.idHabitacion}</td>
             <td>${reserva.fechaEntrada}</td>
             <td>${reserva.fechaSalida}</td>
@@ -85,7 +85,7 @@ th, td {
 			<td>${reserva.estadoReserva}</td>
 			<td>${reserva.numeroHuespedes}</td>
 			<td>${reserva.observaciones}</td>
-            <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
+            <td>
                 <a href="${pageContext.request.contextPath}/reservas/detalle?idReserva=${reserva.idReserva}">Ver</a>
                 <c:if test="${sessionScope.usuarioLogueado.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
                 <a href="${pageContext.request.contextPath}/reservas/editar?idReserva=${reserva.idReserva}">Editar</a>

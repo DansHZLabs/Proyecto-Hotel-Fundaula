@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> <!-- esta vista es para probar luego hay que cambiarla -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!-- librería jstl -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
 
@@ -68,7 +68,7 @@ th, td {
 </c:if>
 <br><!-- espacio en blanco, deja una línea -->
 
-<table border="1"><!-- tabla con borde, tr son las filas y td las columnas,th es la cabecera de cada columna -->
+<table border="1">
     <tr class="cabecera">
         <th>Id de la habitacion</th>
         <th>Número de la habitación</th>
@@ -78,7 +78,7 @@ th, td {
         <th>Orientación</th>
         <th>Acciones</th>
     </tr>
-    <c:forEach var="habitacion" items="${habitaciones}"><!-- recorre la list y cada objeto de habitación es una habitación -->
+    <c:forEach var="habitacion" items="${habitaciones}">
         <tr class="sub-cabecera">
             <td>${habitacion.idHabitacion}</td><!-- $expresion languages para llamar y traerse algo como un get -->
             <td>${habitacion.numeroHabitacion}</td>
@@ -86,7 +86,7 @@ th, td {
             <td>${habitacion.precioPorNoche}</td>
 			<td>${habitacion.disponibilidad}</td>
 			<td>${habitacion.orientacionHabitacion}</td>
-            <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
+            <td>
                 <a href="${pageContext.request.contextPath}/habitaciones/detalle?id=${habitacion.idHabitacion}">Ver</a>
          		<c:if test="${sessionScope.usuarioLogueado.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
                 <a href="${pageContext.request.contextPath}/habitaciones/editar?id=${habitacion.idHabitacion}">Editar</a>

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> <!-- se pueden poner br muchas encadenadas y así se deja más hueco -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!-- librería jstl -->
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!-- librería jstl para formatear fechas -->
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
@@ -62,7 +62,7 @@
 <body class="fondo">
 <h2 class="titulo-principal">Formulario Incidencia</h2>
 
-<h1><!-- para cambiar entre guardar y editar --><!-- aquí no se llega según el rol porque ya se ocultó la opción en la lista-->
+<h1><!-- para cambiar entre guardar y editar -->
     <c:choose>
         <c:when test="${incidencia.idIncidencia != 0}">Editar Incidencia</c:when>
         <c:otherwise>Nueva Incidencia</c:otherwise>
@@ -70,11 +70,11 @@
 </h1>
 
 <div class="contenedor-formulario">
-<form:form action="${pageContext.request.contextPath}/incidencias/guardar" method="post" modelAttribute="incidencia"><!-- formulario para actualizar manda los datos al controller -->
+<form:form action="${pageContext.request.contextPath}/incidencias/guardar" method="post" modelAttribute="incidencia">
 
-    <form:hidden path="idIncidencia"/><!-- guarda el id para actualizar pero no lo enseña y así sabe cuál es -->
+    <form:hidden path="idIncidencia"/>
 
-    <label>Número de la habitación:</label><!-- aquí hay que poner lo que es el hueco de cada campo que hay que rellenar -->
+    <label>Número de la habitación:</label>
 		<select name="habitacion.idHabitacion" class="input-formulario">
    			 <c:forEach var="habitacion" items="${habitaciones}">
        			 <option value="${habitacion.idHabitacion}"<c:if test="${incidencia.habitacion != null&& habitacion.idHabitacion == incidencia.habitacion.idHabitacion}">selected</c:if>>${habitacion.numeroHabitacion}</option>

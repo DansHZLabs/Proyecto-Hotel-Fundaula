@@ -24,34 +24,34 @@ import es.accenture.interfaces.IIncidenciaService;
 @RequestMapping("/incidencias") //Anotación que asigna una url al controller, es la ruta general y luego se especifica con getmapping para donde va
 public class IncidenciaController {
 
-	@Autowired //inyección de dependencias del service para no hacer new IIncidenciaService myIncidencia=new incidenciaService
+	@Autowired
 	private IIncidenciaService incidenciaService;
 
-	@Autowired //inyección de dependencias del service de habitaciones para no hacer new IHabitacionService myService=new habitacionService
+	@Autowired
 	private IHabitacionService habitacionService;
 
 	// método para listar incidencias
-	@GetMapping //Anotación que dice cuál es la url de entrada que coge el método como va también a /incidencias y ya está en la general del requestMapping no se pone porque sino quedaría /incidencias/incidencias y no estaría bien
+	@GetMapping //Anotación que dice cuál es la url de entrada
 	public String obtenerIncidencias(Model model) {
 
-		List<Incidencia>incidencias=incidenciaService.buscarTodasIncidencias(); //llama al service de ahí al dao y a bbdd y lo guarda en esta lista incidencias
+		List<Incidencia>incidencias=incidenciaService.buscarTodasIncidencias();
 
-		model.addAttribute("incidencias",incidencias); //model es la caja que guarda la lista incidencias en model con el nombre incidencias y luego desde la jsp se recoge con ${expresion language}
+		model.addAttribute("incidencias",incidencias); 
 
-		return "Incidencias"; //devuelve la vista jsp incidencias y muestra el listado
+		return "Incidencias"; 
 	}
 
 	// método para ver el detalle de una incidencia
-	@GetMapping("/detalle") //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en id se ejecuta el método verDetalle, hace la caja en model con "incidencia" y devuelve la vista detalleIncidencia
-	public String detalleIncidencia(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
+	@GetMapping("/detalle") //Anotación que dice cuál es la url de entrada
+	public String detalleIncidencia(@RequestParam int id,Model model) { 
 		
 		try {
 			
-		Incidencia incidencia=incidenciaService.buscarIncidenciaPorId(id); //obtiene una incidencia por su Id a través del service que la coge del dao que mira en bbdd
+		Incidencia incidencia=incidenciaService.buscarIncidenciaPorId(id); 
 
-		model.addAttribute("incidencia",incidencia); //model es la caja que guarda el objeto incidencia en model con el nombre incidencia, luego se recupera desde la jsp con ${expresion language}
+		model.addAttribute("incidencia",incidencia); 
 
-		return "DetalleIncidencia"; //devuelve la jsp de detalleIncidencia
+		return "DetalleIncidencia"; 
 		
 		}catch(BuscarException e) {
 			
@@ -66,26 +66,26 @@ public class IncidenciaController {
 	}
 	
 	// método para mostrar el formulario de alta
-	@GetMapping("/nueva") //Anotación que dice cuál es la url de entrada que coge el método, cuando alguien entre en nueva se ejecuta el método mostrarFormularioAlta, hace la caja en model con "habitaciones" y con "incidencias" que es la lista donde se guardan y lo muestra devolviendo la vista
+	@GetMapping("/nueva") //Anotación que dice cuál es la url de entrada
 	public String nuevaIncidencia(Model model) {
 
-		model.addAttribute("incidencia",new Incidencia()); //model es la caja que guarda un objeto creado nuevo de tipo incidencia en model con el nombre incidencia
+		model.addAttribute("incidencia",new Incidencia()); 
 
-		List<Habitacion>habitaciones=habitacionService.buscarHabitaciones(); //obtiene todas las habitaciones para mostrarlas en el select
+		List<Habitacion>habitaciones=habitacionService.buscarHabitaciones();
 
-		model.addAttribute("habitaciones",habitaciones); //guarda la lista habitaciones en model para usarla en el formulario
+		model.addAttribute("habitaciones",habitaciones); 
 
-		return "FormularioIncidencia"; //devuelve el jsp del formularioAltaIncidencia
+		return "FormularioIncidencia";
 	}
 
-	// método para guardar incidencia nueva //este se cambia y se mete para que compruebe si tiene incidencias la incidencia y sino (si sí tiene) un else para modificar
-	@PostMapping("/guardar") //Anotación que dice cuál es la url de entrada que coge el método guardarIncidencia
-	public String guardarIncidencia(@ModelAttribute Incidencia incidencia,Model model) { //ModelAtribute hace que Spring rellene automáticamente un objeto con los datos que vienen del formulario
+	// método para guardar incidencia nueva
+	@PostMapping("/guardar") //Anotación que dice cuál es la url de entrada
+	public String guardarIncidencia(@ModelAttribute Incidencia incidencia,Model model) {
 	
 	try {
 		if(incidencia.getIdIncidencia()!=0){
 					
-				incidenciaService.actualizarIncidencia(incidencia); //guarda en bbdd a través del service que las coge del dao que las guarda en bbdd
+				incidenciaService.actualizarIncidencia(incidencia);
 			
 		}else {
 			
@@ -106,25 +106,25 @@ public class IncidenciaController {
 			
 		}
 		
-		return "redirect:/incidencias"; // Redirige a la jsp incidencias y muestra el listado
+		return "redirect:/incidencias";
 		
 	}
 
 	// método para mostrar el formulario para editar
-	@GetMapping("/editar") //Anotación que dice cuál es la url de entrada que coge el método
-	public String editarIncidencia(@RequestParam int id,Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
+	@GetMapping("/editar") //Anotación que dice cuál es la url de entrada
+	public String editarIncidencia(@RequestParam int id,Model model) {
 
 		try {
 			
-		Incidencia incidencia=incidenciaService.buscarIncidenciaPorId(id); //obtiene una incidencia por su id a través del service,dao,bbdd
+		Incidencia incidencia=incidenciaService.buscarIncidenciaPorId(id);
 
-		model.addAttribute("incidencia",incidencia); //model es la caja que guarda el objeto incidencia en model con el nombre incidencia, luego desde la jsp se recoge con ${expression language}
+		model.addAttribute("incidencia",incidencia);
 
-		List<Habitacion>habitaciones=habitacionService.buscarHabitaciones(); //obtiene todas las habitaciones y las guarda en la lista habitaciones
+		List<Habitacion>habitaciones=habitacionService.buscarHabitaciones();
 
-		model.addAttribute("habitaciones",habitaciones); //guarda la lista habitaciones en model para usarla en el formulario, luego desde jsp se cogen con ${expresion languanges}
+		model.addAttribute("habitaciones",habitaciones);
 
-		return "FormularioIncidencia"; //devuelve la jsp formularioEditarIncidencia
+		return "FormularioIncidencia";
 		
 		}catch(BuscarException e) {
 			
@@ -138,50 +138,41 @@ public class IncidenciaController {
 		
 	}
 
-	// método para actualizar incidencia en bbdd //este método se borra y se meterá en guardar con una comprobación de si hay datos porque tienen que ir juntos en la jsp y sino no veo forma
-	//@PostMapping("/actualizar") //Anotación que dice cuál es la url de entrada que coge el método actualizarIncidencia
-	//public String actualizarIncidencia(@ModelAttribute Incidencia incidencia) { //ModelAtribute hace que Spring rellene automáticamente un objeto con los datos que vienen del formulario
-
-		//incidenciaService.modificarIncidencia(incidencia); //modifica una incidencia a través del service,dao,bbdd
-
-		//return "redirect:/incidencias"; // Redirige a la jsp incidencias y muestra el listado de incidencias
-	//}
-
 	// método para eliminar incidencia de bbdd
-	@GetMapping("/eliminar") //Anotación que dice cuál es la url de entrada que coge el método
-	public String eliminarIncidencia(@RequestParam int id,Model model){ //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidencias/4 si se cambia el valor de id por ejemplo REST
+	@GetMapping("/eliminar") //Anotación que dice cuál es la url de entrada
+	public String eliminarIncidencia(@RequestParam int id,Model model){
 
 		try {
 
-			incidenciaService.eliminarIncidencia(id); // borra de bbdd a través del service,dao,bbdd
+			incidenciaService.eliminarIncidencia(id);
 
 		}catch(EliminarException |BuscarException e){
 
-			model.addAttribute("error",e.getMessage()); //crea la caja model, ahí se añade el error que recupera el mensaje de la excepción
+			model.addAttribute("error",e.getMessage());
 
 			model.addAttribute("incidencias",incidenciaService.buscarTodasIncidencias()); //se vuelve a cargar la lista de incidencias porque sino al salir el mensaje en rojo no aparece
 
-			return "Incidencias"; //vuelve a la jsp incidencias y la muestra
+			return "Incidencias";
 		}
 
-		return "redirect:/incidencias"; // Redirige a la jsp incidencias y muestra el listado si todo sale bien
+		return "redirect:/incidencias";
 	}
 
 	// método para obtener incidencias por el id de una habitación
-	@GetMapping("/habitacion") //Anotación que dice cuál es la url de entrada que coge el método
-	public String obtenerIncidenciasPorHabitacion(@RequestParam int idHabitacion, Model model) { //PathVariable es la anotación que recoge un valor que viene dentro de la url como incidencias/5 o incidenciass/4 si se cambia el valor de id por ejemplo REST
+	@GetMapping("/habitacion") //Anotación que dice cuál es la url de entrada
+	public String obtenerIncidenciasPorHabitacion(@RequestParam int idHabitacion, Model model) {
 		
 		try {
 			
-		List<Incidencia>incidencias=incidenciaService.buscarIncidenciasPorIdHabitacion(idHabitacion); //obtiene las incidencias de una habitación y las guarda en la lista incidencias
+		List<Incidencia>incidencias=incidenciaService.buscarIncidenciasPorIdHabitacion(idHabitacion);
 
-		Habitacion habitacion=habitacionService.buscarHabitacionPorId(idHabitacion); //obtiene la habitación por su id y la guarda en habitacion, service,dao,bbdd
+		Habitacion habitacion=habitacionService.buscarHabitacionPorId(idHabitacion);
 
-		model.addAttribute("incidencias",incidencias); //guarda la lista incidencias en model, luego se cogerán en jsp con ${expresion language}
+		model.addAttribute("incidencias",incidencias);
 
-		model.addAttribute("habitacion",habitacion); //guarda la habitación en model, luego se cogerán en jsp con ${expresion language}
+		model.addAttribute("habitacion",habitacion);
 
-		return "Incidencias"; //devuelve la jsp incidencias y muestra las de esa habitación
+		return "Incidencias";
 		
 		}catch (BuscarException e) {
 			
