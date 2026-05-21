@@ -83,9 +83,9 @@
 
     <label>Tipo de la habitación:</label>
     <select name="tipo" class="input-formulario">
-        <option value="INDIVIDUAL">Individual</option>
-        <option value="DOBLE">Doble</option>
-        <option value="SUITE">Suite</option>
+        <option value="INDIVIDUAL" <c:if test="${habitacion.tipo == 'INDIVIDUAL'}">selected</c:if>>Individual</option>
+        <option value="DOBLE"<c:if test="${habitacion.tipo == 'DOBLE'}">selected</c:if>>Doble</option>
+        <option value="SUITE"<c:if test="${habitacion.tipo == 'SUITE'}">selected</c:if>>Suite</option>
     </select>
     
 
@@ -95,17 +95,17 @@
 
     <label>Disponibilidad de la habitación:</label>
     <select name="disponibilidad" class="input-formulario">
-        <option value="DISPONIBLE">disponible</option>
-        <option value="OCUPADA">ocupada</option>
-        <option value="LIMPIEZA">limpieza</option>
-        <option value="MANTENIMIENTO">mantenimiento</option>
+        <option value="DISPONIBLE"<c:if test="${habitacion.disponibilidad == 'DISPONIBLE'}">selected</c:if>>disponible</option>
+        <option value="OCUPADA" <c:if test="${habitacion.disponibilidad == 'OCUPADA'}">selected</c:if>>ocupada</option>
+        <option value="LIMPIEZA" <c:if test="${habitacion.disponibilidad == 'LIMPIEZA'}">selected</c:if>>limpieza</option>
+        <option value="MANTENIMIENTO" <c:if test="${habitacion.disponibilidad == 'MANTENIMIENTO'}">selected</c:if>>mantenimiento</option>
     </select>
     
 
     <label>Orientación de la habitación:</label>
     <select name="orientacionHabitacion" class="input-formulario">
-        <option value="INTERIOR">Interior</option>
-        <option value="EXTERIOR">Exterior</option>
+        <option value="INTERIOR" <c:if test="${habitacion.orientacionHabitacion == 'INTERIOR'}">selected</c:if>>Interior</option>
+        <option value="EXTERIOR" <c:if test="${habitacion.orientacionHabitacion == 'EXTERIOR'}">selected</c:if>>Exterior</option>
     </select>
     
 	<p style="color:red; text-align:center">${error}</p><!-- el error si no se completan los campos -->
