@@ -78,7 +78,7 @@ public class ReservasService implements IReservasService{
     	}
     	
     	//para los 3 estados
-    	if (reserva.getEstadoReserva()==Reserva.EstadoReserva.PENDIENTE||reserva.getEstadoReserva()==Reserva.EstadoReserva.CONFIRMADA||reserva.getEstadoReserva()==Reserva.EstadoReserva.CANCELADA) { //se comprueba que no tenga esos estados
+    	if (reserva.getEstadoReserva()!=Reserva.EstadoReserva.CANCELADA) { //se comprueba que no tenga esos estados
 
             throw new EliminarException("La reserva no se puede eliminar");
         }

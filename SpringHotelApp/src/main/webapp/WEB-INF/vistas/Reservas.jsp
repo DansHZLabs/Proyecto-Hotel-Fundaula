@@ -23,6 +23,16 @@
     text-align: center;
 }
 
+.cabecera {	
+	background-color: #D18400;
+}
+
+
+.sub-cabecera {
+	
+	background-color: #CCFFFF;
+}
+
 .error {
     text-align: center;
     color: #D93D2E;
@@ -44,15 +54,15 @@ th, td {
 
 <h1 class="titulo-principal">Lista de Reservas</h1><!-- título, se puede cambiar el tamaño poniendo h2 o h3 o lo que sea -->
 
-<p class="error">${error}</p> <!-- error al borrar habitación, cambia solo el mensaje porque enlaza al error y muestra el texto que sea -->
 
-<c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
-    <a href="${pageContext.request.contextPath}/reservas/nueva">Nueva reserva</a>
+
+<c:if test="${sessionScope.usuarioLogueado.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
+    <a href="${pageContext.request.contextPath}/reservas/nuevo">Nueva reserva</a>
 </c:if>
 <br><!-- espacio en blanco, deja una línea -->
 
 <table border="1"><!-- tabla con borde, tr son las filas y td las columnas,th es la cabecera de cada columna -->
-    <tr>
+    <tr class="cabecera">
         <th>Id de la reserva</th>
         <th>Id de la habitación</th>
         <th>Fecha de entrada</th>
@@ -65,7 +75,7 @@ th, td {
         <th>Acciones</th>
     </tr>
     <c:forEach var="reserva" items="${reservas}"><!-- recorre la list y cada objeto de reserva es una reserva -->
-        <tr>
+        <tr class="sub-cabecera">
             <td>${reserva.idReserva}</td><!-- $expresion languages para llamar y traerse algo como un get -->
             <td>${reserva.habitacion.idHabitacion}</td>
             <td>${reserva.fechaEntrada}</td>
@@ -76,15 +86,24 @@ th, td {
 			<td>${reserva.numeroHuespedes}</td>
 			<td>${reserva.observaciones}</td>
             <td><!-- enlaces ver, editar y eliminar, redirigen a las otras vistas pasando por el controller -->
-                <a href="${pageContext.request.contextPath}/reservas/detalle?id=${reserva.idReserva}">Ver</a>
-                <c:if test="${sessionScope.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
-                <a href="${pageContext.request.contextPath}/reservas/editar?id=${reserva.idReserva}">Editar</a>
-                <a href="${pageContext.request.contextPath}/reservas/eliminar?id=${reserva.idReserva}">Eliminar</a>
+                <a href="${pageContext.request.contextPath}/reservas/detalle?idReserva=${reserva.idReserva}">Ver</a>
+                <c:if test="${sessionScope.usuarioLogueado.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
+                <a href="${pageContext.request.contextPath}/reservas/editar?idReserva=${reserva.idReserva}">Editar</a>
+                <a href="${pageContext.request.contextPath}/reservas/eliminar?idReserva=${reserva.idReserva}">Eliminar</a>
                  </c:if>
             </td>
         </tr>
     </c:forEach>
 </table>
+
+<p class="error">${error}</p> <!-- error al borrar habitación, cambia solo el mensaje porque enlaza al error y muestra el texto que sea -->
+
+<form:form action="${pageContext.request.contextPath}/vueltaPrincipal" method="get">
+
+<!-- Al pulsar sobre el boton se vuelve al controlador del menu principal que envia la vista jsp 'Principal' -->
+<button type="submit">Vover al menu principal</button>
+
+</form:form>
 
 </body>
 </html>

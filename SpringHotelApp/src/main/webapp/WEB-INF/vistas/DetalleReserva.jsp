@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Detalle Reserva</title><!-- título de la pestaña del navegador -->
+    
        <style type="text/css">
 
     .fondo {
@@ -39,6 +40,8 @@
 </head>
 <body class="fondo">
 
+<h2 class="titulo-principal">Detalle Reserva</h2>
+
 <div class="contenedor-formulario">
 <form:form modelAttribute="reserva">
     <p>
@@ -47,7 +50,7 @@
     </p>
     <p>
         <strong>Id de la habitación:</strong>
-        <form:input cssClass="input-formulario" path="idHabitacion" disabled="true"/>
+        <form:input cssClass="input-formulario" path="habitacion.idHabitacion" disabled="true"/>
     </p>
         <p>
         <strong>Fecha de entrada:</strong>
@@ -59,7 +62,7 @@
     </p>
         <p>
         <strong>Id del huésped:</strong>
-        <form:input cssClass="input-formulario" path="idHuesped" disabled="true"/>
+        <form:input cssClass="input-formulario" path="huesped.idHuesped" disabled="true"/>
     </p>
     <p>
         <strong>Tipo de pensión:</strong>
