@@ -1,5 +1,6 @@
 package es.accenture.service;                  //esto lo hace el A
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,16 @@ public class HabitacionService implements IHabitacionService{
     	
     	if(habitacion==null){throw new GuardarException("Error al guardar la habitación");//si no hay habitación lanza excepción
     	}
+    	
+       	if (habitacion.getNumeroHabitacion().isEmpty()
+    				|| habitacion.getPrecioPorNoche() == null
+    				|| habitacion.getPrecioPorNoche().compareTo(BigDecimal.ZERO) <= 0 // IA: le pregunto a gemini como convertir el decimal para poder limitar que el precio no sea menor o igual a cero 
+    				
+        			) {
+    			
+    			throw new GuardarException ("Debe rellenar todos los campos para guardar la habitacion.");
+    		}
+    	
         habitacionDao.guardarHabitacion(habitacion); //aquí se llama a dao para guardar la habitación
     }
     
@@ -68,6 +79,15 @@ public class HabitacionService implements IHabitacionService{
     public void actualizarHabitacion(Habitacion habitacion)throws ActualizarException {
 
     	if(habitacion==null){throw new ActualizarException("Error al actualizar la habitación");}//si no hay habitación lanza excepción
+    	
+    	if (habitacion.getNumeroHabitacion().isEmpty()
+				|| habitacion.getPrecioPorNoche() == null
+				|| habitacion.getPrecioPorNoche().compareTo(BigDecimal.ZERO) <= 0 // IA: le pregunto a gemini como convertir el decimal para poder limitar que el precio no sea menor o igual a cero 
+				
+    			) {
+			
+			throw new ActualizarException ("Debe rellenar todos los campos para guardar la habitacion.");
+		}
     	
         // aquí hay que poner la lógica
         habitacionDao.actualizarHabitacion(habitacion); //aquí se llama a dao para actualizar en la bbdd
