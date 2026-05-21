@@ -161,11 +161,8 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 ### 🚀 Servidor
 - 🌐 **Apache Tomcat 9**
 
-### 🔐 Seguridad y logging
-- 📜 **Log4j** (logging)  
-- 🔒 **BCrypt** (seguridad)  
 
----
+-----
 
 ## 🧱 Estructura del proyecto:
 
@@ -264,16 +261,7 @@ LoginService → servicio que se encarga de la lógica de Login
 ReservaService → servicio que se encarga de la lógica de Reservas
 ```
 
-### PAQUETE UTILS: tareas adicionales
-
-```
-nombreUtils → 
-nombreUtils → 
-nombreUtils → 
-nombreUtils → 
-```
-
-### VISTAS: (van en WebInf, Vistas)
+### VISTAS: (van en WebInf, Vistas, menos Login que va en WebApp)
 
 ```
 DetalleHabitacion.jsp → vista de la pantalla de detalle de cada habitación
