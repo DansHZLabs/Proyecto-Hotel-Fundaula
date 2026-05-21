@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -172,5 +174,86 @@ public class ReservasController {
 	}
 	
     
+	/**
+	 * Metodo
+	 * @param huesped
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/actualizar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	public String actualizarReserva (@ModelAttribute("plantillaReserva") Reserva reserva, Model model) {	
+		
+		
+		try {
+			
+		reservaService.actualizarReserva(reserva);
+		
+		} catch (Exception e) {
+			
+			model.addAttribute("error",e.getMessage());
+			
+			model.addAttribute("plantillaReserva", reserva);
+			
+			model.addAttribute("habitaciones",habitacionService.buscarHabitaciones());
+			
+			model.addAttribute("tipoFormulario", "modificado");
+			
+			try {
+				model.addAttribute("huespedes",huespedService.listarHuesped());
+				
+			} catch (Exception b) {
+				
+				model.addAttribute("error",b.getMessage());
+			}		
+			
+			
+			return "FormularioReserva";
+		}
+		
+		return "redirect:/reservas";
+	}
+	
+	
+	
+	/**
+	 * Metodo
+	 * @param huesped
+	 * @param model
+	 * @return
+	 */
+	@PostMapping("/guardar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	public String guardarReserva (@ModelAttribute("plantillaReserva") Reserva reserva, Model model) {	
+		
+		
+		try {
+			
+		reservaService.guardarReserva(reserva);
+		
+		} catch (Exception e) {
+			
+			model.addAttribute("error",e.getMessage());
+			
+			model.addAttribute("plantillaReserva", reserva);
+			
+			model.addAttribute("habitaciones",habitacionService.buscarHabitaciones());
+			
+			model.addAttribute("tipoFormulario", "nuevo");
+			
+			try {
+				model.addAttribute("huespedes",huespedService.listarHuesped());
+				
+			} catch (Exception b) {
+				
+				model.addAttribute("error",b.getMessage());
+			}		
+			
+			
+			return "FormularioReserva";
+		}
+		
+		return "redirect:/reservas";
+	}
+	
+	
     
 }

@@ -80,9 +80,9 @@ public class Reserva {
 		return idReserva;
 	}
 
-	/*public void setIdReserva(int idReserva) { //se quita el setter porque es autoincremental y se pone solo
+	public void setIdReserva(int idReserva) { //se quita el setter porque es autoincremental y se pone solo
 		this.idReserva = idReserva;
-	}*/
+	}
 
 	public Huesped getHuesped() {
 		return huesped;

@@ -11,6 +11,7 @@ import es.accenture.exceptions.ActualizarException;
 import es.accenture.exceptions.BuscarException;
 import es.accenture.exceptions.EliminarException;
 import es.accenture.exceptions.GuardarException;
+import es.accenture.exceptions.HuespedException;
 import es.accenture.interfaces.IReservasDao;
 import es.accenture.interfaces.IReservasService;
 
@@ -45,6 +46,16 @@ public class ReservasService implements IReservasService{
     	
     	}
     	
+    	if (reserva.getFechaEntrada() == null
+				|| reserva.getFechaSalida() == null
+				|| reserva.getHuesped().getIdHuesped() == 0
+				|| reserva.getHabitacion().getIdHabitacion() == 0
+				|| reserva.getNumeroHuespedes() <= 0
+    			) {
+			
+			throw new GuardarException ("Debe rellenar todos los campos para guardar la reserva. LAs observaciones son opcionales y el numero de huespedes debe ser mayor que 0.");
+		}
+    	
         reservaDao.guardarReserva(reserva); //aquí se llama a dao para guardar la reserva
         
 	}
@@ -56,7 +67,17 @@ public class ReservasService implements IReservasService{
     	
     	if(reserva==null){throw new ActualizarException("Error al actualizar la reserva");}//si no hay reserva lanza excepción
     	
-        // aquí hay que poner la lógica
+    	if (reserva.getFechaEntrada() == null
+				|| reserva.getFechaSalida() == null
+				|| reserva.getHuesped().getIdHuesped() == 0
+				|| reserva.getHabitacion().getIdHabitacion() == 0
+				|| reserva.getNumeroHuespedes() <= 0
+    			) {
+			
+			throw new ActualizarException ("Debe rellenar todos los campos para guardar la reserva. LAs observaciones son opcionales y el numero de huespedes debe ser mayor que 0.");
+		}
+    	
+    	
         reservaDao.actualizarReserva(reserva); //aquí se llama a dao para actualizar en la bbdd
 		
 	}
