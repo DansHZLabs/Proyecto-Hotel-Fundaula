@@ -280,7 +280,6 @@ DetalleHabitacion.jsp → vista de la pantalla de detalle de cada habitación
 DetalleIncidencia.jsp → vista de la pantalla de detalle de cada incidencia
 DetalleHuesped.jsp → vista de la pantalla de detalle de cada huésped
 DetalleReserva.jsp → vista de la pantalla de detalle de cada reserva
-Login.jsp → vista de la pantalla de inicio de sesión para introducir credenciales
 Principal.jsp → vista de la pantalla principal tras iniciar sesión
 Huespedes.jsp → vista de la pantalla del listado de huespedes
 Habitaciones.jsp → vista de la pantalla del listado de habitaciones
@@ -290,6 +289,9 @@ FormularioHabitacion.jsp → vista de la pantalla de creación para nueva habita
 FormularioIncidencia.jsp → vista de la pantalla de creación para nueva incidencia
 FormularioHuesped.jsp → vista de la pantalla de creación para nuevo huésped
 FormularioReserva.jsp → vista de la pantalla de creación para nueva reserva
+
+Esta va en WebApp porque es la de acceso:
+Login.jsp → vista de la pantalla de inicio de sesión para introducir credenciales
 ```
 
 (en SRC, Main, Resources)
@@ -349,20 +351,55 @@ Merge final a main
 
 A Javi → Habitaciones + Incidencias + Reservas
 <br>
-B Jorge → Huéspedes + Login + Reservas
+B Daniel → Huéspedes + Login + Reservas
 
 ---
 
-## ⚠️ Conflictos de merge: ------------------> apuntar los que surjan
+## ⚠️ Conflictos de merge:
 
 Se resolvieron conflictos principalmente en:
 
-- configuración de Spring ---------------> es un ejemplo, borrar luego  
-- controladores compartidos -------------> es un ejemplo, borrar luego  
-- ficheros JSP comunes ------------------> es un ejemplo, borrar luego  
-
-Resolución manual combinando cambios de los dos desarrolladores.
-
+- Conflicto 1:
+<br>
+	Motivo:<br>
+	Por readme desactualizado entre las ramas login y habitaciones<br>
+	Solución:<br>
+	Se deja el de habitaciones que es el más actualizado<br>
+	Modo:<br>
+	Se resuelve con el editor de Github<br>
+<br>
+- Conflicto 2:<br>
+	Motivo:<br>
+	Entre huespedes y develop por unos imports y un comentario<br>
+	Solución:<br>
+	Se mantienen los imports y el comentario al ser la versión más actualizada<br>
+	Modo:<br>
+	Se resuelve con el editor de Github<br>
+		<br>
+	<p align="center">
+  <img src="docs/images/conflicto 2.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>captura de pantalla del conflicto</em>
+</p>
+	<br>
+- Conflicto 3:<br>
+	Motivo:<br>
+	Las 2 ramas aparecían con el .classpath distinto:<br>
+		 attribute name="optional" value="true" ---------- incidencias<br>
+		 attribute name="maven.pomderived" value="true" -- develop<br>
+	Solución:<br>
+	Se mantiene la versión de develop que es la más actualizada<br>
+	Modo:<br>
+	Se resuelve con el editor de Github<br>
+		<br>
+	<p align="center">
+  <img src="docs/images/conflicto 3.png" style="max-width: 100%; height: auto;" />
+  <br><br><br>
+  <br>
+  <em>captura de pantalla del conflicto</em>
+</p>
+	<br>
+	
 ---
 
 ## ✅ Funcionalidades:
@@ -419,7 +456,7 @@ Habitaciones.jsp muestra listado
 
 ---
 
-## 🔒 Validaciones de las reglas de negocio (a revisar tema historiales)
+## 🔒 Validaciones de las reglas de negocio
 
 ### 🏨 Eliminación de habitaciones
 
@@ -458,8 +495,8 @@ Habitaciones.jsp muestra listado
 
 <!--IA: se preguntó a chat gpt como dejar el texto del Mapeo como lo hice y que saliera igual en el Preview y me dijo que poniendo esto al principio "```text" y esto al final "```"-->
 
+## 🔄 MAPEO ORM Y RELACIONAL POR ENTITIES:
 ```text
-MAPEO ORM Y RELACIONAL POR ENTITIES:
 
 ENTITY Habitacion:
 
@@ -561,13 +598,35 @@ observaciones                         - @Column(name="observaciones")           
 ## 🔑 Credenciales de prueba:
 
 ```
-recepcionista / recep123
-supervisor / super123
+recepcionista / daniH ---> 5678def
+supervisor    / javiR ---> 1234abc
 ```
+
+
+  <img src="docs/images/scrip creacion credenciales usuarios.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <br>
+  <em>script creacion credenciales usuarios</em>
+</p>
+	<br>
+	  <img src="docs/images/script creacion huespedes de prueba.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <br>
+  <em>script creacion huespedes de prueba</em>
+</p>
+	<br>
+		  <img src="docs/images/script creacion habitaciones de prueba.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <br>
+  <em>script creacion habitaciones de prueba</em>
+</p>
+	<br>
+	
+	
 
 ---
 
-## Documentación:
+## 🗂️ Documentación:
 
 Ver carpeta /docs:
 
@@ -579,7 +638,7 @@ Proyecto (PDF)
 
 <!--IA: se ha usado chat gpt para cambiar el formato de la tabla que entregó el profesor y que se vea bien en el preview -->
 
-## Uso de inteligencia artificial Alumno A
+## 🤖 Uso de inteligencia artificial Alumno A
 ### Herramientas utilizadas
 **Alumno A — Javier Roldán Pomareta
 - ChatGPT (versión: 5.5)
@@ -651,7 +710,7 @@ Tengo estas dependencias que he ido buscando en foros y copiando de otros proyec
 
 <td>No</td>
 <td>No</td>
-<</tr>
+</tr>
 
 <tr>
 <td>Entidad Usuario / DAO Usuario / LoginController</td>
@@ -690,7 +749,7 @@ Estos son los css que ha puesto mi compañero en las vistas del proyecto, dime e
 </tr>
 </table>
 
-<<tr>
+<tr>
 <td>Documentación (Javadoc)</td>
 <td>No</td>
 </tr>
@@ -708,7 +767,7 @@ Puedo explicar qué hace cada fragmento marcado como IA, justificar por qué enc
 
 ---
 
-## Uso de inteligencia artificial Alumno B
+## 🤖 Uso de inteligencia artificial Alumno B
 ### Herramientas utilizadas
 **Alumno B — Daniel Herráiz Bastida
 - 
@@ -773,7 +832,7 @@ Usos:
 
 <td>Sí/NO</td>
 <td>...</td>
-<</tr>
+</tr>
 
 <tr>
 <td>Entidad Usuario / DAO Usuario / LoginController</td>
@@ -802,7 +861,7 @@ Usos:
 </tr>
 </table>
 
-<<tr>
+<tr>
 <td>Documentación (Javadoc)</td>
 <td>Sí/NO</td>
 <td>...</td>

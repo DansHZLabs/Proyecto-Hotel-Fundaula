@@ -32,8 +32,8 @@
 
 .contenedor-formulario {
     margin-top: 40px;
-    max-width: 400px;
-    width: 100%;
+    max-width: 300px;
+    width: 90%;
 }
 
 
@@ -42,7 +42,7 @@
 	width: 100%;           
 	margin-top: 5px;       
 	margin-bottom: 18px;   
-	padding: 8px;          
+	padding: 5px;          
 	box-sizing: border-box;
 }
 

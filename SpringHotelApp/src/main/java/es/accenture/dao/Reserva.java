@@ -16,6 +16,9 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import es.accenture.entity.Habitacion;
+import es.accenture.entity.Huesped;
+
 @Entity // Anotación para representar una tabla en BBDD
 @Table(name="reservas") // Anotación que indica cómo se llama la tabla que representa
 public class Reserva {
