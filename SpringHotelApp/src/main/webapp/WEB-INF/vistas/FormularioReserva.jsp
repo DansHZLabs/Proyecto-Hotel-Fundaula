@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!-- librería jstl -->
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!-- librería jstl para formatear fechas -->
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librería form tags -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %><!-- librerÃ­a jstl -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %><!-- librerÃ­a jstl para formatear fechas -->
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><!-- librerÃ­a form tags -->
     
     
 <!DOCTYPE html>
@@ -78,7 +77,7 @@
 			
 			<form:hidden path="idReserva"/>
 			
-			Id de la habitación:
+			Id de la habitaciÃ³n:
 			
 			<select name="habitacion.idHabitacion" class="formulario-reservas">
    			 <c:forEach var="habitacion" items="${habitaciones}">
@@ -89,13 +88,13 @@
 			
 			Fecha de entrada:
 			
-			<form:input cssClass="formulario-reservas" path="fechaEntrada"/>
+			<form:input cssClass="formulario-reservas" path="fechaEntrada" type="date"/>
 			
 			Fecha de salida:
 			
-			<form:input cssClass="formulario-reservas" path="fechaSalida"/>
+			<form:input cssClass="formulario-reservas" path="fechaSalida" type="date"/>
 			
-			Id del huésped:
+			Id del huÃ©sped:
 			
 			<select name="huesped.idHuesped" class="formulario-reservas">
    			 <c:forEach var="huesped" items="${huespedes}">
@@ -103,7 +102,7 @@
     		 </c:forEach>
 			</select>
 			
-			Tipo de pensión:
+			Tipo de pensiÃ³n:
 			
 			<form:select cssClass="formulario-reservas" path="tipoPension">
 			<form:option value="ALOJAMIENTO">alojamiento</form:option>
@@ -119,7 +118,7 @@
     		<form:option value="CONFIRMADA">confirmada</form:option>			
 			</form:select>
 			
-			Número de huéspedes:
+			NÃºmero de huÃ©spedes:
 			
 			<form:input cssClass="formulario-reservas" path="numeroHuespedes"/>
 			
@@ -146,7 +145,7 @@
 			
 			<form:hidden path="idReserva"/>
 			
-			Id de la habitación:
+			Id de la habitaciÃ³n:
 			
 			<select name="habitacion.idHabitacion" class="formulario-reservas">
    			 <c:forEach var="habitacion" items="${habitaciones}">
@@ -156,13 +155,13 @@
 			
 			Fecha de entrada:
 			
-			<form:input cssClass="formulario-reservas" path="fechaEntrada"/>
+			<form:input cssClass="formulario-reservas" path="fechaEntrada" type="date"/>
 			
 			Fecha de salida:
 			
-			<form:input cssClass="formulario-reservas" path="fechaSalida"/>
+			<form:input cssClass="formulario-reservas" path="fechaSalida" type="date"/>
 			
-			Id del huésped:
+			Id del huÃ©sped:
 			
 			<select name="huesped.idHuesped" class="formulario-reservas">
    			 <c:forEach var="huesped" items="${huespedes}">
@@ -170,7 +169,7 @@
     		 </c:forEach>
 			</select>
 			
-			Tipo de pensión:
+			Tipo de pensiÃ³n:
 			
 			<form:select cssClass="formulario-reservas" path="tipoPension">
 			<form:option value="ALOJAMIENTO">alojamiento</form:option>
@@ -186,7 +185,7 @@
     		<form:option value="CONFIRMADA">confirmada</form:option>			
 			</form:select>
 			
-			Número de huéspedes:
+			NÃºmero de huÃ©spedes:
 			
 			<form:input cssClass="formulario-reservas" path="numeroHuespedes"/>
 			

@@ -98,7 +98,7 @@ th, td {
 <form:form action="${pageContext.request.contextPath}/vueltaPrincipal" method="get">
 
 <!-- Al pulsar sobre el boton se vuelve al controlador del menu principal que envia la vista jsp 'Principal' -->
-<button type="submit">Vover al menu principal</button>
+<button type="submit">Volver al menu principal</button>
 
 </form:form>
 

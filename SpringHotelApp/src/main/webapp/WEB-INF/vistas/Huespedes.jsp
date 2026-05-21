@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
@@ -105,7 +104,7 @@ th, td {
 	<form:form action="${pageContext.request.contextPath}/vueltaPrincipal" method="get">
 
 		<!-- Al pulsar sobre el boton se vuelve al controlador del menu principal que envia la vista jsp 'Principal' -->
-		<button type="submit">Vover al menu principal</button>
+		<button type="submit">Volver al menu principal</button>
 
 	</form:form>
 
