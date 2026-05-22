@@ -94,7 +94,10 @@ public class LoginController {
 		 * existencia en la BBDD 'hoteldb'. Devolviendo de nuevo en este caso la vista
 		 * de 'Login.jsp' con el mensaje de error correspondiente (almacenado en el
 		 * model). Se devuelve la pagina 'Principal.jsp' en caso de coincidencia con la
-		 * BBDD.
+		 * BBDD. Se usa el post en vez de get, por dos motivos: debido a que se 
+		 * esta modificando el estado de la app (se almacena en el service
+		 * las credenciales en el sesion) y para que las credenciales
+		 * no se muestren en la url. 
 		 */
 		try {
 
@@ -131,12 +134,19 @@ public class LoginController {
 	@PostMapping("/cerrarSesion") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente. En este caso uso el metodo POST por razones de seguridad.
 	public String cerrarSesion (Model model, HttpSession sesion) {
 		
-		sesion.invalidate();
+		sesion.invalidate(); // Se usa el metodo post porque se modifica el estado de la app, eliminando las credenciales del objeto sesion.
 		
 		return "redirect:/"; // IA: investigo con gemini el mejor metodo para que no aparezca el /cerrar sesion otra vez en la url y no de errores al pulsar f5
 		
 	}
 	
+	/**
+	 * Metodo que devuelve la vista 'Principal' de la app, mostrando tanto las crendenciales 
+	 * del usuario y sus permisos, como un menu de opciones de navigacion a las distintas
+	 * funcionalidades de la app.
+	 * 
+	 * @return String con la vista 'Principal.jsp'
+	 */
 	@GetMapping("/vueltaPrincipal")
 	public String vueltaPrincipal () {
 		

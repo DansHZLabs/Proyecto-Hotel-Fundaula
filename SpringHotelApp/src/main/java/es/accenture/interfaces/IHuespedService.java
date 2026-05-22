@@ -37,7 +37,7 @@ public interface IHuespedService {
 	
 	/**
 	 * Metodo que modifica los datos de un determinado huesped a partir de los datos del formulario jsp rellenado por el usuario
-	 * @param huespedModificado (este identificador viaja en el objeto Model de la request)
+	 * @param huespedModificado (este objeto viaja en el Model de la request)
 	 * @throws Exception 
 	 */
 	void actualizarHuesped (Huesped huespedModificado) throws Exception;

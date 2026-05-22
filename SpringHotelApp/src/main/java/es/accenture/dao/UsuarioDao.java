@@ -55,10 +55,15 @@ public class UsuarioDao implements IUsuarioDao {
 		 * manualmente '.openSession'). Respecto al ":username" esos dos puntos hacen
 		 * referencia a que se utilizara una prepared statement que luego inyectaremos
 		 * con el .setParameter (en este caso el String de tipo usuario). Esto ultimo se
-		 * ha investigado con la IA 		 */
+		 * ha investigado con la IA */
 		return mySessionFactory.getCurrentSession()
-				.createQuery("from Usuario u where u.username = :username", Usuario.class) // IA: uso de ':' como prepared Statement sugerido por Gemini ya que es mejor que utilizar un ? por terminos de practicidad (para poder cambiar los prepared Statement, si hay varios, en el orden del codigo sin que esto afecte luego a su declaracion)
+				.createQuery("from Usuario u where u.username = :username", Usuario.class) 
 				.setParameter("username", usuario).getResultList();
+		
+		/* IA: uso de ':' como prepared Statement sugerido por Gemini ya que es mejor que utilizar
+		 *  un ? por terminos de practicidad (para poder cambiar los prepared Statement, si hay varios, en
+		 *  el orden del codigo sin que esto afecte luego a su declaracion)
+		 */
 
 	}
 

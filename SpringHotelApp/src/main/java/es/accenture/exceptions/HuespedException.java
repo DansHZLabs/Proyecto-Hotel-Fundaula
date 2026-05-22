@@ -2,7 +2,7 @@ package es.accenture.exceptions;
 
 /**
  * Clase que genera excepciones personalizadas relacionadas con la accion de
- * 'Login'
+ * 'huespedes'
  * 
  * @author danih y javi
  * @version 1.0

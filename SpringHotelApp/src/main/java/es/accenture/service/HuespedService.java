@@ -3,13 +3,11 @@ package es.accenture.service;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.accenture.entity.Huesped;
-import es.accenture.entity.Reserva;
 import es.accenture.exceptions.HuespedException;
 import es.accenture.interfaces.IHuespedDao;
 import es.accenture.interfaces.IHuespedService;
@@ -22,8 +20,8 @@ import es.accenture.interfaces.IHuespedService;
  * @author danih y javi
  * @version 1.0
  */
-@Service // Etiqueta Spring que clasifica la clase como Servicio (generando un bean que
-			// se pueda utilizar en cualquier momento)
+@Service // Etiqueta Spring que clasifica la clase como Servicio (generando un bean que se pueda utilizar en cualquier momento)
+			
 public class HuespedService implements IHuespedService {
 
 	private IHuespedDao huespedRepositorio; // Atributo que almacena el DAO de huesped
@@ -44,8 +42,8 @@ public class HuespedService implements IHuespedService {
 	 * @param repositorioHuesped
 	 * @param session
 	 */
-	@Autowired // Etiqueta de Spring para la inyeccion de dependencias al detectar una clase
-				// como 'component' o similar en el paquete seleccionado en la configuracion.
+	@Autowired // Etiqueta de Spring para la inyeccion de dependencias al detectar una clase como 'component' o similar en el paquete seleccionado en la configuracion.
+				
 	public HuespedService(IHuespedDao repositorioHuesped, HttpSession session) {
 
 		this.huespedRepositorio = repositorioHuesped;
@@ -75,13 +73,14 @@ public class HuespedService implements IHuespedService {
 
 		return huespedRepositorio.buscarHuesped(idHuesped);
 
-		// TODO PREGUNTAR JAVI, este metodo no tiene ninguna excepcion, tal vez poner
-		// opcionalmente alguna por si no encuentra un huesped con ese id (esto
-		// tecnicamente no deberia pasar pero...)
 	}
 
 	@Override
 	public void actualizarHuesped(Huesped huespedModificado) throws Exception {
+		
+		/* Comprobamos si estan completos los datos del formulario que no deben
+		 * ser null en la BBDD. En caso contrario lanzamos el mensaje 
+		 * de error para que el usuario haga los cambios pertinentes. */
 
 		if (huespedModificado.getNombre().isEmpty()
 				|| huespedModificado.getApellidos().isEmpty()
@@ -94,8 +93,9 @@ public class HuespedService implements IHuespedService {
 		if (!huespedModificado.getTelefono().isEmpty()) {
 
 			/*
-			 * Comprobamos si existe el telefono en la BBDD mediante un metodo que hemos
-			 * creado en el DAO En caso afirmativo mandamos un mensaje de error para que el
+			 * Comprobamos si existe el telefono en la BBDD mediante el getter
+			 * de dicho atributo del huesped ORM.
+			 * En caso afirmativo mandamos un mensaje de error para que el
 			 * usuario haga los cambios pertinentes
 			 */
 			huespedRepositorio.comprobarDuplicadoTelefonoHuesped(huespedModificado.getTelefono(), huespedModificado.getIdHuesped());
@@ -103,9 +103,8 @@ public class HuespedService implements IHuespedService {
 
 		/*
 		 * Si no coinciden los telefonos se salta el condicional y procede a insertar
-		 * los datos del huesped (obtenidos del formulario) en la bbdd con el metodo pertinente
-		 * del Dao. En caso de encontrar algun parametro requerido como not null que no se ha rellenado
-		 * se lanza una excepcion*/
+		 * los datos del huesped (obtenidos del formulario) en la BBDD con el metodo pertinente
+		 * del Dao.*/
 		huespedRepositorio.actualizarHuesped(huespedModificado);
 
 	}
@@ -113,12 +112,6 @@ public class HuespedService implements IHuespedService {
 	
 	@Override
 	public void eliminarHuesped(int idHuesped) throws Exception {
-		// TODO PREGUNTAR JAVI poner excepcion si no encuentra ese usuario con ese id		
-					
-		//if (!listaReservas.isEmpty()) {
-			
-			//throw new HuespedException(HuespedException.EliminarException);
-	//	}
 				
 		huespedRepositorio.eliminarHuesped(idHuesped);
 
@@ -127,6 +120,8 @@ public class HuespedService implements IHuespedService {
 	
 	@Override
 	public void guardarHuesped(Huesped huespedNuevo) throws Exception {
+		
+		// Misma logica que en actualizar (comentarios detallados en ese metodo), excepto la orden del DAO
 		
 		if (huespedNuevo.getNombre().isEmpty()
 				|| huespedNuevo.getApellidos().isEmpty()
@@ -138,19 +133,11 @@ public class HuespedService implements IHuespedService {
 		
 		if (!huespedNuevo.getTelefono().isEmpty()) {
 
-			/*
-			 * Comprobamos si existe el telefono en la BBDD mediante un metodo que hemos
-			 * creado en el DAO En caso afirmativo mandamos un mensaje de error para que el
-			 * usuario haga los cambios pertinentes
-			 */
+			
 			huespedRepositorio.comprobarDuplicadoTelefonoHuesped(huespedNuevo.getTelefono(),0);
 		}
 
-		/*
-		 * Si no coinciden los telefonos se salta el condicional y procede a insertar
-		 * los datos del huesped (obtenidos del formulario) en la bbdd con el metodo pertinente
-		 * del Dao. En caso de encontrar algun parametro requerido como not null que no se ha rellenado
-		 * se lanza una excepcion*/
+		
 		huespedRepositorio.guardarHuesped(huespedNuevo);
 
 	}

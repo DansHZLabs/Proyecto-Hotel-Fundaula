@@ -76,7 +76,7 @@
 
     <label>Número de la habitación:</label>
 		<select name="habitacion.idHabitacion" class="input-formulario">
-   			 <c:forEach var="habitacion" items="${habitaciones}">
+   			 <c:forEach var="habitacion" items="${habitaciones}"> <!-- Este condicional permite que entre todas las opciones del desplegable se marque la correspondiente a los detalles de la incidencia (si estamos ante la opcion de que sea el formulario de detalle, sino pone la primera por defecto) -->
        			 <option value="${habitacion.idHabitacion}"<c:if test="${incidencia.habitacion != null&& habitacion.idHabitacion == incidencia.habitacion.idHabitacion}">selected</c:if>>${habitacion.numeroHabitacion}</option>
     		 </c:forEach>
 		</select>

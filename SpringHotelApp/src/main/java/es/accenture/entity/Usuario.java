@@ -37,14 +37,14 @@ public class Usuario {
 	@Column(name = "id_usuario", nullable=false) // Anotacion que indica como se llama la columna que representa
 	private int idUsuario;
 
-	@Column(name = "username", nullable=false,unique=true) // Anotacion que indica como se llama la columna que representa
+	@Column(name = "username", nullable=false,unique=true) 
 	private String username;
 
-	@Column(name = "password", nullable=false) // Anotacion que indica como se llama la columna que representa
+	@Column(name = "password", nullable=false) 
 	private String password;
 
 	@Enumerated(EnumType.STRING) // Anotacion para definir el enum y su tipo
-	@Column(name = "rol", nullable=false) // Anotacion que indica como se llama la columna que representa
+	@Column(name = "rol", nullable=false) 
 	private Rol rol;
 
 	// CONSTRUCTOR VACIO (obligatorio)

@@ -29,19 +29,19 @@ public class Huesped {
 	@Column(name = "id_huesped",nullable=false) // Anotacion que indica como se llama la columna que representa
 	private int idHuesped;
 
-	@Column(name = "nombre",nullable=false) // Anotacion que indica como se llama la columna que representa
+	@Column(name = "nombre",nullable=false) 
 	private String nombre;
 
-	@Column(name = "apellidos",nullable=false) // Anotacion que indica como se llama la columna que representa
+	@Column(name = "apellidos",nullable=false) 
 	private String apellidos;
 
-	@Column(name = "direccion",nullable=false) // Anotacion que indica como se llama la columna que representa
+	@Column(name = "direccion",nullable=false) 
 	private String direccion;
 
-	@Column(name = "telefono",nullable=false, unique=true) // Anotacion que indica como se llama la columna que representa
+	@Column(name = "telefono",nullable=false, unique=true) 
 	private String telefono;
 
-	@Column(name = "email") // Anotacion que indica como se llama la columna que representa
+	@Column(name = "email") 
 	private String email;
 	
 	@OneToMany(mappedBy = "huesped", fetch=FetchType.LAZY) // Anotacion para definir la relacion de uno a muchos (1 huesped puede tener muchas resercas)
@@ -58,6 +58,15 @@ public class Huesped {
 
 	// CONSTRUCTOR POR PARAMETROS
 
+	/**
+	 * Genera un objeto de tipo huesped a partir de parametros
+	 * 
+	 * @param nombre
+	 * @param apellidos
+	 * @param direccion
+	 * @param telefono
+	 * @param email
+	 */
 	public Huesped(String nombre, String apellidos, String direccion, String telefono, String email) {
 
 		this.nombre = nombre;
@@ -174,15 +183,16 @@ public class Huesped {
 	}	
 	
 	/**
-	 * 
-	 * @return
+	 * Metodo get que devuelve las reservas asociadas a este huesped
+	 * @return lista de reservas
 	 */
 	public List<Reserva> getReservas() {
 		return reservas;
 	}
 	
 	/**
-	 * 
+	 * Metodo set que asigna el valor que le pasemos como parametro como 
+	 * reservas que tienen relacion con este huesped
 	 * @param reservas
 	 */
 	public void setReservas(List<Reserva> reservas) {
@@ -201,8 +211,7 @@ public class Huesped {
 	public String toString() {
 		return "Huesped [idHuesped=" + idHuesped + ", nombre=" + nombre + ", apellidos=" + apellidos + ", direccion="
 				+ direccion + ", telefono=" + telefono + ", email=" + email + "]";
-	}
-	
-	//TODO valorar si se necesita un metodo que meta las reservas a este huesped y viceversa (aunque tal vez deberia ir en el service donde esta la logica)
+	}	
+
 		
 }

@@ -75,6 +75,8 @@
 
 <h2 class="titulo-principal">Formulario Huesped</h2>
 
+
+<!-- Aqui se selecciona/pinta este formulario si la opcion que nos llega del model de la request es de crear un formulario nuevo -->
 <c:if test="${tipoFormulario == 'nuevo'}">
 <h1>Nuevo Huesped</h1>
 
@@ -102,7 +104,7 @@
 			<form:input cssClass="formulario-huespedes" path="email"/>
 
 			<div class="error">
-				<!-- recupera de la request el mensaje de error que hemos almacenado (mediante el objeto 'Model' creado en el LoginController). Son errores tanto de credenciales vacias como erroneas segun lo buscado por el DAO en la tabla usuarios de la BBDD hoteldb -->
+				<!-- recupera de la request el mensaje de error que hemos almacenado (mediante el objeto 'Model' creado en el HuespedController) -->
 				<c:out value="${errorActualizarHuesped}"></c:out>
 			</div>
 	
@@ -112,7 +114,7 @@
 </c:if>
 
 
-
+<!-- Aqui se selecciona/pinta este formulario si la opcion que nos llega del model de la request es de editar un formulario con datos existentes -->
 <c:if test="${tipoFormulario == 'modificado'}">
 <h1>Editar Huesped</h1>
 <form:form modelAttribute="plantillaHuesped" autocomplete="off"
@@ -141,7 +143,7 @@
 			<form:input cssClass="formulario-huespedes" path="email"/>
 
 			<div class="error">
-				<!-- recupera de la request el mensaje de error que hemos almacenado (mediante el objeto 'Model' creado en el LoginController). Son errores tanto de credenciales vacias como erroneas segun lo buscado por el DAO en la tabla usuarios de la BBDD hoteldb -->
+				<!-- recupera de la request el mensaje de error que hemos almacenado (mediante el objeto 'Model' creado en el HuespedController) -->
 				<c:out value="${errorActualizarHuesped}"></c:out>
 			</div>
 	

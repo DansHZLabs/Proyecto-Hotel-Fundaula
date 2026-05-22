@@ -65,7 +65,7 @@ th, td {
 	<h1 class="titulo-principal">Lista de Huespedes</h1>
 
 	<c:if
-		test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}">		
+		test="${sessionScope.usuarioLogueado.rol.toString() == 'RECEPCIONISTA'}"> <!-- restricción por roles (se visualizaran opciones relativas a modificar crear o eliminar datos solo si se tiene el privilegio de recepcionista) -->		
 		<a href="${pageContext.request.contextPath}/huespedes/nuevo">Nuevo huesped</a> <!-- Al pulsar sobre el boton se envia la accion de Login definida para el formulario -->
 	</c:if>
 

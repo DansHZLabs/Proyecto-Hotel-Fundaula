@@ -58,7 +58,7 @@ public class HuespedController {
 	 * configurado en el archivo WebConfig se encarga de añadir las anotaciones de
 	 * sub ruta y la extension .jsp correspondientes)
 	 *  
-	 * @param model (para poder almacenar atributos y otra informacion entre
+	 * @param model (objeto para poder almacenar atributos y otra informacion entre
 	 *              requests)
 	 * @return String con la vista 'Huespedes'
 	 */
@@ -82,10 +82,14 @@ public class HuespedController {
 	}
 	
 	/**
-	 * Metodo
-	 * @param huesped
-	 * @param model
-	 * @return
+	 * Metodo que recoge todas las request de la url dirigidas a las seccion 'detalle' del huesped, para ello
+	 * se hace una busqueda a partir del id del huesped, almacenando en el Model los datos relativos a este. 
+	 * Finalmente se devuelven los datos a la vista correspondiente.
+	 * 
+	 * @param idHuesped (numero identificador del huesped sobre el que devolver los datos)
+	 * @param model (objeto para poder almacenar atributos y otra informacion entre
+	 *              requests)
+	 * @return String con la vista 'DetalleHuesped'
 	 */
 	@GetMapping("/detalle") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String detalleHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
@@ -99,27 +103,35 @@ public class HuespedController {
 	
 	
 	/**
-	 * Metodo
-	 * @param huesped
-	 * @param model
-	 * @return
+	 * Metodo que recoge todas las request de la url dirigidas a las seccion 'editar' del huesped, para ello
+	 * se hace una busqueda a partir del id del huesped, almacenando en el Model los datos relativos a este. 
+	 * Finalmente se devuelven los datos a la vista correspondiente, en un formato de formulario, el cual
+	 * podra ser modificado por el usuario. 
+	 * 
+	 * @param idHuesped (numero identificador del huesped sobre el que devolver los datos)
+	 * @param model (objeto para poder almacenar atributos y otra informacion entre
+	 *              requests)
+	 * @return String con la vista 'FormularioHuesped'
 	 */
 	@GetMapping("/editar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String editarHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
 		
 		Huesped detalleHuesped = huespedService.buscarHuesped(idHuesped);
 		
-		model.addAttribute("plantillaHuesped",detalleHuesped); //puede que tengamos conflictos aqui con el jsp de formulario ya que tiene que tener el mismo atributo para nuevo y modificar
-		model.addAttribute("tipoFormulario", "modificado");
+		model.addAttribute("plantillaHuesped",detalleHuesped); 
 		
 		return "FormularioHuesped";
 	}
 	
 	/**
-	 * Metodo
-	 * @param huesped
-	 * @param model
-	 * @return
+	 * Metodo que recoge todas las request de la url dirigidas a las seccion 'eliminar' del huesped, para ello
+	 * se hace una busqueda a partir del id del huesped. Posteriormente se elimina el huesped, devolviendo
+	 * de nuevo la vista principal de huespedes en caso de exito, añadiendo un error en caso de fallo.
+	 * 
+	 * @param idHuesped (numero identificador del huesped sobre el que eliminar los datos)
+	 * @param model (objeto para poder almacenar atributos y otra informacion entre
+	 *              requests)
+	 * @return String con la vista general del metodo 'obtenerHuespedes'
 	 */
 	@GetMapping("/eliminar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String eliminarHuesped (@RequestParam("idHuesped") int idHuesped, Model model) {
@@ -127,29 +139,46 @@ public class HuespedController {
 	
 		try {
 			
-			huespedService.eliminarHuesped(idHuesped);
-			
-		
+			huespedService.eliminarHuesped(idHuesped);		
 			
 		} catch(Exception e) {
 			
+			/* Capturamos el error definido por las reglas de negocio 
+			 * en el HuespedService y lo mostramos en la vista de huespedes
+			 * a modo de explicacion de que ha fallado. Aqui no hacemos
+			 * una redireccion y llamamos al metodo de obtenerhuespedes
+			 * debido a que sino se borrarian los datos del model, y por 
+			 * lo tanto perderiamos lo almacenado en el mensaje de error */
+			
 			model.addAttribute("errorEliminarHuesped", e.getMessage()); 
 			
-			return obtenerHuespedes(model);		
-			
+			return obtenerHuespedes(model);				
 			
 		} 			
 			return "redirect:/huespedes";		
 		
 	}
 	
+	
 	/**
-	 * Metodo
-	 * @param model
-	 * @return
+	 * Metodo que recoge todas las request de la url dirigidas a las seccion 'nuevo' del huesped. Se genera 
+	 * una plantilla de formulario en blanco para que el usuario pueda rellenar los datos correspondientes a un nuevo
+	 * huesped. 
+	 * 
+	 * @param model (objeto para poder almacenar atributos y otra informacion entre
+	 *              requests)
+	 * 
+	 * @return String con la vista general del metodo 'FormularioHuesped'
 	 */
 	@GetMapping("/nuevo") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String nuevoHuesped (Model model) {
+		
+		/* Se crea un Huesped vacio y se almacena en el Model para que las etiquetas
+		 * form del 'FormularioHuesped.jsp' puedan tener una plantilla y funcionen.
+		 * Respecto al parametro nuevo selecciona la logica form del jsp
+		 * adecuada para un nuevo Formulario sin datos (ya que se usa 
+		 * el mismo formulario tanto para editar datos existentes como de 
+		 * nuevo huesped) */
 		
 		model.addAttribute("plantillaHuesped", new Huesped());
 		model.addAttribute("tipoFormulario", "nuevo");
@@ -160,10 +189,14 @@ public class HuespedController {
 	
 	
 	/**
-	 * Metodo
-	 * @param huesped
-	 * @param model
-	 * @return
+	 * Metodo que recoge todas las request de la url dirigidas a las seccion 'actualizar' del huesped. Obtiene
+	 * los datos del formulario de huespedes rellenado por el usuario y lo actualiza en la BBDD 'hoteldb', mostrando
+	 * un mensaje de error en caso de fallo.
+	 * 
+	 * @param huesped (objeto para almacenar los datos del huesped rellenados por el usuario en el 'FormularioHuesped.jsp'
+	 * @param model (objeto para poder almacenar atributos y otra informacion entre
+	 *              requests)
+	 * @return String con la vista general del metodo 'obtenerHuespedes'
 	 */
 	@PostMapping("/actualizar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String actualizarHuesped (@ModelAttribute("plantillaHuesped") Huesped huesped, Model model) {	
@@ -173,6 +206,15 @@ public class HuespedController {
 		huespedService.actualizarHuesped(huesped);
 		
 		} catch (Exception e) {
+			
+			/* Si se encuentra algun error segun las logicas de negocio del 
+			 * huespedService, se captura con el catch y se envia 
+			 * la informacion del fallo en el model, mostrando
+			 * de nuevo los datos del huesped para poder corregirlos.
+			 * Ademas se reenvia el tipo de formulario de nuevo para que
+			 * la logica del 'FormularioHuesped.jsp' pueda elegir
+			 * que form utilizar. El uso del metodo post en vez de get
+			 * es porque se esta modificando el estado del servidor.  */
 			
 			model.addAttribute("errorActualizarHuesped",e.getMessage());
 			
@@ -188,7 +230,10 @@ public class HuespedController {
 	
 	
 	/**
-	 * Metodo
+	 * Metodo que recoge todas las request de la url dirigidas a las seccion 'guardar' del huesped. Obtiene
+	 * los datos del formulario de huespedes rellenado por el usuario, crea un nuevo usario y lo guarda en la BBDD
+	 * 'hoteldb', mostrando un mensaje de error en caso de fallo.
+	 * 
 	 * @param huesped
 	 * @param model
 	 * @return
@@ -196,6 +241,8 @@ public class HuespedController {
 	@PostMapping("/guardar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String guardarHuesped (@ModelAttribute("plantillaHuesped") Huesped huesped, Model model) {
 		
+		/* El uso del metodo post en vez de get
+			 * es porque se esta modificando el estado del servidor. */
 		try {
 			
 			huespedService.guardarHuesped(huesped);
@@ -204,13 +251,11 @@ public class HuespedController {
 				
 				model.addAttribute("errorActualizarHuesped",e.getMessage());
 				
-				return nuevoHuesped(model); // a lo mejor aqui hay problemas porque desaparecen los datos y hay que volver a rellenarlos
+				return nuevoHuesped(model); 
 			}
 			
 			return "redirect:/huespedes";
-		}
-	
-	
-	
+		}	
+		
 	
 }

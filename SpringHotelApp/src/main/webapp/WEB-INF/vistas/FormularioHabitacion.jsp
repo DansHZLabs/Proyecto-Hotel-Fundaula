@@ -72,7 +72,7 @@
     </c:choose>
 </h1>
 
-<div class="contenedor-formulario">
+<div class="contenedor-formulario"> <!--  Los pageContext permiten obtener toda la ruta inical de la url y asi tener un mejor control de las direcciones -->
 <form action="${pageContext.request.contextPath}/habitaciones/guardar" method="post">
 
     <input type="hidden" name="idHabitacion" value="${habitacion.idHabitacion}">
@@ -82,7 +82,7 @@
     
 
     <label>Tipo de la habitación:</label>
-    <select name="tipo" class="input-formulario">
+    <select name="tipo" class="input-formulario"> <!-- Este condicional permite que entre todas las opciones del desplegable se marque la correspondiente a los detalles de la habitacion (si estamos ante la opcion de que sea el formulario de detalle, sino pone la primera por defecto) -->
         <option value="INDIVIDUAL" <c:if test="${habitacion.tipo == 'INDIVIDUAL'}">selected</c:if>>Individual</option>
         <option value="DOBLE"<c:if test="${habitacion.tipo == 'DOBLE'}">selected</c:if>>Doble</option>
         <option value="SUITE"<c:if test="${habitacion.tipo == 'SUITE'}">selected</c:if>>Suite</option>
@@ -113,7 +113,7 @@
     <button type="submit" class="boton-formulario">
         <c:choose>
             <c:when test="${habitacion.idHabitacion != 0}">
-                Actualizar
+                Actualizar <!-- Se cambia el nombre del boton en funcion de si estamos ante la opcion del formulario de editar o guardar -->
             </c:when>
             <c:otherwise>
                 Guardar

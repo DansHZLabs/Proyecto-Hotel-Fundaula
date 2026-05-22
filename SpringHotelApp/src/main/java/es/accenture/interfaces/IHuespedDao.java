@@ -68,12 +68,4 @@ public interface IHuespedDao {
 	void comprobarDuplicadoTelefonoHuesped(String telefonoFormularioHuesped, int idFormularioHuesped) throws HuespedException;
 
 	
-	/**
-	 * Metodo que obtiene las reservas asociadas al Huesped
-	 * @param idHuesped
-	 * @return
-	 */
-	//List<Reserva> comprobarReservas(int idHuesped);
-	
-	
 }

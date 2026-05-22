@@ -63,7 +63,7 @@ th, td {
 
 <h1 class="titulo-principal">Lista de Habitaciones</h1><!-- título, se puede cambiar el tamaño poniendo h2 o h3 o lo que sea -->
 
-<c:if test="${sessionScope.usuarioLogueado.rol=='RECEPCIONISTA'}"><!-- restricción por roles -->
+<c:if test="${sessionScope.usuarioLogueado.rol=='RECEPCIONISTA'}"><!-- restricción por roles (se visualizaran opciones relativas a modificar crear o eliminar datos solo si se tiene el privilegio de recepcionista) -->
     <a href="${pageContext.request.contextPath}/habitaciones/nueva">Nueva habitación</a>
 </c:if>
 <br><!-- espacio en blanco, deja una línea -->

@@ -20,39 +20,16 @@ import es.accenture.exceptions.GuardarException;
 import es.accenture.interfaces.IHabitacionService;
 import es.accenture.interfaces.IIncidenciaService;
 
-/**
- * Controlador encargado de gestionar las peticiones relacionadas con las incidencias.
- * 
- * Esta clase permite hacer el crud.
- * 
- * @author danih y javi
- * @version 1.0
- */
 @Controller //Anotación que le dice a Spring que esta clase es un controller
 @RequestMapping("/incidencias") //Anotación que asigna una url al controller, es la ruta general y luego se especifica con getmapping para donde va
 public class IncidenciaController {
 
-	/*
-	 * Atributo donde se almacena el servicio de incidencias, ahí va la
-	 * logica de negocio de las incidencias.
-	 */
 	@Autowired
 	private IIncidenciaService incidenciaService;
 
-	/*
-	 * Atributo donde se almacena el servicio de habitaciones utilizado para
-	 * obtener la informacion de las habitaciones relacionadas incidencias.
-	 */
 	@Autowired
 	private IHabitacionService habitacionService;
 
-	/**
-	 * Metodo que recoge las peticiones de la vista principal de incidencias,
-	 * obteniene el listado completo de incidencias.
-	 * 
-	 * @param model objeto que permite almacenar atributos para enviarlos a la vista
-	 * @return String con la vista Incidencias
-	 */
 	// método para listar incidencias
 	@GetMapping //Anotación que dice cuál es la url de entrada
 	public String obtenerIncidencias(Model model) {
@@ -64,13 +41,6 @@ public class IncidenciaController {
 		return "Incidencias"; 
 	}
 
-	/**
-	 * Metodo que recoge las peticiones de la vista de detalle de una incidencia.
-	 * 
-	 * @param id    identificador de la incidencia que se desea consultar
-	 * @param model objeto que permite almacenar atributos y los mensajes de error
-	 * @return String con la vista DetalleIncidencia o return a la lista
-	 */
 	// método para ver el detalle de una incidencia
 	@GetMapping("/detalle") //Anotación que dice cuál es la url de entrada
 	public String detalleIncidencia(@RequestParam int id,Model model) { 
@@ -95,13 +65,6 @@ public class IncidenciaController {
 
 	}
 	
-	/**
-	 * Metodo que recoge las peticiones dirigidas de creacion de una incidencia
-	 * preparando formulario y cargan las habitaciones disponibles.
-	 * 
-	 * @param model objeto que permite almacenar atributos para enviarlos a la vista
-	 * @return String con la vista FormularioIncidencia
-	 */
 	// método para mostrar el formulario de alta
 	@GetMapping("/nueva") //Anotación que dice cuál es la url de entrada
 	public String nuevaIncidencia(Model model) {
@@ -115,14 +78,6 @@ public class IncidenciaController {
 		return "FormularioIncidencia";
 	}
 
-	/**
-	 * Metodo que recoge las peticiones de guardar o actualizar incidencia
-	 * a partir de los datos recibidos desde formulario.
-	 * 
-	 * @param incidencia objeto incidencia con los datos introducidos o modificados
-	 * @param model      objeto que permite almacenar atributos y los mensajes de error
-	 * @return redireccion a la vista principal o return al formulario
-	 */
 	// método para guardar incidencia nueva
 	@PostMapping("/guardar") //Anotación que dice cuál es la url de entrada
 	public String guardarIncidencia(@ModelAttribute Incidencia incidencia,Model model) {
@@ -155,14 +110,6 @@ public class IncidenciaController {
 		
 	}
 
-	/**
-	 * Metodo que recoge las peticiones de edicion de una incidencia, carga previamente
-	 * los datos existentes y las habitaciones disponibles.
-	 * 
-	 * @param id    identificador de la incidencia que se quiere editar
-	 * @param model objeto que permite almacenar atributos y los mensajes de error
-	 * @return String con la vista FormularioIncidencia
-	 */
 	// método para mostrar el formulario para editar
 	@GetMapping("/editar") //Anotación que dice cuál es la url de entrada
 	public String editarIncidencia(@RequestParam int id,Model model) {
@@ -191,13 +138,6 @@ public class IncidenciaController {
 		
 	}
 
-	/**
-	 * Metodo que recoge las peticiones de eliminacion de una incidencia.
-	 * 
-	 * @param id    identificador de la incidencia que se desea eliminar
-	 * @param model objeto que permite almacenar atributos y los mensajes de error
-	 * @return redireccion a la vista principal de incidencias
-	 */
 	// método para eliminar incidencia de bbdd
 	@GetMapping("/eliminar") //Anotación que dice cuál es la url de entrada
 	public String eliminarIncidencia(@RequestParam int id,Model model){
@@ -218,14 +158,6 @@ public class IncidenciaController {
 		return "redirect:/incidencias";
 	}
 
-	/**
-	 * Metodo que recoge las peticiones de obtencion de incidencias relacionadas
-	 * con una habitacion concreta.
-	 * 
-	 * @param idHabitacion identificador de la habitacion cuyas incidencias se quiere consultar
-	 * @param model        objeto que permite almacenar atributos y losmensajes de error
-	 * @return String con la vista Incidencias o return a la vista de habitaciones
-	 */
 	// método para obtener incidencias por el id de una habitación
 	@GetMapping("/habitacion") //Anotación que dice cuál es la url de entrada
 	public String obtenerIncidenciasPorHabitacion(@RequestParam int idHabitacion, Model model) {

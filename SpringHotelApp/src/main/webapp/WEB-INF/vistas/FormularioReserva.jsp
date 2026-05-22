@@ -70,6 +70,7 @@
 
 <h2 class="titulo-principal">Formulario Reserva</h2>
 
+<!-- Aqui se selecciona/pinta este formulario si la opcion que nos llega del model de la request es de crear un formulario nuevo -->
 <c:if test="${tipoFormulario == 'nuevo'}">
 <h1>Nueva Reserva</h1>
 <form:form modelAttribute="plantillaReserva" autocomplete="off"
@@ -80,7 +81,7 @@
 			Id de la habitación:
 			
 			<select name="habitacion.idHabitacion" class="formulario-reservas">
-   			 <c:forEach var="habitacion" items="${habitaciones}">
+   			 <c:forEach var="habitacion" items="${habitaciones}"> <!-- Este condicional permite que entre todas las opciones del desplegable se marque la correspondiente a los detalles de la reserva (si estamos ante la opcion de que sea el formulario de detalle, sino pone la primera por defecto) -->
        			 <option value="${habitacion.idHabitacion}"<c:if test="${plantillaReserva.habitacion != null&& habitacion.idHabitacion == plantillaReserva.habitacion.idHabitacion}">selected</c:if>>${habitacion.numeroHabitacion}</option>
     		 </c:forEach>
 		</select>
@@ -137,7 +138,7 @@
 </form:form>
 </c:if>
 
-
+<!-- Aqui se selecciona/pinta este formulario si la opcion que nos llega del model de la request es de editar un formulario con datos existentes -->
 <c:if test="${tipoFormulario == 'modificado'}">
 <h1>Editar Reserva</h1>
 <form:form modelAttribute="plantillaReserva" autocomplete="off"

@@ -71,11 +71,7 @@ public class HuespedDao implements IHuespedDao {
 	public void actualizarHuesped(Huesped huespedModificado) throws HuespedException {
 
 		/* el objeto de tipo huesped se envia en la request al darle al boton de guardar
-		en el 'FormularioHuesped.jsp'. Viaja desde esa parte pasando por Controller->Service->Dao*/
-		
-		
-			
-		
+		en el 'FormularioHuesped.jsp'. Viaja desde esa parte pasando por Controller->Service->Dao*/		
 		
 		mySessionFactory.getCurrentSession().update(huespedModificado);
 		
@@ -91,6 +87,12 @@ public class HuespedDao implements IHuespedDao {
 		 correpondiente de la tabla de la vista 'Huespedes.jsp' */
 		Huesped huesped = mySessionFactory.getCurrentSession().get(Huesped.class, idHuesped);
 		
+		/* Logica que bloquea el borrado de huespedes si tiene reservas asociadas
+		 * sea cual sea el estado (habria que borrar primero manualmente sus reservas
+		 * si tuviera alguna). Esto se hace ya que al ser una relacion
+		 * 1->N no pueden existir reservas que no tengan asociadas un id de huesped ya que
+		 * sino saldria una excepcion que romperia la aplicacion */
+		
 		List<Reserva> listaReservas = huesped.getReservas();
 		
 		if(!listaReservas.isEmpty()) {
@@ -99,38 +101,18 @@ public class HuespedDao implements IHuespedDao {
 		}
 
 			mySessionFactory.getCurrentSession().delete(huesped);		
-			
-			//TODO: PONER EXCEPCION NO SE PUEDA BORRAR ADEMAS DE SI ES NULL SI EN LA TABLA DE RESERVAS EL ENUM DEL ESTADO_RESERVA ES IGUAL A 'PENDIENTE' (SI SE PUEDE SE HACE AUTOMATICO POR EL ON DELETE CASCADE QUE PONDRE AL ORM DE HUESPED)
-				
 		
 	}
 
-	//@Transactional  // Etiqueta de Spring para crear y cerrar de forma automatica las Transacciones (se crea la SessionFactory, se abre una sesion y se inicia la transaccion)
-	//@Override // Se implementa el metodo de la interfaz IHuespedDao
-	//public List<Reserva> comprobarReservas(int idHuesped) {
-		
-		//return  mySessionFactory.getCurrentSession().createQuery("FROM Reserva r WHERE r.idHuesped = :idHuesped", Reserva.class)
-			//	.setParameter("idHuesped", idHuesped).getResultList();
-		
-	//}
-	
-	
-	
-	
 	
 	@Transactional // Etiqueta de Spring para crear y cerrar de forma automatica las Transacciones (se crea la SessionFactory, se abre una sesion y se inicia la transaccion)
 	@Override // Se implementa el metodo de la interfaz IHuespedDao
 	public void guardarHuesped(Huesped huespedNuevo) throws HuespedException {
 
 		/* el objeto de tipo huesped se envia en la request al darle al boton de guardar
-		en el 'FormularioHuesped.jsp'. Viaja desde esa parte pasando por Controller->Service->Dao*/
-		
-		
-			
+		en el 'FormularioHuesped.jsp'. Viaja desde esa parte pasando por Controller->Service->Dao*/			
 		
 		mySessionFactory.getCurrentSession().save(huespedNuevo);
-		
-	
 
 	}
 	
@@ -139,11 +121,19 @@ public class HuespedDao implements IHuespedDao {
 	@Override // Se implementa el metodo de la interfaz IHuespedDao
 	public void comprobarDuplicadoTelefonoHuesped (String telefonoFormularioHuesped, int idFormularioHuesped) throws HuespedException {
 		
+		/* Se crea este metodo para implementar la logica de que
+		 * si metemos en el formulario de huespedes un telefono ya existente
+		 * en la BBDD nos salte un mensaje de error (ya que en la estructura se ha definido
+		 * como unique este campo y sino se romperia la aplicacion con una excepcion) */
 		List<Huesped> huespedTelefonoCoincidente = mySessionFactory.getCurrentSession()
-				.createQuery("FROM Huesped h WHERE h.telefono = :telefono AND h.idHuesped != :id", Huesped.class).
+				.createQuery("FROM Huesped h WHERE h.telefono = :telefono AND h.idHuesped != :id", Huesped.class). 
 				setParameter("telefono", telefonoFormularioHuesped)
 				.setParameter("id", idFormularioHuesped)
 				.getResultList();
+		
+		/* los ':' en el query sirven para una preparedStatement, insertando el telefono id con los 
+		 * datos que nos llegan del formulario a traves del model
+		 */
 		
 		if (!huespedTelefonoCoincidente.isEmpty()) {
 			
