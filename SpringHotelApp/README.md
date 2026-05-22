@@ -149,7 +149,7 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 
 ### 🔧 Backend
 - ☕ **Java 11**  
-- 🌱 **Spring MVC**  
+- 🌱 **Spring MVC 5.30**  
 - 🗄️ **Hibernate (ORM)**  
 
 ### 💾 Base de datos
@@ -451,7 +451,7 @@ Habitaciones.jsp muestra listado
 **Incidencias**
 - abierta → ❌ No
 - en_curso → ❌ No
-- cerrada → ✔️ Sí
+- cerrada → ❌ No
 
 **Reservas**
 - pendiente → ❌ No
@@ -466,10 +466,10 @@ Habitaciones.jsp muestra listado
 
 ### 👤 Eliminación de huéspedes
 
+**Reservas**
 - pendiente → ❌ No
 - confirmada → ❌ No
-- cancelada → ✔️ Sí
-- finalizada → ❌ No
+- cancelada → ❌ No
 
 ---
 
@@ -477,7 +477,13 @@ Habitaciones.jsp muestra listado
 
 - abierta → ❌ No
 - en_proceso → ❌ No
-- cerrada → ❌ No
+- cerrada → ✔️ Sí
+
+### 📅 Eliminación de reservas
+
+- pendiente → ❌ No
+- confirmada → ❌ No
+- cancelada → ✔️ Sí
 
 ---
 
@@ -603,14 +609,24 @@ supervisor    / javiR ---> 1234abc
   <em>script creacion huespedes de prueba</em>
 </p>
 	<br>
-		  <img src="docs/images/script creacion habitaciones de prueba.png" style="max-width: 100%; height: auto;" />
+	<img src="docs/images/script creacion habitaciones de prueba.png" style="max-width: 100%; height: auto;" />
   <br>
   <br>
   <em>script creacion habitaciones de prueba</em>
 </p>
 	<br>
-	
-	
+	<img src="docs/images/script creacion reservas de prueba.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <br>
+  <em>script creacion reservas de prueba</em>
+</p>
+	<br>
+	<img src="docs/images/script creacion incidencias de prueba.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <br>
+  <em>script creacion incidencias de prueba</em>
+</p>
+	<br>
 
 ---
 
