@@ -20,16 +20,44 @@ import es.accenture.interfaces.IHabitacionService;
 import es.accenture.interfaces.IHuespedService;
 import es.accenture.interfaces.IReservasService;
 
+/**
+ * Controlador encargado de gestionar las peticiones relacionadas con las reservas.
+ * 
+ * Esta clase permite hacer el crud de reservas, asi como gestionar las relaciones
+ * entre huespedes y habitaciones.
+ * 
+ * @author danih y javi
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/reservas") //Anotación que asigna una url al controller, es la ruta general y luego se especifica con getmapping para donde va
 public class ReservasController {
 	
+	/*
+	 * Atributo donde se almacena el servicio de reservas encargado de la
+	 * logica relacionada con reservas.
+	 */
 	private IReservasService reservaService;
 	
+	/*
+	 * Atributo donde se almacena el servicio de habitaciones
+	 * para obtener informacion de las habitaciones.
+	 */
 	private IHabitacionService habitacionService;
 	
+	/*
+	 * Atributo donde se almacena el servicio de huespedes
+	 * para obtener informacion de los huespedes que hay.
+	 */
 	private IHuespedService huespedService;
 
+	/**
+	 * Constructor por parametros en el que se realiza la inyeccion de dependencias.
+	 * 
+	 * @param reservaService     servicio encargado de la logica de reservas
+	 * @param habitacionService  servicio encargado de la logica de habitaciones
+	 * @param huespedService     servicio encargado de la logica de huespedes
+	 */
 	@Autowired
 	public ReservasController(IReservasService reservaService, IHabitacionService habitacionService, IHuespedService huespedService) {
 	    this.reservaService = reservaService;
@@ -37,7 +65,13 @@ public class ReservasController {
 	    this.huespedService = huespedService;
 	}
 	
-	
+	/**
+	 * Metodo que recoge las peticiones de la vista principal de reservas
+	 * obteniene el listado de reservas que hay.
+	 * 
+	 * @param model objeto que permite almacenar atributos para enviarlos a la vista
+	 * @return String con la vista 'Reservas'
+	 */
     @GetMapping //Anotación que dice cuál es la url de entrada
     public String obtenerReservas(Model model) {
 
@@ -49,6 +83,13 @@ public class ReservasController {
         
     }
 	
+    /**
+     * Metodo que recoge las peticiones de la vista de detalle de una reserva.
+     * 
+     * @param idReserva identificador de la reserva que se desea consultar
+     * @param model     objeto que permite almacenar atributos y los mensajes de error
+     * @return String con la vista DetalleReserva o return a la lista
+     */
     // método para ver el detalle de una reserva
     @GetMapping("/detalle") //Anotación que dice cuál es la url de entrada
     public String detalleReserva(@RequestParam int idReserva,Model model) {
@@ -74,10 +115,12 @@ public class ReservasController {
     }
     
 	/**
-	 * Metodo
-	 * @param huesped
-	 * @param model
-	 * @return
+	 * Metodo que recoge las peticiones de editar una reserva, carga previamente
+	 * los datos quehay junto con las habitaciones y huespedes.
+	 * 
+	 * @param idReserva identificador de la reserva que se desea editar
+	 * @param model     objeto que permite almacenar atributos y los mensajes de error
+	 * @return String con la vista FormularioReserva
 	 */
 	@GetMapping("/editar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String editarReserva (@RequestParam("idReserva") int idReserva, Model model) {		
@@ -110,6 +153,13 @@ public class ReservasController {
 		
 		}   
 
+	  /**
+     * Metodo que recoge las peticiones de eliminacion de una reserva.
+     * 
+     * @param idReserva identificador de la reserva que se quiere eliminar
+     * @param model     objeto que permite almacenar atributos y losmensajes de error
+     * @return redireccion a la vista principal de reservas
+     */
     // método para eliminar reserva de bbdd
     @GetMapping("/eliminar") //Anotación que dice cuál es la url de entrada
     public String eliminarReserva(@RequestParam int idReserva,Model model) {
@@ -132,10 +182,12 @@ public class ReservasController {
         
     }
     
-	/**
-	 * Metodo
-	 * @param model
-	 * @return
+    /**
+	 * Metodo que recoge las peticiones de creacion de una nueva reserva, prepara
+	 *  el formulario y carga habitaciones y huespedes.
+	 * 
+	 * @param model objeto que permite almacenar atributos para enviarlos a la vista
+	 * @return String con la vista FormularioReserva
 	 */
 	@GetMapping("/nuevo") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String nuevaReserva (Model model) {
@@ -168,10 +220,12 @@ public class ReservasController {
 	}
     
 	/**
-	 * Metodo
-	 * @param huesped
-	 * @param model
-	 * @return
+	 * Metodo que recoge las peticiones de actualizacion de una reserva a partir
+	 * de los datos recibidos desde el formulario.
+	 * 
+	 * @param reserva objeto reserva con la informacion modificada
+	 * @param model   objeto que permite almacenar atributos y los mensajes de error
+	 * @return redireccion a la vista principal o return al formulario
 	 */
 	@PostMapping("/actualizar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String actualizarReserva (@ModelAttribute("plantillaReserva") Reserva reserva, Model model) {	
@@ -206,13 +260,13 @@ public class ReservasController {
 		return "redirect:/reservas";
 	}
 	
-	
-	
 	/**
-	 * Metodo
-	 * @param huesped
-	 * @param model
-	 * @return
+	 * Metodo que recoge las peticiones de guardar reserva a partir de los datos
+	 * de el formulario.
+	 * 
+	 * @param reserva objeto reserva con la informacion introducida
+	 * @param model   objeto que permite almacenar atributos y los mensajes de error
+	 * @return redireccion a la vista principal o return al formulario
 	 */
 	@PostMapping("/guardar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
 	public String guardarReserva (@ModelAttribute("plantillaReserva") Reserva reserva, Model model) {	
@@ -245,8 +299,6 @@ public class ReservasController {
 		}
 		
 		return "redirect:/reservas";
-	}
-	
-	
+	}	
     
 }

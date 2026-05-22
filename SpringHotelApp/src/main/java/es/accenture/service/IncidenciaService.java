@@ -14,19 +14,38 @@ import es.accenture.exceptions.GuardarException;
 import es.accenture.interfaces.IIncidenciaDao;
 import es.accenture.interfaces.IIncidenciaService;
 
+/**
+ * Clase de servicio encargada de la logica de negocio de las incidencias.
+ * 
+ * Esta clase se hace el crud y la lógica de negocio antes de ir a bbdd
+ * 
+ * @author danih y javi
+ * @version 1.0
+ */
 @Service //Anotación para decirle a Spring que es un service
 public class IncidenciaService implements IIncidenciaService {
 
-	//@Autowired //Anotación para hacer la inyección de dependencias de HabitacionDao aquí sin hacer new HabitacionDao=habitacionDao
-	//private IIncidenciaDao incidenciaDao;  //se quita porque Daniel lo tiene por constructor y es mejor práctica
-	
+	/*
+	 * Atributo donde se almacena el DAO de incidencias encargado del acceso a bbdd
+	 */
 	private IIncidenciaDao incidenciaDao;
 
+	/**
+	 * Constructor por parametros en el que se realiza la inyeccion
+	 * de dependencias del DAO de incidencias.
+	 * 
+	 * @param incidenciaDao DAO encargado del acceso a datos de incidencias
+	 */
 	@Autowired //inyección por constructor
 	public IncidenciaService(IIncidenciaDao incidenciaDao) {
 	    this.incidenciaDao = incidenciaDao;
 	}
-	//a partir de aquí hay que ir llamando a los métodos del contrato con IIncidenciaService y meter la lógica y luego ir llamando a los que IncidenciaDao ha ido sobreescribiendo de IIncidenciaDao y así sacar datos
+	
+	/**
+	 * Metodo encargado de sacar el listado de incidencias de bbdd
+	 * 
+	 * @return lista de objetos Incidencia
+	 */
 	//método para obtener todas las incidencias
 	@Override //Anotación para sobreescribir el método de la interfaz
 	public List<Incidencia>buscarTodasIncidencias() {
@@ -36,6 +55,12 @@ public class IncidenciaService implements IIncidenciaService {
     
     }
 
+	/**
+	 * Metodo encargado de guardar una incidencia en bbdd
+	 * 
+	 * @param incidencia objeto Incidencia con la informacion a guardar
+	 * @throws GuardarException excepcion lanzada si los datos no son validos
+	 */
 	//método para el alta de una incidencia
     @Override //Anotación para sobreescribir el método de la interfaz
 	public void guardarIncidencia(Incidencia incidencia)throws GuardarException {
@@ -46,6 +71,12 @@ public class IncidenciaService implements IIncidenciaService {
     	incidenciaDao.guardarIncidencia(incidencia); //aquí se llama a dao para guardar la incidencia
 	}
 
+    /**
+     * Metodo encargado de actualizar una incidencia en bbdd
+     * 
+     * @param incidencia objeto Incidencia con la informacion modificada
+     * @throws ActualizarException excepcion lanzada si los datos no son validos
+     */
     //método para la modificación de una incidencia
     @Override //Anotación para sobreescribir el método de la interfaz
 	public void actualizarIncidencia(Incidencia incidencia)throws ActualizarException {
@@ -56,6 +87,13 @@ public class IncidenciaService implements IIncidenciaService {
     	incidenciaDao.actualizarIncidencia(incidencia); //aquí se llama a dao para actualizar en la bbdd
 	}
 
+    /**
+     * Metodo encargado de eliminar una incidencia de bbdd
+     * 
+     * @param idIncidencia identificador de la incidencia que se quiere eliminar
+     * @throws EliminarException excepcion lanzada si la incidencia no puede eliminarse
+     * @throws BuscarException excepcion lanzada si la incidencia no existe
+     */
     //método para la eliminación de una incidencia
     @Override //Anotación para sobreescribir el método de la interfaz
 	public void eliminarIncidencia(int idIncidencia) throws EliminarException,BuscarException {
@@ -74,6 +112,13 @@ public class IncidenciaService implements IIncidenciaService {
 		
 	}
 
+    /**
+     * Metodo encargado de obtener una incidencia en bbdd por su id
+     * 
+     * @param idIncidencia identificador de la incidencia que se quiere consultar
+     * @return objeto Incidencia encontrado
+     * @throws BuscarException excepcion lanzada si la incidencia no existe
+     */
     // método para obtener una incidencia por su id
     @Override
     public Incidencia buscarIncidenciaPorId(int idIncidencia)throws BuscarException {
@@ -87,6 +132,12 @@ public class IncidenciaService implements IIncidenciaService {
     	return incidencia;
     }
 
+	/**
+	 * Metodo encargado de obtener las incidencias de una habitacion.
+	 * 
+	 * @param idHabitacion identificador de la habitacion cuyas incidencias se quieren consultar
+	 * @return lista de incidencias de la habitacion
+	 */
 	@Override
 	public List<Incidencia>buscarIncidenciasPorIdHabitacion(int idHabitacion) {
 		// TODO Auto-generated method stub
