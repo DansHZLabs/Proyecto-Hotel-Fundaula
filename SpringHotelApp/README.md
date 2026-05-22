@@ -72,6 +72,11 @@ ORDEN CORRECTO PARA EJECUTAR LOS SCRIPTS:
 4. hoteldb_habitaciones.sql  
 5. hoteldb_reservas.sql  
 6. hoteldb_incidencias.sql  
+7. hoteldb_datos_usuarios.sql
+8. hoterdb_datos_huespedes.sql
+9. hoteldb_datos_habitaciones.sql
+10. hoteldb_datos_incidencias.sql
+11. hoteldb_datos_reservas.sql
 
 <!--IA: se pidió a chat gpt que hiciera responsive la imagen luego en las otras copié y pegué cambiando la imagen en cada una-->
 
