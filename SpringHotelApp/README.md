@@ -891,4 +891,81 @@ Puedo explicar qué hace cada fragmento marcado como IA, justificar por qué enc
 
 ## Capturas de pantalla:
 
-Acordarnos de poner aquí al final cuando acabemos todo unas capturas de pantalla de la app funcionando que no se tarda nada y queda muy bien.
+<p align="center">
+  <img src="docs/images/pantalla login.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla login</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla principal.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla principal</em>
+</p>
+ <br>
+<p align="center">
+  <img src="docs/images/pantalla lista habitaciones.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla lista habitaciones</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla detalle habitación.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla detalle habitación</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla formulario editar habitación.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla formulario editar habitación</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla detalle huesped.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla detalle huésped</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla formulario editar huesped.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla formulario editar huésped</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla lista de incidencias.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla lista de incidencias</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla detalle incidencia.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla detalle incidencia</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla formulario editar incidencia.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla formulario editar incidencia</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla lista de reservas.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla lista de reservas</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla detalle reserva.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla detalle reserva</em>
+</p>
+<br>
+<p align="center">
+  <img src="docs/images/pantalla formulario editar reserva.png" style="max-width: 100%; height: auto;" />
+  <br>
+  <em>Pantalla formulario editar reserva</em>
+</p>
+<br>
