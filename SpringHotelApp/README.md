@@ -238,7 +238,8 @@ GuardarException → error al guardar
 EliminarException → error al eliminar
 ActualizarException → error al actualizar
 BuscarException → error al buscar
-PONER AQUÍ LAS QUE SE USEN EN LA PARTE DEL LOGIN
+HuespedException → error en los métodos de huesped
+UsuarioException  → error en los métodos de usuario
 ```
 
 ### PAQUETE INTERFACES: son las interfaces que definen los contratos de métodos que se deben cumplir

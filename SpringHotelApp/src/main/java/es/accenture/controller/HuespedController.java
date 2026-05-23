@@ -118,7 +118,9 @@ public class HuespedController {
 		
 		Huesped detalleHuesped = huespedService.buscarHuesped(idHuesped);
 		
-		model.addAttribute("plantillaHuesped",detalleHuesped); 
+		model.addAttribute("plantillaHuesped",detalleHuesped);
+		
+		model.addAttribute("tipoFormulario", "modificado");
 		
 		return "FormularioHuesped";
 	}
