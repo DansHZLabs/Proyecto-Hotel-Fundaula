@@ -62,8 +62,8 @@ public class HuespedController {
 	 *              requests)
 	 * @return String con la vista 'Huespedes'
 	 */
-	@GetMapping("") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
-	public String obtenerHuespedes(Model model) {
+	@GetMapping // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
+	public String obtenerHuespedes(Model model) { // Meter url exclusiva
 		
 		List<Huesped> listaHuespedes = null;
 		
@@ -152,12 +152,12 @@ public class HuespedController {
 			 * debido a que sino se borrarian los datos del model, y por 
 			 * lo tanto perderiamos lo almacenado en el mensaje de error */
 			
-			model.addAttribute("errorEliminarHuesped", e.getMessage()); 
+			model.addAttribute("errorEliminarHuesped", e.getMessage()); // abstraccion error (pagina nueva)
 			
 			return obtenerHuespedes(model);				
 			
 		} 			
-			return "redirect:/huespedes";		
+			return "redirect:/huespedes";	// constante	
 		
 	}
 	
@@ -201,9 +201,9 @@ public class HuespedController {
 	 * @return String con la vista general del metodo 'obtenerHuespedes'
 	 */
 	@PostMapping("/actualizar") // Etiqueta de Spring para mapear la request con el metodo del controlador correspondiente
-	public String actualizarHuesped (@ModelAttribute("plantillaHuesped") Huesped huesped, Model model) {	
+	public String actualizarHuesped (@ModelAttribute("plantillaHuesped") Huesped huesped, Model model) {// USAR DTO para las entities (para no usarlas directamente)	
 		
-		try {
+		try {// anotacion controllerAdvicer clase que recoge los errores y no haria falta catch
 			
 		huespedService.actualizarHuesped(huesped);
 		

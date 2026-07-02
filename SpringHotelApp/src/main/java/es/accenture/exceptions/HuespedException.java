@@ -21,7 +21,7 @@ public class HuespedException extends Exception {
 	
 	public static final String BuscarException = "Lista vacía, por favor inserte un nuevo Huesped si desea obtener resultados.";
 	
-
+	// Legilibilidad
 	
 	
 	/**

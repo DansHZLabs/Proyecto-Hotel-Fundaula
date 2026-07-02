@@ -51,7 +51,7 @@ public class ReservasService implements IReservasService{
 	//método para obtener todas las reservas
 	@Override //Anotación para sobreescribir el método de la interfaz
 	public List<Reserva>buscarReservas() {
-		// TODO Auto-generated method stub
+	
 		
 		return reservaDao.buscarReservas(); //aquí se llama a dao que consulta bbdd y devuelve la lista
 		
@@ -66,7 +66,7 @@ public class ReservasService implements IReservasService{
     //método para el alta de una reserva
     @Override //Anotación para sobreescribir el método de la interfaz
 	public void guardarReserva(Reserva reserva)throws GuardarException {
-		// TODO Auto-generated method stub
+		
 		
     	if(reserva==null){throw new GuardarException("Error al guardar la reserva");//si no hay reserva lanza excepción
     	
@@ -95,7 +95,7 @@ public class ReservasService implements IReservasService{
     //método para la modificación de una reserva
     @Override //Anotación para sobreescribir el método de la interfaz
 	public void actualizarReserva(Reserva reserva)throws ActualizarException {
-		// TODO Auto-generated method stub
+		
     	
     	if(reserva==null){throw new ActualizarException("Error al actualizar la reserva");}//si no hay reserva lanza excepción
     	
@@ -125,7 +125,7 @@ public class ReservasService implements IReservasService{
     //método para la eliminación de una reserva
     @Override //Anotación para sobreescribir el método de la interfaz
 	public void eliminarReserva(int idReserva)throws EliminarException,BuscarException {
-		// TODO Auto-generated method stub
+	
 		
     	//no eliminar si está ocupada
     	// obtener la reserva
@@ -157,7 +157,7 @@ public class ReservasService implements IReservasService{
     //método para obtener una reserva por Id
     @Override //Anotación para sobreescribir el método de la interfaz
 	public Reserva buscarReservaPorId(int idReserva)throws BuscarException {
-		// TODO Auto-generated method stub
+
     	
     	Reserva reserva=reservaDao.buscarReservaPorId(idReserva);//aquí se almacena para comprobar que exista
     	
