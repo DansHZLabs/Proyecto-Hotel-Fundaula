@@ -404,4 +404,4 @@ Ver carpeta /docs:
 
 Proyecto (PDF)
 
-- [proyecto (PDF)](docs/proyecto.pdf)
+- [proyecto (PDF)](SpringHotelApp/docs/proyecto.pdf)
