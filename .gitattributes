@@ -1,11 +1,11 @@
 # 1. EXCLUIR EL JAVADOC Y OTROS HTML/CSS
 **/docs/JavaDoc/** linguist-detectable=false
 **/*.html linguist-detectable=false
+**/*.css linguist-detectable=false
 
-
-# 2. FORZAR LA DETECCIÓN DE JSP (Apuntando a su ruta exacta en Spring)
+# 2. FORZAR LA DETECCIÓN DE JSP (Con el nombre oficial entre comillas)
 SpringHotelApp/src/main/webapp/**/*.jsp linguist-detectable=true
-SpringHotelApp/src/main/webapp/**/*.jsp linguist-language=Java_Server_Pages
+SpringHotelApp/src/main/webapp/**/*.jsp linguist-language="Java Server Pages"
 
 # 3. FORZAR LA DETECCIÓN DE SQL
 **/*.sql linguist-detectable=true
