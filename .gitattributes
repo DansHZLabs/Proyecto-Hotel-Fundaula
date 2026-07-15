@@ -1,7 +1,7 @@
 # 1. EXCLUIR EL JAVADOC Y OTROS HTML/CSS
 **/docs/JavaDoc/** linguist-detectable=false
 **/*.html linguist-detectable=false
-**/*.css linguist-detectable=false
+
 
 # 2. FORZAR LA DETECCIÓN DE JSP 
 *.jsp linguist-language=Java\ Server\ Pages
