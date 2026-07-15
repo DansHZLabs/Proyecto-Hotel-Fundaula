@@ -1,3 +1,6 @@
 # 1. EXCLUIR EL JAVADOC Y OTROS HTML/CSS
 **/docs/JavaDoc/** linguist-detectable=false
 **/*.html linguist-detectable=false
+
+# 2. FORZAR LA DETECCIÓN SQL
+**/*.sql linguist-detectable=true
