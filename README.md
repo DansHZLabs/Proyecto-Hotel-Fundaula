@@ -1,6 +1,3 @@
-
-init
-=======
 <h1 align="center" style="
 background: linear-gradient(135deg, #7b2ff7, #f107a3);
 padding: 18px;
@@ -34,7 +31,7 @@ El sistema cubre operaciones CRUD completas y simula un entorno real de gestión
 1. Clonar el repositorio:
 
 ```
-git clone https://github.com/PrimeraEdicionFlexible/ProyectoFinalEquipoL.git
+git clone https://github.com/DansHZLabs/Proyecto-Hotel-Fundaula.git
 ```
 
 2. Importar el proyecto en el IDE (Eclipse como Maven project)
@@ -60,27 +57,26 @@ http://localhost:8080/SpringHotelApp
 
 ## 🗄️ Creación de la BBDD:
 
-ORDEN CORRECTO PARA EJECUTAR LOS SCRIPTS:
+ORDEN CORRECTO PARA EJECUTAR LOS SCRIPTS (se encuentran en la carpeta /sql del proyecto):
 
-1. hoteldb_CREATE DATABASE.sql  
-2. hoteldb_usuarios.sql  
-3. hoteldb_huespedes.sql  
-4. hoteldb_habitaciones.sql  
-5. hoteldb_reservas.sql  
-6. hoteldb_incidencias.sql  
 
-<p align="center">
-  <img src="docs/images/diagrama ER BBDD.png" style="max-width: 100%; height: auto;" />
-  <br>
-  <em>diagrama ER</em>
-</p>
-
-Los scripts SQL se encuentran en la carpeta /sql del proyecto.
+1. hoteldb_CREATE DATABASE.sql
+2. hoteldb_usuarios.sql
+3. hoteldb_huespedes.sql
+4. hoteldb_habitaciones.sql
+5. hoteldb_reservas.sql
+6. hoteldb_incidencias.sql
+7. hoteldb_datos_usuarios.sql
+8. hoterdb_datos_huespedes.sql
+9. hoteldb_datos_habitaciones.sql
+10. hoteldb_datos_incidencias.sql
+11. hoteldb_datos_reservas.sql 
+ 
 
 <h2 align="center">Tablas de la BBDD</h2>
 
 <p align="center">
-  <img src="docs/images/tabla usuarios.png" width="500" />
+<img width="499" height="215" alt="image" src="https://github.com/user-attachments/assets/cfd0209e-7c7c-4d67-9651-51c5ccd89bb4" />
   <br>
   <em>tabla usuarios</em>
 </p>
@@ -88,7 +84,7 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 <br>
 
 <p align="center">
-  <img src="docs/images/tabla habitaciones.png" width="500" />
+  <img width="496" height="213" alt="image" src="https://github.com/user-attachments/assets/15fe7756-f374-4b15-95b6-f284983e4a6f" />
   <br>
   <em>tabla habitaciones</em>
 </p>
@@ -96,15 +92,14 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 <br><br>
 
 <p align="center">
-  <img src="docs/images/tabla huespedes.png" width="500" />
+  <img width="496" height="213" alt="image" src="https://github.com/user-attachments/assets/fbb26278-ca84-4334-81c8-89433bea0a72" />
   <br>
   <em>tabla huespedes</em>
 </p>
 
 <br><br>
 
-<p align="center">
-  <img src="docs/images/tabla incidencias.png" width="500" />
+<p align="center"><img width="494" height="215" alt="image" src="https://github.com/user-attachments/assets/be0ca565-2f5d-4ee9-998d-8ffda8fdf9b2" />
   <br>
   <em>tabla incidencias</em>
 </p>
@@ -112,7 +107,7 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 <br>
 
 <p align="center">
-  <img src="docs/images/tabla reservas.png" width="500" />
+  <img width="499" height="239" alt="image" src="https://github.com/user-attachments/assets/34f89899-4a6c-485e-a8c1-b525842fe9f4" />
   <br>
   <em>tabla reservas</em>
 </p>
@@ -121,7 +116,7 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 <h2 align="center">Relaciones de las tablas</h2>
 
 <p align="center">
-  <img src="docs/images/fk de incidencias.png" width="500" />
+  <img width="496" height="173" alt="image" src="https://github.com/user-attachments/assets/3dd937ee-e53f-412a-b844-e91e9a38a811" />
   <br>
   <em>FK de incidencias</em>
 </p>
@@ -129,7 +124,7 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 <br>
 
 <p align="center">
-  <img src="docs/images/fk de reservas.png" width="500" />
+ <img width="498" height="175" alt="image" src="https://github.com/user-attachments/assets/422ebf04-219e-4198-a7f2-d11a45f4342f" />
   <br>
   <em>FK de reservas</em>
 </p>
@@ -141,20 +136,19 @@ Los scripts SQL se encuentran en la carpeta /sql del proyecto.
 ### 🔧 Backend
 - ☕ **Java 11**  
 - 🌱 **Spring MVC**  
-- 🗄️ **Hibernate (ORM)**  
+- 🗄️ **Hibernate (ORM)**
+- 🎁 **Maven**
 
 ### 💾 Base de datos
 - 🐬 **MySQL 8**
 
 ### 🎨 Frontend
 - 🖥️ **JSP + JSTL**
+- 🏷️ **Spring Form Tags**
+- 🖌️ **CSS**
 
 ### 🚀 Servidor
 - 🌐 **Apache Tomcat 9**
-
-### 🔐 Seguridad y logging
-- 📜 **Log4j** (logging)  
-- 🔒 **BCrypt** (seguridad)  
 
 ---
 
@@ -169,11 +163,10 @@ es.accenture.dao          → es el acceso a BBDD, lo usa Services por medio de 
 es.accenture.entity       → entidades de la bbdd
 es.accenture.exceptions   → excepciones personalizadas
 es.accenture.interfaces   → son las interfaces que definen los contratos de métodos que se deben cumplir
-es.accenture.services     → PAQUETE SERVICES: es la lógica, se manda a DAO para las consultas a BBDD
-es.accenture.utils        → Tareas adicionales
+es.accenture.services     → es la lógica, se manda a DAO para las consultas a BBDD
 ```
 <p align="center">
-  <img src="docs/images/estructura de paquetes.png" style="width: 50%; max-width: 900px; height: auto;" />
+  <img width="295" height="214" alt="screenshot" src="https://github.com/user-attachments/assets/b33fa337-b574-445d-8973-146517417c70" />
   <br>
   <em>imagen de los paquetes del proyecto</em>
 </p>
@@ -190,20 +183,21 @@ HibernateConfig   → configura conexión a base de datos + ORM + transacciones
 ### PAQUETE CONTROLLER: recibe las peticiones HTTP, llama al service y da la respuesta
 
 ```
-nombreController → gestiona el login, el logout y la sesión de usuario
-nombreController → gestiona las peticiones del CRUD de habitaciones
-nombreController → gestiona las peticiones del CRUD de huéspedes
-nombreController → gestiona las peticiones del CRUD de reservas
+LoginController → gestiona el login, el logout y la sesión de usuario
+HabitacionController → gestiona las peticiones del CRUD de habitaciones
+HuespedController → gestiona las peticiones del CRUD de huéspedes
+IncidenciaController → gestiona las peticiones del CRUYD de incidencias
+ReservasController → gestiona las peticiones del CRUD de reservas
 ```
 
 ### PAQUETE DAO: es el acceso a BBDD, lo usa Services para el acceso a datos
 
 ```
-nombreDao → establece la lógica del acceso a los datos de...
-nombreDao → establece la lógica del acceso a los datos de...
-nombreDao → establece la lógica del acceso a los datos de...
-nombreDao → establece la lógica del acceso a los datos de...
-nombreDao → establece la lógica del acceso a los datos de...
+HabitacionDao → establece la lógica del acceso a los datos de Habitacion
+HuespedDao → establece la lógica del acceso a los datos de Huesped
+IncidenciaDao → establece la lógica del acceso a los datos de Incidencia
+ReservasDao → establece la lógica del acceso a los datos de Reservas
+UsuarioDao → establece la lógica del acceso a los datos de Usuario
 ```
 
 ### PAQUETE ENTITIES: entidades de la bbdd
@@ -219,51 +213,56 @@ Usuario → es representación de la tabla usuarios (login y roles)
 ### PAQUETE EXCEPTIONS: son las excepciones personalizadas
 
 ```
-nombreException → error de acceso a base de datos
-nombreException → error de autentificación
-nombreException → no encontrado
-nombreException → el error que sea
+ActualizarException → error de actualización en base de datos
+BuscarException → error de acceso en base de datos
+EliminarException → error de eliminación en base de datos
+GuardarException → error de guardado en base de datos
+HuespedException → error de creacion de huespedes en base de datos
+UsarioException → error de autentificación
 ```
 
 ### PAQUETE INTERFACES: son las interfaces que definen los contratos de métodos que se deben cumplir
 
 ```
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
-Inombre → interfaz que hace...
+IHabitacionDao
+IHabitacionService
+IHuespedDao
+IHuespedService
+IIncidenciaDao
+IIncidenciaService
+IReservasDao
+IReservasService
+IUsuarioDao
+IUsuarioService
+
 ```
 
 ### PAQUETE SERVICES: es la lógica, se manda a DAO para las consultas a BBDD
 
 ```
-nombreService → servicio del que se encarga
-nombreService → servicio del que se encarga
-nombreService → servicio del que se encarga
-nombreService → servicio del que se encarga
+HabitacionService → se encarga de la lógica de Habitacion
+HuespedService → se encarga de la lógica de Huesped
+IncidenciaService → se encarga de la lógica de Incidencia
+ReservasService → se encarga de la lógica de Reservas
+UsuarioService → se encarga de la lógica de Usuario
 ```
 
-### PAQUETE UTILS: tareas adicionales
+### VISTAS: (van en WebInf, Vistas; y muestran la pantalla con los datos html y css correspondientes a cada sección)
 
 ```
-nombreUtils → 
-nombreUtils → 
-nombreUtils → 
-nombreUtils → 
-```
-
-### VISTAS: (van en WebInf, Vistas)
-
-```
-nombre.jsp → vista de la pantalla de...
-nombre.jsp → vista de la pantalla de...
-nombre.jsp → vista de la pantalla de...
-nombre.jsp → vista de la pantalla de...
-nombre.jsp → vista de la pantalla de...
-nombre.jsp → vista de la pantalla de...
+DetalleHabitacion.jsp
+DetalleHuesped.jsp
+DetalleIncidencia.jsp
+DetalleReserva.jsp
+FormularioHabitacion.jsp
+FormularioHuesped.jsp
+FormularioIncidencia.jsp
+FormularioReserva.jsp
+Habitaciones.jsp
+Huespedes.jsp
+Incidencias.jsp
+Principal.jsp
+Reservas.jsp
 ```
 
 (en SRC, Main, Resources)
@@ -274,7 +273,7 @@ application.properties → contiene configuración de conexión a base de datos
 
 carpeta sql/ en la raiz con los scrips de BBDD y su orden de ejecución
 
-Separación de responsabilidades para seguir buenas prácticas
+Se realizó la separación de responsabilidades para seguir buenas prácticas
 
 Arquitectura en capas (Controller → Service → DAO → DB)
 
@@ -286,36 +285,15 @@ Arquitectura en capas (Controller → Service → DAO → DB)
 ```
 main        → versión final estable
 develop     → integración
-feature/*   → desarrollo por funcionalidades
-```
-
-Ejemplos:
-
-```
-feature/setup
-feature/sql
-feature/habitaciones
-feature/incidencias
-feature/login
-feature/huespedes
-feature/reservas
 ```
 
 ---
 
 ## 🔄 Flujo de trabajo:
 
-Cada funcionalidad en rama feature/*  
-Pull Request a develop  
+Commits  
 Revisión por compañero  
-Merge a develop  
 Merge final a main  
-
-<p align="center">
-  <img src="docs/images/dibujo git.png" style="max-width: 100%; height: auto;" />
-  <br>
-  <em>imagen simplificada del flujo de trabajo</em>
-</p>
 
 ---
 
@@ -338,7 +316,7 @@ Merge final a main
 
 ## Controller
 - Recibe la petición (@Controller)
-- Llama al servicie
+- Llama al service
 
 ## Service
 - Valida datos básicos
