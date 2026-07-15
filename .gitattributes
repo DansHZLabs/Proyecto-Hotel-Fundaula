@@ -1,9 +1,2 @@
-# Excluir todos los archivos HTML del cálculo de lenguaje de Linguist
-**/*.html linguist-detectable=false
-
-# Excluir todos los archivos CSS (si también están sumando demasiado)
-**/*.css linguist-detectable=false
-
-# Excluir recursos estáticos de Spring (plantillas, estilos, JS)
-src/main/resources/templates/** linguist-detectable=false
-src/main/resources/static/** linguist-detectable=false
+# Excluir toda la documentación autogenerada de JavaDoc
+**/docs/JavaDoc/** linguist-detectable=false
