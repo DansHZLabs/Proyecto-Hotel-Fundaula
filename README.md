@@ -570,20 +570,3 @@ Dime una descripción buena para poner en este readme</br>
 </tr>
 </table>
 
----
-
-### Compromiso
-
-Declaro que entiendo todo el código que entrego.
-
-Puedo explicar qué hace cada fragmento marcado como IA, justificar por qué encaja en el proyecto y modificarlo durante la defensa si fuera necesario.
-
-— Alumno A: Javier Roldán Pomareta
-
-— Alumno B: *(Nombre del alumno)*
-
----
-
-## Capturas de pantalla:
-
-Acordarnos de poner aquí al final cuando acabemos todo unas capturas de pantalla de la app funcionando que no se tarda nada y queda muy bien.
