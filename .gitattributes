@@ -2,9 +2,5 @@
 **/docs/JavaDoc/** linguist-detectable=false
 **/*.html linguist-detectable=false
 
-
-# 2. FORZAR LA DETECCIÓN DE JSP 
-*.jsp linguist-language=Java\ Server\ Pages
-
-# 3. FORZAR LA DETECCIÓN DE SQL
+# 2. FORZAR LA DETECCIÓN DE SQL
 **/*.sql linguist-detectable=true
