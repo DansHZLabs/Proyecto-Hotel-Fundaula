@@ -319,25 +319,6 @@ Merge final a main
 
 ---
 
-## 👥 Reparto de tareas:
-
-A Javi → (ej: Habitaciones + Incidencias)  
-B Jorge → (ej: Huéspedes + Login)  
-
----
-
-## ⚠️ Conflictos de merge: ------------------> apuntar los que surjan
-
-Se resolvieron conflictos principalmente en:
-
-- configuración de Spring ---------------> es un ejemplo, borrar luego  
-- controladores compartidos -------------> es un ejemplo, borrar luego  
-- ficheros JSP comunes ------------------> es un ejemplo, borrar luego  
-
-Resolución manual combinando cambios de los dos desarrolladores.
-
----
-
 ## ✅ Funcionalidades:
 
 - Login con roles (recepcionista / supervisor)
