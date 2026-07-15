@@ -131,6 +131,63 @@ ORDEN CORRECTO PARA EJECUTAR LOS SCRIPTS (se encuentran en la carpeta /sql del p
 
 ---
 
+## Visualización del proyecto:
+
+<p align="center">
+  <img width="1240" height="622" alt="Screenshot_15-7-2026_2016_localhost" src="https://github.com/user-attachments/assets/afa58e48-38be-4a2c-8c49-426fcf77e2c7" />
+  <br>
+  <em>Pantalla Login</em>
+</p>
+
+<p align="center">
+ <img width="1240" height="622" alt="Screenshot_15-7-2026_20141_localhost" src="https://github.com/user-attachments/assets/a95adbd1-b4a4-4397-a25c-dd10c8bfd586" />
+  <br>
+  <em>Pantalla Inicio</em>
+</p>
+
+<p align="center">
+ <img width="1240" height="622" alt="Screenshot_15-7-2026_20153_localhost" src="https://github.com/user-attachments/assets/b04707ac-baef-4c6c-8ed2-62c7f07beeb0" />
+  <br>
+  <em>Pantalla Habitaciones</em>
+</p>
+
+<p align="center">
+<img width="1240" height="622" alt="Screenshot_15-7-2026_2028_localhost" src="https://github.com/user-attachments/assets/804c7d3e-08d0-4aef-87b7-eefedae23366" />
+  <em>Pantalla Detalle Habitacion</em>
+</p>
+
+<p align="center">
+ <img width="1240" height="749" alt="Screenshot_15-7-2026_20221_localhost" src="https://github.com/user-attachments/assets/7168bede-0369-4feb-88b0-bd2808a60b1f" />
+  <br>
+  <em>Pantalla Formulario editar Habitacion</em>
+</p>
+
+<p align="center">
+<img width="1240" height="749" alt="Screenshot_15-7-2026_20233_localhost" src="https://github.com/user-attachments/assets/71f7b4f6-b09f-4d61-86a8-14f324ce74b8" />
+  <br>
+  <em>Pantalla nueva Habitacion</em>
+</p>
+
+<p align="center">
+<img width="1240" height="622" alt="Screenshot_15-7-2026_20245_localhost" src="https://github.com/user-attachments/assets/6c6fda08-375c-4a2e-a1e1-50e91b8d82dc" />
+  <br>
+  <em>Pantalla Huespedes</em>
+</p>
+
+<p align="center">
+<img width="1240" height="622" alt="Screenshot_15-7-2026_20320_localhost" src="https://github.com/user-attachments/assets/75ef9113-6ed6-4323-80d9-f5dc3102466a" />
+  <br>
+  <em>Pantalla Incidencias</em>
+</p>
+
+<p align="center">
+<img width="1240" height="622" alt="Screenshot_15-7-2026_20331_localhost" src="https://github.com/user-attachments/assets/d2d80523-d848-47d5-a316-b3accdfa8f8a" />
+<br>
+  <em>Pantalla Reservas</em>
+</p>
+
+---
+
 ## 🛠️ Tecnologías utilizadas
 
 ### 🔧 Backend
@@ -405,3 +462,11 @@ Ver carpeta /docs:
 Proyecto (PDF)
 
 - [proyecto (PDF)](SpringHotelApp/docs/proyecto.pdf)
+
+
+## 👥 Autores:
+
+- Javier Roldán Pomareta
+- Daniel Herraiz Bastida
+<br>
+<br>
