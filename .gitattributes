@@ -1,14 +1,13 @@
-# 1. EXCLUIR EL JAVADOC (El gran culpable del HTML basura)
+# 1. EXCLUIR EL JAVADOC
 **/docs/JavaDoc/** linguist-detectable=false
 
-# 2. EXCLUIR CUALQUIER OTRO HTML/CSS SECUNDARIO
+# 2. EXCLUIR HTML/CSS SECUNDARIO
 **/*.html linguist-detectable=false
 **/*.css linguist-detectable=false
 
-# 3. FORZAR LA DETECCIÓN DE JSP (Java Server Pages)
-*.jsp linguist-detectable=true
+# 3. FORZAR LA DETECCIÓN DE JSP (Con su nombre oficial)
+**/*.jsp linguist-language=Java-Server-Pages
 **/*.jsp linguist-detectable=true
 
-# 4. FORZAR LA DETECCIÓN DE SQL
-*.sql linguist-detectable=true
+# 4. DETECTAR SQL
 **/*.sql linguist-detectable=true
