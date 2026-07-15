@@ -3,9 +3,8 @@
 **/*.html linguist-detectable=false
 **/*.css linguist-detectable=false
 
-# 2. FORZAR LA DETECCIÓN DE JSP (Con el nombre oficial entre comillas)
-SpringHotelApp/src/main/webapp/**/*.jsp linguist-detectable=true
-SpringHotelApp/src/main/webapp/**/*.jsp linguist-language="Java Server Pages"
+# 2. FORZAR LA DETECCIÓN DE JSP 
+*.jsp linguist-language=Java\ Server\ Pages
 
 # 3. FORZAR LA DETECCIÓN DE SQL
 **/*.sql linguist-detectable=true
